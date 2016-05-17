@@ -38,8 +38,8 @@ float  /*	kp0=16.5,ki0=0,kd0=4.2,
 		kp4=2.3,ki4=0,kd4=0.65; //¿Õ×ª86*/
 
 
-		kp0=10.5,ki0=0,kd0=15,
-		kp1=8,ki=0,kd1=16,// ·Ö¶ÎPID
+		kp0=11,ki0=0,kd0=15,
+		kp1=9,ki=0,kd1=16,// ·Ö¶ÎPID
 		kp2=4,ki2=0,kd2=17,  
 		kp3=2,ki3=0,kd3=18,
 		kp4=1,ki4=0,kd4=18; 
@@ -366,22 +366,17 @@ unsigned int abs(signed int x)
 
 void SpeedSet(void)
 {
-	
-    if(temp_steer<30&&temp_steer>-30)  
+	 if(temp_steer<30&&temp_steer>-30)  
     {
     	zd_flag++;
-        speed_target = speed1;
+    	if(zd_flag>250)
+    		speed_target = speed1;
     } 
     else if(temp_steer>-60 && temp_steer<60)
     {
-    	if(zd_flag>100)
+    	if(zd_flag>1000)
     	{
-    		if(currentspeed>=speed1)
-    			speed_target=speed2;
-    		else if(currentspeed>=speed2-2)
-    			speed_target=speed3;
-    		else 
-    			speed_target=speed4;	
+    		//speed_target=speed5-4;	
     	}
     	else
     		speed_target = speed2-(abs(temp_steer)-30)/30*(speed2-speed1);
