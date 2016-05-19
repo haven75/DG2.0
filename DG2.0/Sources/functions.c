@@ -23,7 +23,7 @@ unsigned int presteer,currentsteer,dsteer;
 unsigned int speed1=60,	
 			 speed2=48,
 			 speed3=32,
-			 speed4=27,
+			 speed4=29,
 			 speed5=22;
 float  /*	kp0=16.5,ki0=0,kd0=4.2,
 		kp1=12,ki=0,kd1=3.3,// 分段PID
@@ -38,8 +38,8 @@ float  /*	kp0=16.5,ki0=0,kd0=4.2,
 		kp4=2.3,ki4=0,kd4=0.65; //空转86*/
 
 
-		kp0=11.1,ki0=0,kd0=15,
-		kp1=9,ki=0,kd1=17,// 分段PID
+		kp0=11.12,ki0=0,kd0=15.5,
+		kp1=9.14,ki=0,kd1=18,// 分段PID
 		kp2=4.5,ki2=0,kd2=20,  
 		kp3=2.35,ki3=0,kd3=20,
 		kp4=1.25,ki4=0,kd4=20; 
@@ -366,7 +366,9 @@ unsigned int abs(signed int x)
 
 void SpeedSet(void)
 {
-	 if(temp_steer<30&&temp_steer>-30)  
+	if(temp_steer==181||temp_steer==-186)
+		speed_target=speed5+3;
+	else if(temp_steer<30&&temp_steer>-30)  
     {
     	zd_flag++;
     	if(zd_flag>250)
@@ -376,7 +378,7 @@ void SpeedSet(void)
     {
     	if(zd_flag>750)
     	{
-    		speed_target=speed5-4;	
+    		speed_target=speed5-6;	
     	}
     	else
     		speed_target = speed2-(abs(temp_steer)-30)/30*(speed2-speed1);
@@ -420,8 +422,8 @@ void speed_control()
 	
 	
 	temp_speed+=speed_kp*(Error[0]-Error[1])+speed_ki*Error[0]+speed_kd*(Error[0]-Error[1]-(Error[1]-Error[2]));
-	if(temp_speed>100)
-		temp_speed=100;
+	if(temp_speed>107)
+		temp_speed=107;
 	if(temp_speed<-110)
 			temp_speed=-110;
 	SET_motor(temp_speed);
