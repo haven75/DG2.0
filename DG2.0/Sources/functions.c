@@ -20,10 +20,10 @@ float sensor[3][10]={0},avr[10]={0.005,0.01,0.01,0.0125,0.0125,0.025,0.025,0.05,
 unsigned int left,right,middle,flag=0,zd_flag=0; //车子在赛道的位置标志
 unsigned int count1,count2,currentspeed,speed_target; 
 unsigned int presteer,currentsteer,dsteer;
-unsigned int speed1=60,	
+unsigned int speed1=58,	
 			 speed2=48,
-			 speed3=32,
-			 speed4=29,
+			 speed3=37,
+			 speed4=27,
 			 speed5=22;
 float  /*	kp0=16.5,ki0=0,kd0=4.2,
 		kp1=12,ki=0,kd1=3.3,// 分段PID
@@ -38,11 +38,12 @@ float  /*	kp0=16.5,ki0=0,kd0=4.2,
 		kp4=2.3,ki4=0,kd4=0.65; //空转86*/
 
 
-		kp0=11.12,ki0=0,kd0=15.5,
-		kp1=9.14,ki=0,kd1=18,// 分段PID
-		kp2=4.5,ki2=0,kd2=20,  
-		kp3=2.35,ki3=0,kd3=20,
-		kp4=1.25,ki4=0,kd4=20; 
+		kp0=10.8,ki0=0,kd0=18,
+		kp1=8.42,ki=0,kd1=18,// 分段PID
+		kp2=4.45,ki2=0,kd2=22,  
+		kp3=2.35,ki3=0,kd3=22,
+		kp4=1.25,ki4=0,kd4=22;
+
 float kp,ki,kd;
 int RIGHT,LEFT,MIDDLE,temp_fre[2];
 unsigned char Outdata[8];
@@ -422,8 +423,8 @@ void speed_control()
 	
 	
 	temp_speed+=speed_kp*(Error[0]-Error[1])+speed_ki*Error[0]+speed_kd*(Error[0]-Error[1]-(Error[1]-Error[2]));
-	if(temp_speed>107)
-		temp_speed=107;
+	if(temp_speed>108)
+		temp_speed=108;
 	if(temp_speed<-110)
 			temp_speed=-110;
 	SET_motor(temp_speed);
