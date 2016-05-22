@@ -5,7 +5,7 @@
 ################################################################################
 
 export GNU_Make_Install_DirEnv=$(CWInstallLocationEnv)/gnu/bin
-export ProjDirPath=C:/Users/Quan/Documents/GitHub/DG2.0/DG2.0
-export CWInstallLocationEnv=E:/codewarrior/setup10.6/CW MCU v10.6
+export ProjDirPath=F:/大学资源/TUSmart/DG2.0/DG2.0
+export CWInstallLocationEnv=D:/Program Files/CodeWarrior2/CW MCU v10.6
 export MCUToolsBaseDirEnv=$(CWInstallLocationEnv)/MCU
 export PAToolsDirEnv=$(CWInstallLocationEnv)/MCU/PA_Tools/Command_Line_Tools
