@@ -19,7 +19,7 @@ float LEFT_Temp,RIGHT_Temp,MIDDLE_Temp,Lsum,Rsum,Msum;
 float sensor[3][10]={0},avr[10]={0.005,0.01,0.01,0.0125,0.0125,0.025,0.025,0.05,0.15,0.7};
 unsigned int left,right,middle,flag=0,zd_flag=0,slow; //车子在赛道的位置标志
 unsigned int count1,count2,currentspeed,speed_target; 
-unsigned int presteer,currentsteer,dsteer;
+unsigned int presteer,currentsteer,dsteer,steer_old;
 unsigned int speed1=58,	
 			 speed2=50,
 			 speed3=40,
@@ -201,15 +201,14 @@ void GETservoPID(void)
 }
 
 
-/****************************************************************************************************************
-* 函数名称：InitsePID()	
-* 函数功能：初始化舵机的PID参数
-* 入口参数：无
-* 出口参数：无
-* 修改人  ：温泉
-* 修改时间：2016/02/18
-*****************************************************************************************************************/
-
+/********************************************************************abs function****************************************************/
+unsigned int abs(signed int x)
+{
+	if(x>=0)
+		return x;
+	else 
+		return -x;
+}
 /****************************************************************************************************************
 * 函数名称：LocPIDCal()	
 * 函数功能：计算舵机的PWM变化值
@@ -357,13 +356,56 @@ signed int LocPIDCal(void)
 
 }
 
-unsigned int abs(signed int x)
-{
-	if(x>=0)
-		return x;
-	else 
-		return -x;
+/***************************************************************another steer function*********************************************/
+signed int Steer(void)
+{	
+	float ierror,derror;
+	fre_diff=LEFT-RIGHT;
+	if(MIDDLE<=Msetpoint)
+	{
+	    if(fre_diff>0)
+	        fre_diff=20-fre_diff;
+	    if(fre_diff<0)
+		fre_diff=(-22-fre_diff);	
+	}
+	if(MIDDLE<Msetpoint&&LEFT<=592&&RIGHT<=569)
+	    return(steer_old);
+	ierror=fre_diff;
+	derror=ierror-lasterror;
+	lasterror=ierror;
+	if(fre_diff>=-4&&fre_diff<=4)
+	{
+	   kp=kp4*fre_diff/4;
+	   kd=kd4*fre_diff/4;
+	}
+	else if(fre_diff>=-8&&fre_diff<=8)
+	{
+	   kp=kp4+(kp3-kp4)/4*(abs(fre_diff)-4);
+	   kd=kd4+(kd3-kd4)/4*(abs(fre_diff)-4);
+	}
+	else if(fre_diff>=-12&&fre_diff<=12)
+	{
+	   kp=kp3+(kp2-kp3)/4*(abs(fre_diff)-8);
+	   kd=kd3+(kd2-kd3)/4*(abs(fre_diff)-8);
+	}
+	else if(fre_diff>=-16&&fre_diff<=16)
+	{
+	   kp=kp2+(kp1-kp2)/4*(abs(fre_diff)-12);
+	   kd=kd2+(kd1-kd2)/4*(abs(fre_diff)-12);
+	}
+	else
+	{
+	   kp=kp1+(kp0-kp1)/4*(abs(fre_diff)-16);
+	   kd=kd1+(kd0-kd1)/4*(abs(fre_diff)-16);
+	}
+	temp_steer=kp*ierror+kd*derror;
+	steer_old=temp_steer;
+	return(temp_steer);
 }
+
+
+
+
 
 void SpeedSet(void)
 {
@@ -429,8 +471,8 @@ void speed_control()
 	
 	
 	temp_speed+=speed_kp*(Error[0]-Error[1])+speed_ki*Error[0]+speed_kd*(Error[0]-Error[1]-(Error[1]-Error[2]));
-	if(temp_speed>110)
-		temp_speed=110;
+	if(temp_speed>115)
+		temp_speed=115;
 	if(temp_speed<-110)
 			temp_speed=-110;
 	SET_motor(temp_speed);

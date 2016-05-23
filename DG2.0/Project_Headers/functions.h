@@ -25,4 +25,5 @@ void Senddata();
 void SpeedSet();
 void speed_control();
 
+signed int Steer();
 #endif /* FUNCTIONS_H_ */
