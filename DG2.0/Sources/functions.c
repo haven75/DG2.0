@@ -19,12 +19,21 @@ float LEFT_Temp,RIGHT_Temp,MIDDLE_Temp,Lsum,Rsum,Msum;
 float sensor[3][10]={0},avr[10]={0.005,0.01,0.01,0.0125,0.0125,0.025,0.025,0.05,0.15,0.7};
 unsigned int left,right,middle,flag=0,zd_flag=0,slow; //车子在赛道的位置标志
 unsigned int count1,count2,currentspeed,speed_target; 
+<<<<<<< HEAD
 unsigned int presteer,currentsteer,dsteer,steer_old;
 unsigned int speed1=60,	
 			 speed2=52,
 			 speed3=40,
 			 speed4=28,
 			 speed5=21;
+=======
+unsigned int presteer,currentsteer,dsteer;
+unsigned int speed1=64,	
+			 speed2=58,
+			 speed3=48,
+			 speed4=30,
+			 speed5=24;
+>>>>>>> 990ccebf43e01de67698c2efe4b79185852d6e71
 float  /*	kp0=16.5,ki0=0,kd0=4.2,
 		kp1=12,ki=0,kd1=3.3,// 分段PID
 		kp2=7.8,ki2=0,kd2=2.15,  
@@ -38,11 +47,19 @@ float  /*	kp0=16.5,ki0=0,kd0=4.2,
 		kp4=2.3,ki4=0,kd4=0.65; //空转86*/
 
 
+<<<<<<< HEAD
 		kp0=11.2,ki0=0,kd0=17,
 		kp1=6.42,ki=0,kd1=17,// 分段PID
 		kp2=4.35,ki2=0,kd2=23,  
 		kp3=2.2,ki3=0,kd3=23,
 		kp4=1.15,ki4=0,kd4=23;
+=======
+		kp0=11,ki0=0,kd0=25,
+		kp1=7.2,ki=0,kd1=25,// 分段PID
+		kp2=4.35,ki2=0,kd2=22,  
+		kp3=2.2,ki3=0,kd3=22,
+		kp4=1.15,ki4=0,kd4=22;
+>>>>>>> 990ccebf43e01de67698c2efe4b79185852d6e71
 
 float kp,ki,kd;
 int RIGHT,LEFT,MIDDLE,temp_fre[2];
@@ -410,24 +427,34 @@ signed int Steer(void)
 void SpeedSet(void)
 {
 	if((temp_steer==181||temp_steer==-186))
+<<<<<<< HEAD
 	{
 		speed_target=speed5+2;
 	//	slow--;
+=======
+	{	
+		if(slow>200)
+			speed_target=speed5+2;
+		else
+			speed_target=speed4+3;
+		//slow=0;
+		slow--;
+>>>>>>> 990ccebf43e01de67698c2efe4b79185852d6e71
 	}
 	else if(temp_steer<30&&temp_steer>-30)  
     {
     	zd_flag++;
-    	if(zd_flag>250)
+    	slow++;
+    	if(zd_flag>100)
     	{
     		speed_target = speed1;
-    		slow=100;
     	}
     } 
     else if(temp_steer>-60 && temp_steer<60)
     {
-    	if(zd_flag>500)
+    	if(zd_flag>250)
     	{
-    		speed_target=speed5-6;
+    		speed_target=speed5-8;
     	}
     	else
     		speed_target = speed2-(abs(temp_steer)-30)/30*(speed2-speed1);
@@ -436,6 +463,7 @@ void SpeedSet(void)
     else if(temp_steer>-100 && temp_steer<100)
     {
     	zd_flag=0; 
+    	slow=0;
         speed_target = speed3-(abs(temp_steer)-60)/40*(speed3-speed2);
     } 
     else if(temp_steer>=-140 && temp_steer<140)

@@ -35,8 +35,12 @@
 
 /***************变量定义*****************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define STEER_HELM_CENTER 852//853/*861.5*/
 =======
 #define STEER_HELM_CENTER 850//862//853/*861.5*/
 >>>>>>> 62a5ad70a917be7220e35a2c1e7f6fe5767c2abf
+=======
+#define STEER_HELM_CENTER 855//862//853/*861.5*/
+>>>>>>> 990ccebf43e01de67698c2efe4b79185852d6e71
 
