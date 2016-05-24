@@ -38,11 +38,11 @@ float  /*	kp0=16.5,ki0=0,kd0=4.2,
 		kp4=2.3,ki4=0,kd4=0.65; //¿Õ×ª86*/
 
 
-		kp0=11,ki0=0,kd0=18,
-		kp1=7.3,ki=0,kd1=17.5,// ·Ö¶ÎPID
-		kp2=4.35,ki2=0,kd2=22,  
-		kp3=2.25,ki3=0,kd3=22,
-		kp4=1.15,ki4=0,kd4=22;
+		kp0=10.8,ki0=0,kd0=18,
+		kp1=7.8,ki=0,kd1=18,// ·Ö¶ÎPID
+		kp2=4.35,ki2=0,kd2=24,  
+		kp3=2.25,ki3=0,kd3=25,
+		kp4=1.15,ki4=0,kd4=25;
 
 float kp,ki,kd;
 int RIGHT,LEFT,MIDDLE,temp_fre[2];
