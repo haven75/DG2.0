@@ -18,10 +18,10 @@ void main(void)
 			sensor_display();
 			position();
 			steer=STEER_HELM_CENTER+LocPIDCal();
-			if(steer<688)
-				steer=685;
-			if(steer>=1026)
-				steer=1058;
+			if(steer<678)
+				steer=662;
+			if(steer>=1016)
+				steer=1028;
 			Dis_Num(64,3,(WORD)steer,5);
 			SET_steer(steer);
 			SpeedSet();
