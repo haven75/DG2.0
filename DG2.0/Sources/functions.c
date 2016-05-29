@@ -20,10 +20,10 @@ float sensor[3][10]={0},avr[10]={0.005,0.01,0.01,0.0125,0.0125,0.025,0.025,0.05,
 unsigned int left,right,middle,flag=0,zd_flag=0,slow; //车子在赛道的位置标志
 unsigned int count1,count2,currentspeed,speed_target; 
 unsigned int presteer,currentsteer,dsteer;
-unsigned int speed1=62,	
-			 speed2=56,
-			 speed3=48,
-			 speed4=38,
+unsigned int speed1=65,	
+			 speed2=60,
+			 speed3=50,
+			 speed4=40,
 			 speed5=30;
 float  /*	kp0=16.5,ki0=0,kd0=4.2,
 		kp1=12,ki=0,kd1=3.3,// 分段PID
@@ -38,11 +38,11 @@ float  /*	kp0=16.5,ki0=0,kd0=4.2,
 		kp4=2.3,ki4=0,kd4=0.65; //空转86*/
 
 
-		kp0=10.8,ki0=0,kd0=10.2,
-		kp1=8.25,ki=0,kd1=10.2,// 分段PID
-		kp2=5,ki2=0,kd2=17,  
-		kp3=2.35,ki3=0,kd3=22,
-		kp4=1.25,ki4=0,kd4=22;
+		kp0=10.6,ki0=0,kd0=11,
+		kp1=8.3,ki=0,kd1=11,//分段PID
+		kp2=4.8,ki2=0,kd2=16,  
+		kp3=2.3,ki3=0,kd3=21,
+		kp4=1.2,ki4=0,kd4=21;
 
 float kp,ki,kd;
 int RIGHT,LEFT,MIDDLE,temp_fre[2];
@@ -200,7 +200,6 @@ void GETservoPID(void)
 	}
 }
 
-
 /****************************************************************************************************************
 * 函数名称：InitsePID()	
 * 函数功能：初始化舵机的PID参数
@@ -209,7 +208,13 @@ void GETservoPID(void)
 * 修改人  ：温泉
 * 修改时间：2016/02/18
 *****************************************************************************************************************/
-
+unsigned int abs(signed int x)
+{
+	if(x>=0)
+		return x;
+	else 
+		return -x;
+}
 /****************************************************************************************************************
 * 函数名称：LocPIDCal()	
 * 函数功能：计算舵机的PWM变化值
@@ -231,7 +236,7 @@ signed int LocPIDCal(void)
 		middleflag++;
 		if(flag==1)
 		{
-			temp_steer=181;
+			temp_steer=186;
 			return(temp_steer);
 		}
 		if(flag==2)
@@ -250,7 +255,7 @@ signed int LocPIDCal(void)
 //			{
 				if(fre_diff>=0)
 				{
-					temp_steer=181;
+					temp_steer=186;
 					flag=1;
 					return(temp_steer);
 				}
@@ -289,7 +294,7 @@ signed int LocPIDCal(void)
 		if(fre_diff>=-2&&fre_diff<=2)      //直道
 		{
 			flag=0;
-			kp=kp4;
+			kp=kp4/2*abs(fre_diff);
 			kd=kd4;
 		}
 		else if(fre_diff>=-4&&fre_diff<=4)                                //小弯
@@ -346,7 +351,7 @@ signed int LocPIDCal(void)
 		}
 		
 		temp_steer=kp*iError+kd*dError;
-		if(temp_steer>=181)
+		if(temp_steer>=186)
 			flag=1;               //左打死
 		else if(temp_steer<=-186)
 			flag=2;
@@ -357,20 +362,14 @@ signed int LocPIDCal(void)
 
 }
 
-unsigned int abs(signed int x)
-{
-	if(x>=0)
-		return x;
-	else 
-		return -x;
-}
+
 
 void SpeedSet(void)
 {
-	if((temp_steer==181||temp_steer==-186))
+	if((temp_steer>=181||temp_steer<=-186))
 	{	
 		if(slow>200)
-			speed_target=speed5-6;
+			speed_target=speed5-8;
 		else
 			speed_target=speed4+3;
 		//slow=0;
@@ -434,11 +433,13 @@ void speed_control()
 	
 	
 	temp_speed+=speed_kp*(Error[0]-Error[1])+speed_ki*Error[0]+speed_kd*(Error[0]-Error[1]-(Error[1]-Error[2]));
-	if(temp_speed>118)
-		temp_speed=118;
+	if(temp_speed>127)
+		temp_speed=127;
 	if(temp_speed<-110)
 			temp_speed=-110;
 	SET_motor(temp_speed);
+	if(forward)
+		SET_motor(0);
 }
 /****************************************************************************************************************
 * 函数名称：sensor_display()	
