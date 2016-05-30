@@ -38,11 +38,11 @@ float  /*	kp0=16.5,ki0=0,kd0=4.2,
 		kp4=2.3,ki4=0,kd4=0.65; //空转86*/
 
 
-		kp0=10.8,ki0=0,kd0=10.2,
-		kp1=8.25,ki=0,kd1=10.2,// 分段PID
-		kp2=5,ki2=0,kd2=17,  
-		kp3=2.35,ki3=0,kd3=22,
-		kp4=1.25,ki4=0,kd4=22;
+		kp0=10.8,ki0=0,kd0=18,
+		kp1=8.2,ki=0,kd1=18,// 分段PID
+		kp2=4.5,ki2=0,kd2=20,  
+		kp3=2.35,ki3=0,kd3=50,
+		kp4=1.25,ki4=0,kd4=50;
 
 float kp,ki,kd;
 int RIGHT,LEFT,MIDDLE,temp_fre[2];
@@ -288,7 +288,7 @@ signed int LocPIDCal(void)
 		if(fre_diff>=-2&&fre_diff<=2)      //直道
 		{
 			flag=0;
-			kp=kp4;
+			kp=kp4/2*abs(fre_diff);
 			kd=kd4;
 		}
 		else if(fre_diff>=-4&&fre_diff<=4)                                //小弯
@@ -476,8 +476,8 @@ void speed_control()
 	
 	
 	temp_speed+=speed_kp*(Error[0]-Error[1])+speed_ki*Error[0]+speed_kd*(Error[0]-Error[1]-(Error[1]-Error[2]));
-	if(temp_speed>118)
-		temp_speed=118;
+	if(temp_speed>120)
+		temp_speed=120;
 	if(temp_speed<-110)
 			temp_speed=-110;
 	SET_motor(temp_speed);
