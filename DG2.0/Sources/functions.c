@@ -18,14 +18,14 @@ unsigned int chuwan;
 float fre_diff,dis,LEFT_old,LEFT_new=0,RIGHT_old,RIGHT_new=0,MIDDLE_old,MIDDLE_new=0,temp_steer,steer_old;
 float LEFT_Temp,RIGHT_Temp,MIDDLE_Temp,Lsum,Rsum,Msum;
 float sensor[3][10]={0},avr[10]={0.005,0.01,0.01,0.0125,0.0125,0.025,0.025,0.05,0.15,0.7};
-unsigned int left,right,middle,flag=0,zd_flag=0,slow; //车子在赛道的位置标志
+unsigned int left,right,middle,flag=0,zd_flag=0,slow,pause=0; //车子在赛道的位置标志
 unsigned int count1,count2,currentspeed,speed_target; 
 unsigned int presteer,currentsteer,dsteer;
-unsigned int speed1=62,	
-			 speed2=60,
+unsigned int speed1=58,	
+			 speed2=58,
 			 speed3=50,
 			 speed4=40,
-			 speed5=30;
+			 speed5=36;
 float  /*	kp0=16.5,ki0=0,kd0=4.2,
 		kp1=12,ki=0,kd1=3.3,// 分段PID
 		kp2=7.8,ki2=0,kd2=2.15,  
@@ -40,8 +40,8 @@ float  /*	kp0=16.5,ki0=0,kd0=4.2,
 
 
 
-		kp0=9.9,ki0=0,kd0=12.4,
-		kp1=7.9,ki=0,kd1=12.4,//分段PID
+		kp0=10.5,ki0=0,kd0=10.5,
+		kp1=8.3,ki1=0,kd1=10,//分段PID
 		kp2=4.8,ki2=0,kd2=16,  
 		kp3=2.3,ki3=0,kd3=20,
 		kp4=1.2,ki4=0,kd4=20;
@@ -419,7 +419,12 @@ signed int Steer(void)
 
 void SpeedSet(void)
 {
-	if((temp_steer>=181||temp_steer<=-186))
+	if(pause==1)
+	{
+		pause=0;
+		speed_target=0;
+	}
+	else if((temp_steer>=181||temp_steer<=-186))
 	{	
 		if(slow>200)
 		{
@@ -430,6 +435,7 @@ void SpeedSet(void)
 			speed_target=speed5;
 		//slow=0;
 		slow--;
+		pause=0;
 	}
 	else if(temp_steer<30&&temp_steer>-30)  
     {
@@ -440,18 +446,24 @@ void SpeedSet(void)
     		speed_target = speed1;
     		chuwan=0;
     	}
+    	pause=0;
     } 
     else if(temp_steer>-60 && temp_steer<60)
     {
     	if(zd_flag>400)
-    		speed_target=speed5-30;
+    	{
+    		speed_target=0;
+    		pause=1;
+    	}
     	else if(zd_flag>300)
     	{
-    		speed_target=speed5-22;
+    		speed_target=speed5-25;
+    		pause=1;
     	}
     	else
     		speed_target = speed2-(abs(temp_steer)-30)/30*(speed2-speed1);
     	zd_flag=0;
+    	pause=0;
     } 
     else if(temp_steer>-100 && temp_steer<100)
     {
@@ -459,6 +471,7 @@ void SpeedSet(void)
     	if(chuwan)
     		slow=0;
         speed_target = speed3-(abs(temp_steer)-60)/40*(speed3-speed2);
+        pause=0;
     } 
     else if(temp_steer>=-140 && temp_steer<140)
     {
@@ -466,6 +479,7 @@ void SpeedSet(void)
     	if(chuwan)
     		slow=0;
         speed_target = speed4-(abs(temp_steer)-100)/40*(speed4-speed3);
+        pause=0;
     }  
     else 
     {
@@ -473,10 +487,13 @@ void SpeedSet(void)
     	if(chuwan)
     		slow=0;
         speed_target = speed5-(abs(temp_steer)-140)/40*(speed5-speed4);
+        pause=0;
     }  
     
     if(middleflag>100)
     	speed_target+=2;
+    if(StopFlag==1)
+    	speed_target=0;
     
 }
 
@@ -499,8 +516,8 @@ void speed_control()
 	temp_speed+=speed_kp*(Error[0]-Error[1])+speed_ki*Error[0]+speed_kd*(Error[0]-Error[1]-(Error[1]-Error[2]));
 	if(temp_speed>135)
 		temp_speed=135;
-	if(temp_speed<-140)
-			temp_speed=-140;
+	if(temp_speed<-200)
+			temp_speed=-200;
 	SET_motor(temp_speed);
 	if(forward)
 		SET_motor(0);

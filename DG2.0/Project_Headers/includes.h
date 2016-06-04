@@ -12,6 +12,7 @@
 #include "define.h"
 #include "functions.h"
 #include "oleddriver.h"
+#include "ReedSwitch.h"
 
 
 
