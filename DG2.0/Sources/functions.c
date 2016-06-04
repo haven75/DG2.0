@@ -43,9 +43,9 @@ float  /*	kp0=16.5,ki0=0,kd0=4.2,
 
 
 
-		kp0=12.6,ki0=0,kd0=12.4,
-		kp1=9.2,ki1=0,kd1=12.4,//·Ö¶ÎPID
-		kp2=4,ki2=0,kd2=16,  
+		kp0=12.5,ki0=0,kd0=12.5,
+		kp1=8.2,ki1=0,kd1=12.5,//·Ö¶ÎPID
+		kp2=4.2,ki2=0,kd2=12.6,  
 		kp3=2,ki3=0,kd3=13,
 		kp4=1,ki4=0,kd4=13;
 
@@ -515,8 +515,8 @@ void speed_control()
 	
 	
 	temp_speed+=speed_kp*(Error[0]-Error[1])+speed_ki*Error[0]+speed_kd*(Error[0]-Error[1]-(Error[1]-Error[2]));
-	if(temp_speed>130)
-		temp_speed=130;
+	if(temp_speed>135)
+		temp_speed=135;
 	if(temp_speed<-150)
 			temp_speed=-150;
 	SET_motor(temp_speed);
