@@ -18,4 +18,5 @@ Sources/oleddriver_c.obj: F:\大学资源\TUSmart\DG2.0\DG2.0\Sources\oleddriver.c \
 	F:\大学资源\TUSmart\DG2.0\DG2.0\Project_Headers\IntcInterrupts.h \
 	F:\大学资源\TUSmart\DG2.0\DG2.0\Project_Headers\define.h \
 	F:\大学资源\TUSmart\DG2.0\DG2.0\Project_Headers\functions.h \
-	F:\大学资源\TUSmart\DG2.0\DG2.0\Project_Headers\oleddriver.h 
+	F:\大学资源\TUSmart\DG2.0\DG2.0\Project_Headers\oleddriver.h \
+	F:\大学资源\TUSmart\DG2.0\DG2.0\Project_Headers\ReedSwitch.h 
