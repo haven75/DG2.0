@@ -24,9 +24,9 @@ unsigned int presteer,currentsteer,dsteer;
 
 unsigned int speed1=54,	
 			 speed2=52,
-			 speed3=46,
-			 speed4=40,
-			 speed5=34;
+			 speed3=50,
+			 speed4=46,
+			 speed5=36;
 
 float  /*	kp0=16.5,ki0=0,kd0=4.2,
 		kp1=12,ki=0,kd1=3.3,// ·Ö¶ÎPID
@@ -43,11 +43,11 @@ float  /*	kp0=16.5,ki0=0,kd0=4.2,
 
 
 
-		kp0=11.5,ki0=0,kd0=12,
-		kp1=8.5,ki1=0,kd1=12,//·Ö¶ÎPID
-		kp2=5,ki2=0,kd2=12,  
-		kp3=2.5,ki3=0,kd3=12,
-		kp4=1.5,ki4=0,kd4=12;
+		kp0=11,ki0=0,kd0=11,
+		kp1=8.3,ki1=0,kd1=11,//·Ö¶ÎPID
+		kp2=4.5,ki2=0,kd2=11,  
+		kp3=2.45,ki3=0,kd3=10,
+		kp4=1.45,ki4=0,kd4=10;
 
 
 float kp,ki,kd;
@@ -514,8 +514,8 @@ void speed_control()
 	
 	
 	temp_speed+=speed_kp*(Error[0]-Error[1])+speed_ki*Error[0]+speed_kd*(Error[0]-Error[1]-(Error[1]-Error[2]));
-	if(temp_speed>125)
-		temp_speed=125;
+	if(temp_speed>130)
+		temp_speed=130;
 	if(temp_speed<-150)
 			temp_speed=-150;
 	SET_motor(temp_speed);
