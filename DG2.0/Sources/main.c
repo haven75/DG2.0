@@ -21,7 +21,7 @@ void main(void)
 			if(steer<686)
 				steer=670;
 			if(steer>=1028)
-				steer=1058;
+				steer=1052;
 			Dis_Num(64,3,(WORD)steer,5);
 			SET_steer(steer);
 			SpeedSet();

@@ -359,8 +359,8 @@ Link map of __startup
   UNUSED   000062 ........ ........    GETservoPID functions_c.obj 
   000013a6 00000a 000043a6 00001ae6  2 abs 	functions_c.obj 
   000013b0 00042e 000043b0 00001af0  2 LocPIDCal 	functions_c.obj 
-  000017de 00026c 000047de 00001f1e  2 SpeedSet 	functions_c.obj 
-  00001a4a 000136 00004a4a 0000218a  2 speed_control 	functions_c.obj 
+  000017de 00026e 000047de 00001f1e  2 SpeedSet 	functions_c.obj 
+  00001a4c 000134 00004a4c 0000218c  2 speed_control 	functions_c.obj 
   00001b80 000088 00004b80 000022c0  2 sensor_display 	functions_c.obj 
   00001c08 000054 00004c08 00002348  2 Get_speed 	functions_c.obj 
   00001c5c 000070 00004c5c 0000239c  2 Set_Middlepoint 	functions_c.obj 

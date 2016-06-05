@@ -22,11 +22,11 @@ unsigned int left,right,middle,flag=0,zd_flag=0,slow,pause=0; //车子在赛道的位置
 unsigned int count1,count2,currentspeed,speed_target; 
 unsigned int presteer,currentsteer,dsteer;
 
-unsigned int speed1=56,	
-			 speed2=56,
+unsigned int speed1=54,	
+			 speed2=52,
 			 speed3=48,
 			 speed4=40,
-			 speed5=32;
+			 speed5=30;
 
 float  /*	kp0=16.5,ki0=0,kd0=4.2,
 		kp1=12,ki=0,kd1=3.3,// 分段PID
@@ -43,11 +43,11 @@ float  /*	kp0=16.5,ki0=0,kd0=4.2,
 
 
 
-		kp0=12.5,ki0=0,kd0=12.5,
+		kp0=12.2,ki0=0,kd0=12.5,
 		kp1=8.2,ki1=0,kd1=12.5,//分段PID
-		kp2=4.2,ki2=0,kd2=12.6,  
-		kp3=2,ki3=0,kd3=13,
-		kp4=1,ki4=0,kd4=13;
+		kp2=5,ki2=0,kd2=12.6,  
+		kp3=2.5,ki3=0,kd3=10,
+		kp4=1.5,ki4=0,kd4=10;
 
 
 float kp,ki,kd;
@@ -278,7 +278,6 @@ signed int LocPIDCal(void)
 				fre_diff=20-fre_diff;
 			else
 				fre_diff=-21-fre_diff;
-		
 		}   
 		else
 			middleflag=0;	
@@ -455,12 +454,12 @@ void SpeedSet(void)
     {
     	if(zd_flag>400)
     	{
-    		speed_target=0;
+    		speed_target=-5;
     		pause=1;
     	}
     	else if(zd_flag>300)
     	{
-    		speed_target=speed5-25;
+    		speed_target=speed5-28;
     		pause=1;
     	}
     	else
@@ -515,8 +514,8 @@ void speed_control()
 	
 	
 	temp_speed+=speed_kp*(Error[0]-Error[1])+speed_ki*Error[0]+speed_kd*(Error[0]-Error[1]-(Error[1]-Error[2]));
-	if(temp_speed>135)
-		temp_speed=135;
+	if(temp_speed>125)
+		temp_speed=125;
 	if(temp_speed<-150)
 			temp_speed=-150;
 	SET_motor(temp_speed);
