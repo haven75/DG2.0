@@ -84,7 +84,7 @@ void initEMIOS_0MotorAndSteer(void)
 	EMIOS_0.CH[9].CCR.B.MODE = 0x60;	/* Mode is OPWM Buffered */
 	EMIOS_0.CH[9].CCR.B.EDPOL = 1;	/* Polarity-leading edge sets output/trailing clears*/
 	EMIOS_0.CH[9].CADR.R = 1;	/* Leading edge when channel counter bus= */
-	EMIOS_0.CH[9].CBDR.R = 40;	/* Trailing edge when channel counter bus= */
+	EMIOS_0.CH[9].CBDR.R = 75;	/* Trailing edge when channel counter bus= */
 	
 	SIU.PCR[9].R = 0x0600;	/*[11:10]—°‘ÒAFx ¥À¥¶AF1 /* MPC56xxS: Assign EMIOS_0 ch 21 to pad */
 	
@@ -299,6 +299,8 @@ void initKeys_Switchs(void)
 	SIU.PCR[52].R = 0x0100;               // PD[4]: Input  switch3
 	SIU.PCR[54].R = 0x0100;               // PD[6]: Input  switch2
 	SIU.PCR[56].R = 0x0100;               // PD[8]: Input  switch1
+	SIU.PCR[57].R = 0x0100; 
+	SIU.PCR[22].R = 0x0100; 
 }
 
 

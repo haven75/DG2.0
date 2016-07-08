@@ -21,7 +21,8 @@ float sensor[3][10]={0},avr[10]={0.005,0.01,0.01,0.0125,0.0125,0.025,0.025,0.05,
 unsigned int left,right,middle,flag=0,zd_flag=0,slow,pause=0; //车子在赛道的位置标志
 unsigned int count1,count2,currentspeed,speed_target; 
 unsigned int presteer,currentsteer,dsteer;
-
+unsigned char Left_Compensator=46, Right_Compensator=36;
+float Middle_Compensator=30.5;
 unsigned int speed1=54,	
 			 speed2=52,
 			 speed3=50,
@@ -49,9 +50,9 @@ float  /*	kp0=16.5,ki0=0,kd0=4.2,
 		kp3=2.45,ki3=0,kd3=10,
 		kp4=1.45,ki4=0,kd4=10;*/
 
-		kp1=3.5,ki2=0,kd1=0,  
+		kp1=4,ki2=0,kd1=0,  
 		kp2=2.5,ki3=0,kd2=0,
-		kp3=1.5,ki4=0,kd3=0;
+		kp3=1.3,ki4=0,kd3=0;
 
 float kp,ki,kd;
 int RIGHT,LEFT,MIDDLE,temp_fre[2];
@@ -136,27 +137,6 @@ void frequency_measure(void)
 }
 
 /****************************************************************************************************************
-* 函数名称：position()	
-* 函数功能：计算车子的位置
-* 入口参数：无
-* 出口参数：无
-* 修改人  ：温泉
-* 修改时间：2016/03/6
-*****************************************************************************************************************/
-void position(void)
-{
-	fre_diff=LEFT-RIGHT+sensor_compensator;
-	if(fre_diff==0)
-		middle=1; 
-	if(fre_diff<0/*LEFT<563&&RIGHT>571*/)
-		left=1;
-	if(fre_diff>0/*LEFT>563&&RIGHT<571*/)
-		right=1;
-}
-
-
-
-/****************************************************************************************************************
 * 函数名称：InitsePID()	
 * 函数功能：初始化舵机的PID参数
 * 入口参数：无
@@ -201,18 +181,18 @@ signed int LocPIDCal(void)
 		flag=0;
 		if(dleft>=dright)
 		{
-			if(dmiddle>=-35)
+			if(dmiddle>=-Middle_Compensator)
 				fre_diff=-dmiddle;
 			else
-				fre_diff=-dmiddle+50-dleft;
+				fre_diff=-dmiddle+Left_Compensator-dleft;
 				
 		}
 		else
 		{
-			if(dmiddle>-35)
+			if(dmiddle>=-Middle_Compensator)
 				fre_diff=dmiddle;
 			else
-				fre_diff=dmiddle-47+dright;
+				fre_diff=dmiddle-Right_Compensator+dright;
 		}
 		
 	}
@@ -421,14 +401,12 @@ void sensor_display(void)
 	Dis_Num(64,0,(WORD)LEFT,5);
 	Dis_Num(64,1,(WORD)MIDDLE,5);
 	Dis_Num(64,2,(WORD)RIGHT,5);
-//	Dis_Num(64,3,(WORD)start_left,5);
-//	Dis_Num(64,4,(WORD)start_middle,5);
-//	Dis_Num(64,5,(WORD)start_right,5); 
 	Dis_Num(64,4,(WORD)currentspeed,5);
 	Dis_Num(64,5,(WORD)fre_diff,5);
 	Dis_Num(64,6,(WORD)-fre_diff,5);
-	//Dis_Num(64,5,(WORD)speed_target,5);
-
+	Dis_Num(0,0,(WORD)Left_Compensator,5);
+	Dis_Num(0,2,(WORD)Right_Compensator,5);
+	Dis_Num(0,1,(WORD)Middle_Compensator,5);
 }
 
 /****************************************************************************************************************
@@ -578,3 +556,74 @@ void Senddata()
 	}
 }
 
+
+/***********************************************按键补偿*******************************************************/
+void Key_Detect_Compensator()
+{
+	while(switch1==0&&switch2==0)
+	{
+		if(Key1==0)
+		{
+			delay();
+		if(Key1==0)
+			Middle_Compensator--;
+		while(Key1==0)
+			sensor_display();
+		}
+		if(Key2==0)
+		{
+			delay();
+			if(Key2==0)
+				Middle_Compensator++;
+			while(Key2==0)
+				sensor_display();
+		}
+	}
+	while(switch1==0&&switch2)
+	{
+		if(Key1==0)
+		{
+			delay();
+		if(Key1==0)
+			Left_Compensator--;
+		while(Key1==0)
+			sensor_display();
+		}
+		if(Key2==0)
+		{
+			delay();
+			if(Key2==0)
+				Left_Compensator++;
+			while(Key2==0)
+				sensor_display();
+		}
+	}
+	while(switch1&&switch2==0)
+	{
+		if(Key1==0)
+		{
+			delay();
+		if(Key1==0)
+			Right_Compensator--;
+		while(Key1==0)
+			sensor_display();
+		}
+		if(Key2==0)
+		{
+			delay();
+			if(Key2==0)
+				Right_Compensator++;
+			while(Key2==0)
+				sensor_display();
+		}
+	}
+}
+
+
+/*************************************************void delay***************************************/
+void delay()
+{
+	unsigned int delay=1000,t;
+	for(t=100;t>0;t--)
+		delay--;
+}

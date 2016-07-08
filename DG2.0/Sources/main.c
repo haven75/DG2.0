@@ -5,7 +5,6 @@ signed int steer=0;
 
 
 
-
 void main(void)
 {
 	initALL();
@@ -13,10 +12,10 @@ void main(void)
 	Set_Middlepoint();
 	for (;;) 
 	{
+		Key_Detect_Compensator();
 		if(Flag==1)
 		{
 			sensor_display();
-			position();
 			steer=STEER_HELM_CENTER+LocPIDCal();
 			if(steer<937)
 				steer=930;

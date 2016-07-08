@@ -11,8 +11,6 @@
 void frequency_measure();
 void InitspPID();
 void InitsePID();
-void position();
-void GETservoPID();
 signed int LocPIDCal();
 void sensor_display();
 void Get_speed();
@@ -24,6 +22,9 @@ void SendHex(unsigned char hex);
 void Senddata();
 void SpeedSet();
 void speed_control();
-
+void Key_Detect_Compensator();
 signed int Steer();
+void delay();
+extern unsigned char Left_Compensator, Right_Compensator;
+extern float Middle_Compensator;
 #endif /* FUNCTIONS_H_ */

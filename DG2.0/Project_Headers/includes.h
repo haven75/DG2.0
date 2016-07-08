@@ -33,6 +33,10 @@
 #define switch5 SIU.GPDI[48].R
 #define switch6 SIU.GPDI[24].R
 
+#define Key2 SIU.GPDI[57].R
+#define Key1 SIU.GPDI[22].R
+
+
 
 /***************变量定义*****************/
 #define STEER_HELM_CENTER 1112//855//862//853/*861.5*/
