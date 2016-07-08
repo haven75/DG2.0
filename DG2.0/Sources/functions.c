@@ -43,17 +43,20 @@ float  /*	kp0=16.5,ki0=0,kd0=4.2,
 
 
 
-		kp0=11,ki0=0,kd0=11,
+/*		kp0=11,ki0=0,kd0=11,
 		kp1=8.3,ki1=0,kd1=11,//分段PID
 		kp2=4.5,ki2=0,kd2=11,  
 		kp3=2.45,ki3=0,kd3=10,
-		kp4=1.45,ki4=0,kd4=10;
+		kp4=1.45,ki4=0,kd4=10;*/
 
+		kp2=1.5,ki2=0,kd2=0,  
+		kp3=1,ki3=0,kd3=0,
+		kp4=0.5,ki4=0,kd4=0;
 
 float kp,ki,kd;
 int RIGHT,LEFT,MIDDLE,temp_fre[2];
 unsigned char Outdata[8];
-float sumerror,lasterror,Msetpoint=0,temp_middle=0,sensor_compensator=0,middleflag=0,start_left=0,start_right=0;
+float sumerror,lasterror,Msetpoint=0,temp_middle=0,sensor_compensator=0,middleflag=0,dleft=0,dmiddle=0,dright=0,start_middle=0,start_left=0,start_right=0;
 int Set_speed,temp_speed,pwm;
 int speed_iError,speed_lastError,speed_prevError,Error[3];
 float speed_kp=5.5,
@@ -234,128 +237,49 @@ signed int LocPIDCal(void)
 {
 	register float iError,dError;
 	
-//	if((LEFT>=start_left+8)&&(RIGHT>=start_right+8))  // 过十字
-	//	return(0);
-//	if(((flag==1)&&(LEFT<572))||((flag==2)&&(RIGHT<580)))
+	dleft=LEFT-start_left;
+	dmiddle=MIDDLE-start_middle;
+	dright=RIGHT-start_right;
 	
-	if(((flag==1)||(flag==2))&&(MIDDLE<=Msetpoint)) //左右打死保持
+	if(dleft>=dright)
 	{
-		middleflag++;
-		if(flag==1)
-		{
-			temp_steer=186;
-			return(temp_steer);
-		}
-		if(flag==2)
-		{
-			temp_steer=-186;
-			return(temp_steer);
-		}
+		if(dmiddle>=-32)
+			fre_diff=-dmiddle;
+		else
+			fre_diff=-dmiddle+40-LEFT;
+			
 	}
-		
 	else
 	{
-		if(MIDDLE<=Msetpoint)      //中间线圈判定频率偏差大小
-		{
-			middleflag++;
-//			if(middleflag>=2)           //u形弯处理  middleflag计数
-//			{
-				if(fre_diff>=0)
-				{
-					temp_steer=186;
-					flag=1;
-					return(temp_steer);
-				}
-				else
-				{
-					temp_steer=-186;
-					flag=2;
-					return(temp_steer);
-				}
-//			}
-			
-			if(fre_diff>=0) 
-				fre_diff=20-fre_diff;
-			else
-				fre_diff=-21-fre_diff;
-		}   
+		if(dmiddle>-32)
+			fre_diff=dmiddle;
 		else
-			middleflag=0;	
-		
-		if(fre_diff>=0)
-			fre_diff+=1;
-		
+			fre_diff=dmiddle-37+RIGHT;
+	}
 		
 		iError=fre_diff; 
 		sumerror+=iError;
 		dError=iError-lasterror;
-		lasterror=iError;
-		
-		/*iError=se->SetPoint-Nextpoint; 
-		se->SumError+=iError;
-		dError=iError-se->LastError;
-		se->LastError=iError;*/
-			
-		
-		if(fre_diff>=-2&&fre_diff<=2)      //直道
+		lasterror=iError;		
+		if(fre_diff>=-15&&fre_diff<=15)      //直道
 		{
 			flag=0;
 			kp=kp4/2*abs(fre_diff);
 			kd=kd4;
 		}
-		else if(fre_diff>=-4&&fre_diff<=4)                                //小弯
+		else if(fre_diff>=-30&&fre_diff<=30)                                //小弯
 		{
-			if(fre_diff>=0)
-			{
-				kp=kp4+(kp3-kp4)/2*(fre_diff-2);
-				kd=kd3;
-			}
-			else
-			{
-				kp=kp4+(kp3-kp4)/2*(-fre_diff-2);
-				kd=kd3;
-			}					
+			kp=kp4+(kp3-kp4)/2*(abs(fre_diff)-15);
+			kd=kd3;
+				
 		}
-		else if(fre_diff>=-6&&fre_diff<=6)                                //小弯
+		else                              //小弯
 		{
-			if(fre_diff>=0)
-			{
-				kp=kp3+(kp2-kp3)/2*(fre_diff-4);
-				kd=kd2;
-			}
-			else
-			{
-				kp=kp3+(kp2-kp3)/2*(-fre_diff-4);
-				kd=kd2;
-			}					
+
+			kp=kp3+(kp2-kp3)/2*(fre_diff-30);
+			kd=kd2;
+				
 		}
-		else if(fre_diff>=-8&&fre_diff<=8)                                //小弯
-		{
-			if(fre_diff>=0)
-			{
-				kp=kp2+(kp1-kp2)/2*(fre_diff-6);
-				kd=kd1;
-			}
-			else
-			{
-				kp=kp2+(kp1-kp2)/2*(-fre_diff-6);
-				kd=kd1;
-			}					
-		}
-		else                    //大弯
-		{
-			if(fre_diff>=0)
-			{
-				kp=kp1+(kp0-kp1)/10*(fre_diff-8);
-				kd=kd0;
-			}
-			else
-			{
-				kp=kp1+(kp0-kp1)/10*(-fre_diff-8);
-				kd=kd0;
-			}								
-		}
-		
 		temp_steer=kp*iError+kd*dError;
 		if(temp_steer>=186)
 			flag=1;               //左打死
@@ -364,7 +288,7 @@ signed int LocPIDCal(void)
 		else 
 			flag=0;
 		return(temp_steer);
-	}
+	
 
 }
 
@@ -632,12 +556,12 @@ void Get_speed()  //定时2mse采速度
 *****************************************************************************************************************/
 void Set_Middlepoint()
 {
-	temp_middle=MIDDLE-11;
+	start_middle=MIDDLE-14;
 	start_left=LEFT-14;
 	start_right=RIGHT-14;
 	sensor_compensator=RIGHT-LEFT;
-	Msetpoint=temp_middle;
-	Dis_Num(64,6,(WORD)Msetpoint,5);
+//	Msetpoint=temp_middle;
+//	Dis_Num(64,6,(WORD)Msetpoint,5);
 }
 
 
