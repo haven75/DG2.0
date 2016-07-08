@@ -15,7 +15,7 @@
  */
 #include"includes.h"
 unsigned int chuwan;
-float fre_diff,dis,LEFT_old,LEFT_new=0,RIGHT_old,RIGHT_new=0,MIDDLE_old,MIDDLE_new=0,temp_steer,steer_old;
+float fre_diff,dis,LEFT_old,LEFT_new=0,RIGHT_old,RIGHT_new=0,MIDDLE_old,MIDDLE_new=0,temp_steer,temp_steer_old;
 float LEFT_Temp,RIGHT_Temp,MIDDLE_Temp,Lsum,Rsum,Msum;
 float sensor[3][10]={0},avr[10]={0.005,0.01,0.01,0.0125,0.0125,0.025,0.025,0.05,0.15,0.7};
 unsigned int left,right,middle,flag=0,zd_flag=0,slow,pause=0; //车子在赛道的位置标志
@@ -49,9 +49,9 @@ float  /*	kp0=16.5,ki0=0,kd0=4.2,
 		kp3=2.45,ki3=0,kd3=10,
 		kp4=1.45,ki4=0,kd4=10;*/
 
-		kp2=1.5,ki2=0,kd2=0,  
-		kp3=1,ki3=0,kd3=0,
-		kp4=0.5,ki4=0,kd4=0;
+		kp1=3.5,ki2=0,kd1=0,  
+		kp2=2.5,ki3=0,kd2=0,
+		kp3=1.5,ki4=0,kd3=0;
 
 float kp,ki,kd;
 int RIGHT,LEFT,MIDDLE,temp_fre[2];
@@ -155,60 +155,6 @@ void position(void)
 }
 
 
-/****************************************************************************************************************
-* 函数名称：GETservoPID()	
-* 函数功能：获取舵机的P、I、D
-* 入口参数：无
-* 出口参数：无
-* 修改人  ：温泉
-* 修改时间：2016/02/18
-*****************************************************************************************************************/
-void GETservoPID(void)
-{
-	if(middle==1)
-		;
-	else if(left==1)
-	{
-		if(LEFT<=567&&RIGHT>=575)
-		{
-			//se->Proportion=kp1;  传递不了值
-			//se->Derivative=kd1;
-	//		kp=kp1;
-	//		kd=kd1;
-		}
-	/*	if(RIGHT>2610&&RIGHT<=2620)
-		{
-			se->Proportion=kp2;
-			se->Derivative=kd2;
-		}
-		if(RIGHT>2620)
-		{
-			se->Proportion=kp3;
-			se->Derivative=kd3;
-		}*/
-	}
-	else if(right==1)
-	{
-		if(LEFT>=567&&RIGHT<=75)
-		{
-			//se->Proportion=kp1;
-			//se->Derivative=kd1;
-			kp=kp1;
-			kd=kd1;
-		}
-	/*	if(LEFT>2610&&LEFT<=2620)
-		{
-			se->Proportion=kp2;
-			se->Derivative=kd2;
-		}
-		if(LEFT>2620)
-		{
-			se->Proportion=kp3;
-			se->Derivative=kd3;
-		}*/
-	}
-}
-
 
 /****************************************************************************************************************
 * 函数名称：InitsePID()	
@@ -237,56 +183,72 @@ signed int LocPIDCal(void)
 {
 	register float iError,dError;
 	
+	
+		
 	dleft=LEFT-start_left;
-	dmiddle=MIDDLE-start_middle;
+	if(MIDDLE>start_middle)
+		dmiddle=0;
+	else
+		dmiddle=MIDDLE-start_middle;
 	dright=RIGHT-start_right;
 	
-	if(dleft>=dright)
-	{
-		if(dmiddle>=-32)
-			fre_diff=-dmiddle;
-		else
-			fre_diff=-dmiddle+40-LEFT;
-			
-	}
+	if(flag==1&&dleft<5)
+		fre_diff=175;
+	else if(flag==2&&dright<5)
+		fre_diff=-175;
 	else
 	{
-		if(dmiddle>-32)
-			fre_diff=dmiddle;
-		else
-			fre_diff=dmiddle-37+RIGHT;
-	}
-		
-		iError=fre_diff; 
-		sumerror+=iError;
-		dError=iError-lasterror;
-		lasterror=iError;		
-		if(fre_diff>=-15&&fre_diff<=15)      //直道
+		flag=0;
+		if(dleft>=dright)
 		{
-			flag=0;
-			kp=kp4/2*abs(fre_diff);
-			kd=kd4;
-		}
-		else if(fre_diff>=-30&&fre_diff<=30)                                //小弯
-		{
-			kp=kp4+(kp3-kp4)/2*(abs(fre_diff)-15);
-			kd=kd3;
+			if(dmiddle>=-35)
+				fre_diff=-dmiddle;
+			else
+				fre_diff=-dmiddle+50-dleft;
 				
 		}
+		else
+		{
+			if(dmiddle>-35)
+				fre_diff=dmiddle;
+			else
+				fre_diff=dmiddle-47+dright;
+		}
+		
+	}
+/*	if(dleft<4&&dmiddle<-33&&dright<4)
+		return(temp_steer_old);*/
+	
+	iError=fre_diff; 
+	sumerror+=iError;
+	dError=iError-lasterror;
+	lasterror=iError;		
+	if(fre_diff>=-15&&fre_diff<=15)      //直道
+	{
+
+		kp=kp3/15*abs(fre_diff);
+		kd=kd3;
+	}
+	else if(fre_diff>=-30&&fre_diff<=30)                                //小弯
+	{
+		kp=kp3+(kp2-kp3)/15*(abs(fre_diff)-15);
+		kd=kd2;
+	}
 		else                              //小弯
 		{
 
-			kp=kp3+(kp2-kp3)/2*(fre_diff-30);
-			kd=kd2;
+			kp=kp2+(kp1-kp2)/30*(abs(fre_diff)-30);
+			kd=kd1;
 				
 		}
 		temp_steer=kp*iError+kd*dError;
-		if(temp_steer>=186)
+		if(temp_steer>=175)
 			flag=1;               //左打死
-		else if(temp_steer<=-186)
+		else if(temp_steer<=-175)
 			flag=2;
 		else 
 			flag=0;
+		temp_steer_old=temp_steer;
 		return(temp_steer);
 	
 
@@ -459,8 +421,12 @@ void sensor_display(void)
 	Dis_Num(64,0,(WORD)LEFT,5);
 	Dis_Num(64,1,(WORD)MIDDLE,5);
 	Dis_Num(64,2,(WORD)RIGHT,5);
+//	Dis_Num(64,3,(WORD)start_left,5);
+//	Dis_Num(64,4,(WORD)start_middle,5);
+//	Dis_Num(64,5,(WORD)start_right,5); 
 	Dis_Num(64,4,(WORD)currentspeed,5);
-	Dis_Num(64,5,(WORD)flag,5);
+	Dis_Num(64,5,(WORD)fre_diff,5);
+	Dis_Num(64,6,(WORD)-fre_diff,5);
 	//Dis_Num(64,5,(WORD)speed_target,5);
 
 }
@@ -556,9 +522,9 @@ void Get_speed()  //定时2mse采速度
 *****************************************************************************************************************/
 void Set_Middlepoint()
 {
-	start_middle=MIDDLE-14;
-	start_left=LEFT-14;
-	start_right=RIGHT-14;
+	start_middle=MIDDLE+7;
+	start_left=LEFT+7;
+	start_right=RIGHT+7;
 	sensor_compensator=RIGHT-LEFT;
 //	Msetpoint=temp_middle;
 //	Dis_Num(64,6,(WORD)Msetpoint,5);
