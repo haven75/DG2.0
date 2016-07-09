@@ -21,8 +21,8 @@ float sensor[3][10]={0},avr[10]={0.005,0.01,0.01,0.0125,0.0125,0.025,0.025,0.05,
 unsigned int left,right,middle,flag=0,zd_flag=0,slow,pause=0; //车子在赛道的位置标志
 unsigned int count1,count2,currentspeed,speed_target; 
 unsigned int presteer,currentsteer,dsteer;
-unsigned char Left_Compensator=46, Right_Compensator=36;
-float Middle_Compensator=30.5;
+unsigned char Left_Compensator=46, Right_Compensator=31;
+float Middle_Compensator=29;
 unsigned int speed1=54,	
 			 speed2=52,
 			 speed3=50,
@@ -50,9 +50,9 @@ float  /*	kp0=16.5,ki0=0,kd0=4.2,
 		kp3=2.45,ki3=0,kd3=10,
 		kp4=1.45,ki4=0,kd4=10;*/
 
-		kp1=4,ki2=0,kd1=0,  
-		kp2=2.5,ki3=0,kd2=0,
-		kp3=1.3,ki4=0,kd3=0;
+		kp1=4.2,ki2=0,kd1=5,  
+		kp2=2.8,ki3=0,kd2=5,
+		kp3=1,ki4=0,kd3=5;
 
 float kp,ki,kd;
 int RIGHT,LEFT,MIDDLE,temp_fre[2];
@@ -172,10 +172,10 @@ signed int LocPIDCal(void)
 		dmiddle=MIDDLE-start_middle;
 	dright=RIGHT-start_right;
 	
-	if(flag==1&&dleft<5)
-		fre_diff=175;
-	else if(flag==2&&dright<5)
-		fre_diff=-175;
+	if(flag==1&&dleft<5&&dmiddle<-25)
+		return(175);
+	else if(flag==2&&dright<5&&dmiddle<-25)
+		return(-175);
 	else
 	{
 		flag=0;
@@ -198,7 +198,8 @@ signed int LocPIDCal(void)
 	}
 /*	if(dleft<4&&dmiddle<-33&&dright<4)
 		return(temp_steer_old);*/
-	
+	if(fre_diff<-30)
+		fre_diff*=1.25;
 	iError=fre_diff; 
 	sumerror+=iError;
 	dError=iError-lasterror;
@@ -407,6 +408,7 @@ void sensor_display(void)
 	Dis_Num(0,0,(WORD)Left_Compensator,5);
 	Dis_Num(0,2,(WORD)Right_Compensator,5);
 	Dis_Num(0,1,(WORD)Middle_Compensator,5);
+	Dis_Num(0,3,(WORD)Openloop_Speed,5);
 }
 
 /****************************************************************************************************************
@@ -560,7 +562,7 @@ void Senddata()
 /***********************************************按键补偿*******************************************************/
 void Key_Detect_Compensator()
 {
-	while(switch1==0&&switch2==0)
+	if(switch1==0&&switch2==0)
 	{
 		if(Key1==0)
 		{
@@ -579,7 +581,7 @@ void Key_Detect_Compensator()
 				sensor_display();
 		}
 	}
-	while(switch1==0&&switch2)
+	if(switch1==0&&switch2)
 	{
 		if(Key1==0)
 		{
@@ -598,7 +600,7 @@ void Key_Detect_Compensator()
 				sensor_display();
 		}
 	}
-	while(switch1&&switch2==0)
+	if(switch1&&switch2==0)
 	{
 		if(Key1==0)
 		{
@@ -613,6 +615,25 @@ void Key_Detect_Compensator()
 			delay();
 			if(Key2==0)
 				Right_Compensator++;
+			while(Key2==0)
+				sensor_display();
+		}
+	}
+	if(switch3==0)
+	{
+		if(Key1==0)
+		{
+			delay();
+		if(Key1==0)
+			Openloop_Speed--;
+		while(Key1==0)
+			sensor_display();
+		}
+		if(Key2==0)
+		{
+			delay();
+			if(Key2==0)
+				Openloop_Speed++;
 			while(Key2==0)
 				sensor_display();
 		}

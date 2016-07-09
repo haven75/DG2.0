@@ -8,7 +8,7 @@
 
 #include"includes.h"
 
-
+unsigned int Openloop_Speed=73;
 void initALL(void)
 {
 	disableWatchdog();
@@ -84,7 +84,7 @@ void initEMIOS_0MotorAndSteer(void)
 	EMIOS_0.CH[9].CCR.B.MODE = 0x60;	/* Mode is OPWM Buffered */
 	EMIOS_0.CH[9].CCR.B.EDPOL = 1;	/* Polarity-leading edge sets output/trailing clears*/
 	EMIOS_0.CH[9].CADR.R = 1;	/* Leading edge when channel counter bus= */
-	EMIOS_0.CH[9].CBDR.R = 75;	/* Trailing edge when channel counter bus= */
+	EMIOS_0.CH[9].CBDR.R = Openloop_Speed;	/* Trailing edge when channel counter bus= */
 	
 	SIU.PCR[9].R = 0x0600;	/*[11:10]—°‘ÒAFx ¥À¥¶AF1 /* MPC56xxS: Assign EMIOS_0 ch 21 to pad */
 	

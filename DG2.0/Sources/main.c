@@ -28,7 +28,6 @@ void main(void)
 		}
 		Flag=0;
 		Senddata();
-
 	}
 }
 

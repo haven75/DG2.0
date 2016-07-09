@@ -38,4 +38,7 @@ void SET_motor(signed int speed); //5kHz 正反转,要限位
 void LINFlex_TX(unsigned char data);
 void LINFlex_RX_Interrupt(void);
 
+
+extern unsigned int Openloop_Speed;
+
 #endif /* INIT_H_ */
