@@ -6,7 +6,7 @@ signed int steer=0;
 
 
 void main(void)
-{
+ {
 	initALL();
 	while(wait>0);
 	Set_Middlepoint();
@@ -17,10 +17,10 @@ void main(void)
 		{
 			sensor_display();
 			steer=STEER_HELM_CENTER+LocPIDCal();
-			if(steer<937)
-				steer=930;
-			if(steer>=1287)
-				steer=1297;
+			if(steer<927)
+				steer=905;
+			if(steer>=1297)
+				steer=1310;
 			Dis_Num(64,3,(WORD)steer,5);
 			SET_steer(steer);
 			SpeedSet();
