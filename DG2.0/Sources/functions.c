@@ -21,52 +21,30 @@ float sensor[3][10]={0},avr[10]={0.005,0.01,0.01,0.0125,0.0125,0.025,0.025,0.05,
 unsigned int left,right,middle,flag=0,zd_flag=0,slow,pause=0; //车子在赛道的位置标志
 unsigned int count1,count2,currentspeed,speed_target; 
 unsigned int presteer,currentsteer,dsteer;
-unsigned char Left_Compensator=43, Right_Compensator=36;
+unsigned char Left_Compensator=39, Right_Compensator=36;
 float Middle_Compensator=29;
-unsigned int speed1=54,	
-			 speed2=52,
-			 speed3=50,
-			 speed4=46,
-			 speed5=36;
-#define  D 25
-float  /*	kp0=16.5,ki0=0,kd0=4.2,
-		kp1=12,ki=0,kd1=3.3,// 分段PID
-		kp2=7.8,ki2=0,kd2=2.15,  
-		kp3=5.7,ki3=0,kd3=1.4,
-		kp4=2.3,ki4=0,kd4=0.6;    */ //  空转83
-		
-	/*	kp0=16.7,ki0=0,kd0=4.2,
-		kp1=12,ki=0,kd1=3.2,// 分段PID
-		kp2=7.8,ki2=0,kd2=2.3,  
-		kp3=5.7,ki3=0,kd3=1.6,
-		kp4=2.3,ki4=0,kd4=0.65; //空转86*/
+unsigned int 
+			 speed1=260,	
+			 speed2=200,
+			 speed3=180,
+			 speed4=160,
+			 speed5=150;
 
-
-
-
-/*		kp0=11,ki0=0,kd0=11,
-		kp1=8.3,ki1=0,kd1=11,//分段PID
-		kp2=4.5,ki2=0,kd2=11,  
-		kp3=2.45,ki3=0,kd3=10,
-		kp4=1.45,ki4=0,kd4=10;*/
-
-		kp1=5.3,ki2=0,kd1=D,  
-		kp2=3.75,ki3=0,kd2=D,
-		kp3=2.35,ki4=0,kd3=D,
-		kp4=1.0,ki=0,kd4=D;
-
-
+#define  D 35 //40
+float	kp1=5.45,ki2=0,kd1=D,  
+		kp2=3.8,ki3=0,kd2=D,
+		kp3=2.25,ki4=0,kd3=D,
+		kp4=1.05,ki=0,kd4=D;
 float kp,ki,kd;
 int RIGHT,LEFT,MIDDLE,temp_fre[2];
 unsigned char Outdata[8];
 float sumerror,lasterror,Msetpoint=0,temp_middle=0,sensor_compensator=0,middleflag=0,dleft=0,dmiddle=0,dright=0,start_middle=0,start_left=0,start_right=0;
 int Set_speed,temp_speed,pwm;
 int speed_iError,speed_lastError,speed_prevError,Error[3];
-float speed_kp=5.5,
-	  speed_ki=2.0,
-	  speed_kd=0.7;
-
-
+float
+	  speed_kp=1,
+	  speed_ki=0.3,
+	  speed_kd=0.2;
 /****************************************************************************************************************
 * 函数名称：frequency_measure()	
 * 函数功能：获取电感频率
@@ -245,8 +223,11 @@ signed int LocPIDCal(void)
 	}
 /*	if(dleft<4&&dmiddle<-33&&dright<4)
 		return(temp_steer_old);*/
+	
 	if(fre_diff<0)
-		fre_diff*=1.35;
+	{
+		fre_diff*=1+0.4/45*(-fre_diff);
+	}
 	iError=fre_diff; 
 	sumerror+=iError;
 	dError=iError-lasterror;
@@ -287,82 +268,23 @@ signed int LocPIDCal(void)
 
 }
 
-/***************************************************************another steer function*********************************************/
-/*signed int Steer(void)
-{	
-	float ierror,derror;
-	fre_diff=LEFT-RIGHT;
-	if(MIDDLE<=Msetpoint)
-	{
-	    if(fre_diff>0)
-	        fre_diff=20-fre_diff;
-	    if(fre_diff<0)
-		fre_diff=(-22-fre_diff);	
-	}
-	if(MIDDLE<Msetpoint&&LEFT<=592&&RIGHT<=569)
-	    return(steer_old);
-	ierror=fre_diff;
-	derror=ierror-lasterror;
-	lasterror=ierror;
-	if(fre_diff>=-4&&fre_diff<=4)
-	{
-	   kp=kp4*fre_diff/4;
-	   kd=kd4*fre_diff/4;
-	}
-	else if(fre_diff>=-8&&fre_diff<=8)
-	{
-	   kp=kp4+(kp3-kp4)/4*(abs(fre_diff)-4);
-	   kd=kd4+(kd3-kd4)/4*(abs(fre_diff)-4);
-	}
-	else if(fre_diff>=-12&&fre_diff<=12)
-	{
-	   kp=kp3+(kp2-kp3)/4*(abs(fre_diff)-8);
-	   kd=kd3+(kd2-kd3)/4*(abs(fre_diff)-8);
-	}
-	else if(fre_diff>=-16&&fre_diff<=16)
-	{
-	   kp=kp2+(kp1-kp2)/4*(abs(fre_diff)-12);
-	   kd=kd2+(kd1-kd2)/4*(abs(fre_diff)-12);
-	}
-	else
-	{
-	   kp=kp1+(kp0-kp1)/4*(abs(fre_diff)-16);
-	   kd=kd1+(kd0-kd1)/4*(abs(fre_diff)-16);
-	}
-	temp_steer=kp*ierror+kd*derror;
-	steer_old=temp_steer;
-	return(temp_steer);
-}*/
-
-
-
-
 
 void SpeedSet(void)
 {
-	if(pause==1)
+	/*if(pause==1)
 	{
 		pause=0;
 		speed_target=0;
-	}
-	else if((temp_steer>=181||temp_steer<=-186))
+	}*/
+	 if((temp_steer>=185||temp_steer<=-185))
 	{	
-		if(slow>200)
-		{
-			speed_target=speed5-10;
-			chuwan=1;
-		}
-		else
-			speed_target=speed5;
-		//slow=0;
-		slow--;
-		pause=0;
+		speed_target=speed5;
 	}
 	else if(temp_steer<30&&temp_steer>-30)  
     {
     	zd_flag++;
     	slow++;
-    	if(zd_flag>100)
+    	if(zd_flag>80)
     	{
     		speed_target = speed1;
     		chuwan=0;
@@ -373,12 +295,12 @@ void SpeedSet(void)
     {
     	if(zd_flag>400)
     	{
-    		speed_target=-5;
+    		speed_target=speed3;
     		pause=1;
     	}
     	else if(zd_flag>300)
     	{
-    		speed_target=speed5-28;
+    		speed_target=speed4;
     		pause=1;
     	}
     	else
