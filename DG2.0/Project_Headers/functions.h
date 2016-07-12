@@ -25,6 +25,9 @@ void speed_control();
 void Key_Detect_Compensator();
 signed int Steer();
 void delay();
+unsigned int ADC_GetValueChannel();
+unsigned int Get_Angle();
 extern unsigned char Left_Compensator, Right_Compensator;
 extern float Middle_Compensator;
+extern unsigned int Angle;
 #endif /* FUNCTIONS_H_ */

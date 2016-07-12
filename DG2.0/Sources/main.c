@@ -18,7 +18,7 @@ void main(void)
 			sensor_display();
 			steer=STEER_HELM_CENTER+LocPIDCal();
 			if(steer<=920)
-				steer=900;
+				steer=890;
 			if(steer>=1290)
 				steer=1310;
 			Dis_Num(64,3,(WORD)steer,5);
@@ -36,6 +36,7 @@ void Pit0ISR()
 {
 	Flag=1;
 	frequency_measure();
+	Get_Angle();
 	Get_speed();
 	if(wait>0)
 		wait--;

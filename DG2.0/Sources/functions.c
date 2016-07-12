@@ -20,21 +20,21 @@ float LEFT_Temp,RIGHT_Temp,MIDDLE_Temp,Lsum,Rsum,Msum;
 float sensor[3][10]={0},avr[10]={0.005,0.01,0.01,0.0125,0.0125,0.025,0.025,0.05,0.15,0.7};
 unsigned int left,right,middle,flag=0,zd_flag=0,slow,pause=0; //车子在赛道的位置标志
 unsigned int count1,count2,currentspeed,speed_target; 
-unsigned int presteer,currentsteer,dsteer;
-unsigned char Left_Compensator=39, Right_Compensator=36;
+unsigned int presteer,currentsteer,dsteer,Angle;
+unsigned char Left_Compensator=39, Right_Compensator=34;
 float Middle_Compensator=29;
 unsigned int 
 			 speed1=255,	
 			 speed2=160,
 			 speed3=145,
 			 speed4=130,
-			 speed5=105;
+			 speed5=108;
 
-#define  D 35 //40
-float	kp1=5.45,ki2=0,kd1=D,  
-		kp2=3.75,ki3=0,kd2=D,
-		kp3=2.15,ki4=0,kd3=D,
-		kp4=0.95,ki=0,kd4=D;
+#define  D 32 //40
+float	kp1=5.5,ki2=0,kd1=D,  
+		kp2=3.8,ki3=0,kd2=D,
+		kp3=2.2,ki4=0,kd3=D,
+		kp4=0.9,ki=0,kd4=D;
 float kp,ki,kd;
 int RIGHT,LEFT,MIDDLE,temp_fre[2];
 unsigned char Outdata[8];
@@ -151,6 +151,8 @@ signed int LocPIDCal(void)
 	else
 		dmiddle=MIDDLE-start_middle;
 	dright=RIGHT-start_right;
+	if(dright>34)
+		dright=34;
 	
 	if(flag==1)
 	{
@@ -225,7 +227,7 @@ signed int LocPIDCal(void)
 		return(temp_steer_old);*/
 	
 	if(fre_diff<0)
-		fre_diff*=1.4;
+		fre_diff*=1.38;
 
 	iError=fre_diff; 
 	sumerror+=iError;
@@ -266,8 +268,29 @@ signed int LocPIDCal(void)
 	
 
 }
+/*******************************************************ADC*************************************************************/
+unsigned int ADC_GetValueChannel()
+{
+   unsigned int Value=0;
+   while(ADC.CDR[1].B.VALID != 1) {}         //等待ADC1转换结果有效
+   Value = (unsigned int)ADC.CDR[1].B.CDATA;    //读取ADC1的转换结果
+   return Value;
+}
+
+/*****************************************************采集陀螺仪值*********************************************************/
+unsigned int Get_Angle()
+{
+	unsigned int Angle_t;
+	Angle=0;
+	for(Angle_t=0;Angle_t<10;Angle_t++)
+	{
+		Angle+=ADC_GetValueChannel()*avr[Angle_t];
+		
+	}
+}
 
 
+/****************************************************速度给定****************************************************************/
 void SpeedSet(void)
 {
 	/*if(pause==1)
@@ -383,6 +406,7 @@ void sensor_display(void)
 	Dis_Num(0,1,(WORD)Middle_Compensator,5);
 	Dis_Num(0,3,(WORD)Openloop_Speed,5);
 	Dis_Num(0,4,(WORD)flag,5);
+	Dis_Num(0,5,(WORD)Angle,5);
 }
 
 /****************************************************************************************************************
