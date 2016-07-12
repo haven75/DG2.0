@@ -24,13 +24,13 @@ unsigned int presteer,currentsteer,dsteer,Angle;
 unsigned char Left_Compensator=39, Right_Compensator=34;
 float Middle_Compensator=29;
 unsigned int 
-			 speed1=255,	
-			 speed2=160,
+			 speed1=270,	
+			 speed2=165,
 			 speed3=145,
 			 speed4=130,
-			 speed5=108;
+			 speed5=110;
 
-#define  D 32 //40
+#define  D 34 //40
 float	kp1=5.5,ki2=0,kd1=D,  
 		kp2=3.8,ki3=0,kd2=D,
 		kp3=2.2,ki4=0,kd3=D,
@@ -227,7 +227,7 @@ signed int LocPIDCal(void)
 		return(temp_steer_old);*/
 	
 	if(fre_diff<0)
-		fre_diff*=1.38;
+		fre_diff*=1.37;
 
 	iError=fre_diff; 
 	sumerror+=iError;
@@ -377,8 +377,8 @@ void speed_control()
 	
 	
 	temp_speed+=speed_kp*(Error[0]-Error[1])+speed_ki*Error[0]+speed_kd*(Error[0]-Error[1]-(Error[1]-Error[2]));
-	if(temp_speed>120)
-		temp_speed=120;
+	if(temp_speed>135)
+		temp_speed=135;
 	if(temp_speed<-150)
 			temp_speed=-150;
 	SET_motor(temp_speed);
