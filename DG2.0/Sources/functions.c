@@ -24,17 +24,17 @@ unsigned int presteer,currentsteer,dsteer;
 unsigned char Left_Compensator=39, Right_Compensator=36;
 float Middle_Compensator=29;
 unsigned int 
-			 speed1=260,	
-			 speed2=200,
-			 speed3=180,
-			 speed4=160,
-			 speed5=150;
+			 speed1=255,	
+			 speed2=160,
+			 speed3=145,
+			 speed4=130,
+			 speed5=105;
 
 #define  D 35 //40
 float	kp1=5.45,ki2=0,kd1=D,  
-		kp2=3.8,ki3=0,kd2=D,
-		kp3=2.25,ki4=0,kd3=D,
-		kp4=1.05,ki=0,kd4=D;
+		kp2=3.75,ki3=0,kd2=D,
+		kp3=2.15,ki4=0,kd3=D,
+		kp4=0.95,ki=0,kd4=D;
 float kp,ki,kd;
 int RIGHT,LEFT,MIDDLE,temp_fre[2];
 unsigned char Outdata[8];
@@ -42,7 +42,7 @@ float sumerror,lasterror,Msetpoint=0,temp_middle=0,sensor_compensator=0,middlefl
 int Set_speed,temp_speed,pwm;
 int speed_iError,speed_lastError,speed_prevError,Error[3];
 float
-	  speed_kp=1,
+	  speed_kp=1.1,
 	  speed_ki=0.3,
 	  speed_kd=0.2;
 /****************************************************************************************************************
@@ -225,9 +225,8 @@ signed int LocPIDCal(void)
 		return(temp_steer_old);*/
 	
 	if(fre_diff<0)
-	{
-		fre_diff*=1+0.4/45*(-fre_diff);
-	}
+		fre_diff*=1.4;
+
 	iError=fre_diff; 
 	sumerror+=iError;
 	dError=iError-lasterror;
@@ -284,7 +283,7 @@ void SpeedSet(void)
     {
     	zd_flag++;
     	slow++;
-    	if(zd_flag>80)
+    	if(zd_flag>100)
     	{
     		speed_target = speed1;
     		chuwan=0;
@@ -293,14 +292,14 @@ void SpeedSet(void)
     } 
     else if(temp_steer>-60 && temp_steer<60)
     {
-    	if(zd_flag>400)
-    	{
-    		speed_target=speed3;
-    		pause=1;
-    	}
-    	else if(zd_flag>300)
+    	if(zd_flag>300)
     	{
     		speed_target=speed4;
+    		pause=1;
+    	}
+    	else if(zd_flag>200)
+    	{
+    		speed_target=speed5;
     		pause=1;
     	}
     	else
@@ -355,8 +354,8 @@ void speed_control()
 	
 	
 	temp_speed+=speed_kp*(Error[0]-Error[1])+speed_ki*Error[0]+speed_kd*(Error[0]-Error[1]-(Error[1]-Error[2]));
-	if(temp_speed>130)
-		temp_speed=130;
+	if(temp_speed>120)
+		temp_speed=120;
 	if(temp_speed<-150)
 			temp_speed=-150;
 	SET_motor(temp_speed);

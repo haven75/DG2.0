@@ -17,9 +17,9 @@ void main(void)
 		{
 			sensor_display();
 			steer=STEER_HELM_CENTER+LocPIDCal();
-			if(steer<=927)
+			if(steer<=920)
 				steer=900;
-			if(steer>=1297)
+			if(steer>=1290)
 				steer=1310;
 			Dis_Num(64,3,(WORD)steer,5);
 			SET_steer(steer);
