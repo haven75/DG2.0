@@ -14,15 +14,18 @@
  *      Author: Administrator
  */
 #include"includes.h"
-unsigned int chuwan;
+#define Hillcont 0
+#define Frequency_Over 240
+unsigned int chuwan,Hill_count;
 float fre_diff,dis,LEFT_old,LEFT_new=0,RIGHT_old,RIGHT_new=0,MIDDLE_old,MIDDLE_new=0,temp_steer,temp_steer_old;
 float LEFT_Temp,RIGHT_Temp,MIDDLE_Temp,Lsum,Rsum,Msum;
 float sensor[3][10]={0},avr[10]={0.005,0.01,0.01,0.0125,0.0125,0.025,0.025,0.05,0.15,0.7};
 unsigned int left,right,middle,flag=0,zd_flag=0,slow,pause=0; //车子在赛道的位置标志
 unsigned int count1,count2,currentspeed,speed_target; 
 unsigned int presteer,currentsteer,dsteer,Angle;
-unsigned char Left_Compensator=39, Right_Compensator=34;
-float Middle_Compensator=29;
+unsigned char Left_Compensator=28, Right_Compensator=27;
+float Middle_Compensator=23;
+unsigned int Uphill=0,Downhill=0,Up_Flag=0,Down_Flag=0,Straight;
 unsigned int 
 			 speed1=270,	
 			 speed2=165,
@@ -30,7 +33,7 @@ unsigned int
 			 speed4=130,
 			 speed5=110;
 
-#define  D 34 //40
+#define  D 32 //40
 float	kp1=5.5,ki2=0,kd1=D,  
 		kp2=3.8,ki3=0,kd2=D,
 		kp3=2.2,ki4=0,kd3=D,
@@ -151,13 +154,15 @@ signed int LocPIDCal(void)
 	else
 		dmiddle=MIDDLE-start_middle;
 	dright=RIGHT-start_right;
-	if(dright>34)
-		dright=34;
+	if(dright>28)
+		dright=28;
 	
 	if(flag==1)
 	{
-		if(dleft<6&&dmiddle<-25&&dright<6)
+		if(dleft<6&&dmiddle<-20&&dright<6)
 			return(185);
+//		else if(dleft<6&&dmiddle<-25&&dright<6&&Up_Flag==1)
+//			return(0);
 		else
 		{
 			flag=0;
@@ -181,8 +186,10 @@ signed int LocPIDCal(void)
 		
 	else if(flag==2)
 	{
-		if(dright<6&&dmiddle<-25&&dleft<6)
+		if(dright<6&&dmiddle<-20&&dleft<6)
 			return(-185);
+	//	else if(dleft<6&&dmiddle<-25&&dright<6&&Up_Flag==1)
+	//		return(0);
 		else
 		{
 			flag=0;
@@ -377,8 +384,8 @@ void speed_control()
 	
 	
 	temp_speed+=speed_kp*(Error[0]-Error[1])+speed_ki*Error[0]+speed_kd*(Error[0]-Error[1]-(Error[1]-Error[2]));
-	if(temp_speed>135)
-		temp_speed=135;
+	if(temp_speed>130)
+		temp_speed=130;
 	if(temp_speed<-150)
 			temp_speed=-150;
 	SET_motor(temp_speed);
@@ -395,18 +402,22 @@ void speed_control()
 *****************************************************************************************************************/
 void sensor_display(void)
 {
-	Dis_Num(64,0,(WORD)LEFT,5);
-	Dis_Num(64,1,(WORD)MIDDLE,5);
-	Dis_Num(64,2,(WORD)RIGHT,5);
-	Dis_Num(64,4,(WORD)currentspeed,5);
-	Dis_Num(64,5,(WORD)fre_diff,5);
-	Dis_Num(64,6,(WORD)-fre_diff,5);
-	Dis_Num(0,0,(WORD)Left_Compensator,5);
-	Dis_Num(0,2,(WORD)Right_Compensator,5);
-	Dis_Num(0,1,(WORD)Middle_Compensator,5);
-	Dis_Num(0,3,(WORD)Openloop_Speed,5);
-	Dis_Num(0,4,(WORD)flag,5);
-	Dis_Num(0,5,(WORD)Angle,5);
+
+	Dis_Num(64,0,(WORD)LEFT,4);
+	Dis_Num(64,1,(WORD)MIDDLE,4);
+	Dis_Num(64,2,(WORD)RIGHT,4);
+	Dis_Num(64,4,(WORD)currentspeed,3);
+	Dis_Num(64,5,(WORD)fre_diff,3);
+	Dis_Num(64,6,(WORD)-fre_diff,3);
+	Dis_Num(0,0,(WORD)Left_Compensator,3);
+	Dis_Num(0,2,(WORD)Right_Compensator,3);
+	Dis_Num(0,1,(WORD)Middle_Compensator,3);
+	Dis_Num(0,3,(WORD)RIGHT-start_right+dleft+MIDDLE-start_middle,5);
+	Dis_Num(0,4,(WORD)flag,2);
+	Dis_Num(32,0,(WORD)Uphill,2);
+	Dis_Num(32,1,(WORD)Up_Flag,2);
+	Dis_Num(32,2,(WORD)Down_Flag,2);
+		
 }
 
 /****************************************************************************************************************
@@ -645,4 +656,49 @@ void delay()
 	unsigned int delay=1000,t;
 	for(t=100;t>0;t--)
 		delay--;
+}
+
+
+
+void Ramp_Detect()
+{
+	if(Up_Flag==0	&&	Down_Flag==0	&&	RIGHT-start_right+dleft+MIDDLE-start_middle>Frequency_Over)
+		{
+			Hill_count++;
+			if(Hill_count>Hillcont)
+			{
+				Hill_count=0;
+				Up_Flag=1;
+			}
+		}
+		if(Up_Flag==1	&&	Down_Flag==0	&&	RIGHT-start_right+dleft+MIDDLE-start_middle<(Frequency_Over-100))
+			Uphill=1;
+		if(Uphill==1	&&	RIGHT-start_right+dleft+MIDDLE-start_middle>Frequency_Over)
+		{
+			Hill_count++;
+			if(Hill_count>Hillcont)
+			{
+				Hill_count=0; 
+				Uphill=2;
+				Down_Flag=1;
+				Up_Flag=2;
+			}
+		}
+		if(Up_Flag==0&&Down_Flag==1&&RIGHT-start_right+dleft+MIDDLE-start_middle<(Frequency_Over-100))
+		{
+			Down_Flag=2;
+		}
+	/*if(Angle<Angle_Detect-15&&Up_Flag>10)
+		Uphill=1;
+	if(Angle>Angle_Detect+15&&Down_Flag>10)
+	{
+		Downhill=1;
+		Uphill=0;
+	}
+	if(Straight>10)
+	{
+		Downhill=0;
+		Uphill=0;
+		Straight=0;
+	}*/
 }
