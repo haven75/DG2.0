@@ -29,9 +29,9 @@ unsigned int Uphill=0,Downhill=0,Up_Flag=0,Down_Flag=0,Straight;
 unsigned int 
 			 speed1=270,	
 			 speed2=165,
-			 speed3=145,
-			 speed4=130,
-			 speed5=110;
+			 speed3=150,
+			 speed4=135,
+			 speed5=113;
 
 #define  D 32 //40
 float	kp1=5.5,ki2=0,kd1=D,  
