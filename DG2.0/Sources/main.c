@@ -18,10 +18,10 @@ void main(void)
 			sensor_display();
 			steer=STEER_HELM_CENTER+LocPIDCal();
 			if(steer<=920)
-				steer=890;
+				steer=885;
 			if(steer>=1290)
 				steer=1310;
-			Dis_Num(64,3,(WORD)steer,5);
+			Dis_Num(64,3,(WORD)steer,4);
 			if(Up_Flag==1)
 				steer=STEER_HELM_CENTER;
 			SET_steer(steer);
@@ -47,6 +47,14 @@ void Pit0ISR()
 		delay_count++;
 	else Ramp_Detect();
 	
+	if(Ramp_Flag==1)
+		Ramp_Time++;
+	if(Ramp_Time>180)
+	{
+		Up_Flag=2;
+		Ramp_Flag=0;
+	}
+		
 	PIT.CH[0].TFLG.B.TIF = 1;
 }
 

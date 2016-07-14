@@ -15,7 +15,7 @@
  */
 #include"includes.h"
 #define Hillcont 0
-#define Frequency_Over 240
+#define Frequency_Over 220
 unsigned int chuwan,Hill_count;
 float fre_diff,dis,LEFT_old,LEFT_new=0,RIGHT_old,RIGHT_new=0,MIDDLE_old,MIDDLE_new=0,temp_steer,temp_steer_old;
 float LEFT_Temp,RIGHT_Temp,MIDDLE_Temp,Lsum,Rsum,Msum;
@@ -25,7 +25,7 @@ unsigned int count1,count2,currentspeed,speed_target;
 unsigned int presteer,currentsteer,dsteer,Angle;
 unsigned char Left_Compensator=28, Right_Compensator=27;
 float Middle_Compensator=23;
-unsigned int Uphill=0,Downhill=0,Up_Flag=0,Down_Flag=0,Straight;
+unsigned int Uphill=0,Downhill=0,Up_Flag=0,Down_Flag=0,Straight,Ramp_Flag,Ramp_Time=0;
 unsigned int 
 			 speed1=270,	
 			 speed2=165,
@@ -413,7 +413,8 @@ void sensor_display(void)
 	Dis_Num(0,2,(WORD)Right_Compensator,3);
 	Dis_Num(0,1,(WORD)Middle_Compensator,3);
 	Dis_Num(0,3,(WORD)RIGHT-start_right+dleft+MIDDLE-start_middle,5);
-	Dis_Num(0,4,(WORD)flag,2);
+	Dis_Num(0,4,(WORD)Ramp_Time,3);
+	Dis_Num(0,5,(WORD)Ramp_Flag,3);
 	Dis_Num(32,0,(WORD)Uphill,2);
 	Dis_Num(32,1,(WORD)Up_Flag,2);
 	Dis_Num(32,2,(WORD)Down_Flag,2);
@@ -672,7 +673,10 @@ void Ramp_Detect()
 			}
 		}
 		if(Up_Flag==1	&&	Down_Flag==0	&&	RIGHT-start_right+dleft+MIDDLE-start_middle<(Frequency_Over-100))
+			{
 			Uphill=1;
+			Ramp_Flag=1;
+			}
 		if(Uphill==1	&&	RIGHT-start_right+dleft+MIDDLE-start_middle>Frequency_Over)
 		{
 			Hill_count++;
