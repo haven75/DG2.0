@@ -18,5 +18,4 @@ Sources/oleddriver_c.obj: C:\Users\Quan\Documents\GitHub\DG2.0\DG2.0\Sources\ole
 	C:\Users\Quan\Documents\GitHub\DG2.0\DG2.0\Project_Headers\IntcInterrupts.h \
 	C:\Users\Quan\Documents\GitHub\DG2.0\DG2.0\Project_Headers\define.h \
 	C:\Users\Quan\Documents\GitHub\DG2.0\DG2.0\Project_Headers\functions.h \
-	C:\Users\Quan\Documents\GitHub\DG2.0\DG2.0\Project_Headers\oleddriver.h \
-	C:\Users\Quan\Documents\GitHub\DG2.0\DG2.0\Project_Headers\ReedSwitch.h 
+	C:\Users\Quan\Documents\GitHub\DG2.0\DG2.0\Project_Headers\oleddriver.h 

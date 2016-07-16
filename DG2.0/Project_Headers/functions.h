@@ -27,6 +27,7 @@ signed int Steer();
 void delay();
 unsigned int ADC_GetValueChannel();
 unsigned int Get_Angle();
+void StopLineDetect();
 
 
 void Ramp_Detect();
@@ -37,4 +38,5 @@ extern unsigned char Left_Compensator, Right_Compensator;
 extern float Middle_Compensator;
 extern unsigned int Angle;
 extern unsigned int Uphill,Downhill,Up_Flag,Down_Flag,Ramp_Flag,Ramp_Time;
+extern unsigned char StartFlag,StopFlag,RunFlag;
 #endif /* FUNCTIONS_H_ */

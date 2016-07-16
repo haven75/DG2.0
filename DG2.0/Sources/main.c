@@ -17,14 +17,15 @@ void main(void)
 		{
 			sensor_display();
 			steer=STEER_HELM_CENTER+LocPIDCal();
-			if(steer<=920)
-				steer=885;
-			if(steer>=1290)
-				steer=1310;
+			if(steer<=900)
+				steer=880;
+			if(steer>=1310)
+				steer=1320;
 			Dis_Num(64,3,(WORD)steer,4);
 			if(Up_Flag==1)
 				steer=STEER_HELM_CENTER;
 			SET_steer(steer);
+			StopLineDetect();
 			SpeedSet();
 			speed_control();
 		}
@@ -49,7 +50,7 @@ void Pit0ISR()
 	
 	if(Ramp_Flag==1)
 		Ramp_Time++;
-	if(Ramp_Time>180)
+	if(Ramp_Time>140)
 	{
 		Up_Flag=2;
 		Ramp_Flag=0;
