@@ -15,7 +15,7 @@
  */
 #include"includes.h"
 #define Hillcont 0
-#define Frequency_Over 220
+#define Frequency_Over 210
 unsigned int chuwan,Hill_count;
 unsigned char StartFlag,StopFlag,RunFlag;
 float fre_diff,dis,LEFT_old,LEFT_new=0,RIGHT_old,RIGHT_new=0,MIDDLE_old,MIDDLE_new=0,temp_steer,temp_steer_old;
@@ -24,7 +24,7 @@ float sensor[3][10]={0},avr[10]={0.005,0.01,0.01,0.0125,0.0125,0.025,0.025,0.05,
 unsigned int left,right,middle,flag=0,zd_flag=0,slow,pause=0; //车子在赛道的位置标志
 unsigned int count1,count2,currentspeed,speed_target; 
 unsigned int presteer,currentsteer,dsteer,Angle;
-unsigned char Left_Compensator=31, Right_Compensator=27;
+unsigned char Left_Compensator=33, Right_Compensator=27;
 float Middle_Compensator=23;
 unsigned int Uphill=0,Downhill=0,Up_Flag=0,Down_Flag=0,Straight,Ramp_Flag,Ramp_Time=0;
 unsigned int 
@@ -34,10 +34,10 @@ unsigned int
 			 speed4=130,
 			 speed5=115;
 
-#define  D 35.5 //40
-float	kp1=5.63,ki2=0,kd1=D,  
-		kp2=3.67,ki3=0,kd2=D,
-		kp3=2.10,ki4=0,kd3=D,
+#define  D 40 //40
+float	kp1=5.65,ki2=0,kd1=D,  
+		kp2=3.69,ki3=0,kd2=D,
+		kp3=2.13,ki4=0,kd3=D,
 		kp4=0.87,ki=0,kd4=D;
 float kp,ki,kd;
 int RIGHT,LEFT,MIDDLE,temp_fre[2];
@@ -385,8 +385,8 @@ void speed_control()
 	
 	
 	temp_speed+=speed_kp*(Error[0]-Error[1])+speed_ki*Error[0]+speed_kd*(Error[0]-Error[1]-(Error[1]-Error[2]));
-	if(temp_speed>135) 
-		temp_speed=135;
+	if(temp_speed>138) 
+		temp_speed=138;
 	if(temp_speed<-150)
 			temp_speed=-150;
 	SET_motor(temp_speed);
