@@ -39,7 +39,6 @@ void Pit0ISR()
 {
 	Flag=1;
 	frequency_measure();
-	Get_Angle();
 	Get_speed();
 	if(wait>0)
 		wait--;
@@ -55,7 +54,9 @@ void Pit0ISR()
 		Up_Flag=2;
 		Ramp_Flag=0;
 	}
-		
+	//if(StartFlag==1&&RunFlag<2005)
+	//	RunFlag++;
+
 	PIT.CH[0].TFLG.B.TIF = 1;
 }
 

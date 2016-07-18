@@ -17,7 +17,7 @@
 #define Hillcont 0
 #define Frequency_Over 170
 unsigned int chuwan,Hill_count;
-unsigned char StartFlag,StopFlag,RunFlag;
+unsigned char StartFlag,StopFlag,RunFlag,Stop=100;
 float fre_diff,dis,LEFT_old,LEFT_new=0,RIGHT_old,RIGHT_new=0,MIDDLE_old,MIDDLE_new=0,temp_steer,temp_steer_old;
 float LEFT_Temp,RIGHT_Temp,MIDDLE_Temp,Lsum,Rsum,Msum;
 float sensor[3][10]={0},avr[10]={0.005,0.01,0.01,0.0125,0.0125,0.025,0.025,0.05,0.15,0.7};
@@ -32,11 +32,11 @@ unsigned int
 			 speed2=170,
 			 speed3=150,
 			 speed4=130,
-			 speed5=100;
+			 speed5=105; //100 105 110
 
-#define  D 35 //40
-float	kp1=5.65,ki2=0,kd1=D,  
-		kp2=3.69,ki3=0,kd2=D,
+#define  D 33//30还可以 //40
+float	kp1=5.65,ki2=0,kd1=D+1,  
+		kp2=3.69,ki3=0,kd2=D+2,
 		kp3=2.13,ki4=0,kd3=D+3,
 		kp4=0.87,ki=0,kd4=D+4;
 float kp,ki,kd;
@@ -237,7 +237,7 @@ signed int LocPIDCal(void)
 		return(temp_steer_old);*/
 	
 	if(fre_diff<0)
-		fre_diff*=1;
+		fre_diff*=1.12;
 
 	iError=fre_diff; 
 	sumerror+=iError;
@@ -327,7 +327,7 @@ void SpeedSet(void)
     {
     	if(zd_flag>300)
     	{
-    		speed_target=speed3;
+    		speed_target=speed5;
     		pause=1;
     	}
     	else if(zd_flag>200)
@@ -365,8 +365,8 @@ void SpeedSet(void)
         pause=0;
     }  
 
-    if(StopFlag==1)
-    	speed_target=0;
+//    if(StopFlag==1)
+  //  	speed_target=0;
     
 }
 
@@ -392,8 +392,16 @@ void speed_control()
 	if(temp_speed<-150)
 			temp_speed=-150;
 	SET_motor(temp_speed);
-	if(forward)
-		SET_motor(0);
+	if(StopFlag)
+	{
+		if(Stop>0)
+		{
+			Stop--;
+			SET_motor(-80);
+		}
+		else
+			SET_motor(0);
+	}
 }
 /****************************************************************************************************************
 * 函数名称：sensor_display()	
@@ -422,6 +430,8 @@ void sensor_display(void)
 	Dis_Num(32,1,(WORD)Up_Flag,2);
 	Dis_Num(32,2,(WORD)Down_Flag,2);
 	Dis_Num(0,6,(WORD)start_left,4);
+	Dis_Num(0,7,(WORD)StopFlag,4);
+	Dis_Num(32,4,(WORD)forward,2);
 		
 }
 

@@ -38,5 +38,5 @@ extern unsigned char Left_Compensator, Right_Compensator;
 extern float Middle_Compensator;
 extern unsigned int Angle;
 extern unsigned int Uphill,Downhill,Up_Flag,Down_Flag,Ramp_Flag,Ramp_Time;
-extern unsigned char StartFlag,StopFlag,RunFlag;
+extern unsigned char StartFlag,StopFlag,RunFlag,Stop;
 #endif /* FUNCTIONS_H_ */
