@@ -37,6 +37,7 @@ void Ramp_Detect();
 extern unsigned char Left_Compensator, Right_Compensator;
 extern float Middle_Compensator;
 extern unsigned int Angle;
-extern unsigned int Uphill,Downhill,Up_Flag,Down_Flag,Ramp_Flag,Ramp_Time;
+extern unsigned int Uphill,Downhill,Up_Flag,Down_Flag,Ramp_Flag,Ramp_Time,
+					speed1,speed2,speed3,speed4,speed5;
 extern unsigned char StartFlag,StopFlag,RunFlag,Stop;
 #endif /* FUNCTIONS_H_ */
