@@ -163,7 +163,10 @@ signed int LocPIDCal(void)
 	if(flag==1)
 	{
 		if(dleft<6&&dmiddle<-20&&dright<6)
+		{
+			flag=1;
 			return(210);
+		}
 //		else if(dleft<6&&dmiddle<-25&&dright<6&&Up_Flag==1)
 //			return(0);
 		else
@@ -190,7 +193,10 @@ signed int LocPIDCal(void)
 	else if(flag==2)
 	{
 		if(dright<6&&dmiddle<-20&&dleft<6)
+		{
+			flag=2;
 			return(-218);
+		}
 	//	else if(dleft<6&&dmiddle<-25&&dright<6&&Up_Flag==1)
 	//		return(0);
 		else
@@ -436,7 +442,8 @@ void sensor_display(void)
 	Dis_Num(32,4,(WORD)switch6,2);
 	Dis_Num(32,5,(WORD)switch5,2);
 	Dis_Num(32,6,(WORD)speed5,3);
-	Dis_Num(64,6,(WORD)EMIOS_0.CH[9].CBDR.R,3);
+	//Dis_Num(64,6,(WORD)EMIOS_0.CH[9].CBDR.R,3);
+	Dis_Num(64,7,(WORD)flag,3);
 		
 }
 
