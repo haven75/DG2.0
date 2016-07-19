@@ -24,7 +24,7 @@ float sensor[3][10]={0},avr[10]={0.005,0.01,0.01,0.0125,0.0125,0.025,0.025,0.05,
 unsigned int left,right,middle,flag=0,zd_flag=0,slow,pause=0; //车子在赛道的位置标志
 unsigned int count1,count2,currentspeed,speed_target; 
 unsigned int presteer,currentsteer,dsteer,Angle;
-unsigned char Left_Compensator=38, Right_Compensator=28;
+unsigned char Left_Compensator=39, Right_Compensator=30;
 float Middle_Compensator=27;
 unsigned int Uphill=0,Downhill=0,Up_Flag=0,Down_Flag=0,Straight,Ramp_Flag,Ramp_Time=0;
 unsigned int 
@@ -190,7 +190,7 @@ signed int LocPIDCal(void)
 	else if(flag==2)
 	{
 		if(dright<6&&dmiddle<-20&&dleft<6)
-			return(-238);
+			return(-218);
 	//	else if(dleft<6&&dmiddle<-25&&dright<6&&Up_Flag==1)
 	//		return(0);
 		else
@@ -269,7 +269,7 @@ signed int LocPIDCal(void)
 		temp_steer=kp*iError+kd*dError;
 		if(temp_steer>=210)
 			flag=1;               //左打死
-		else if(temp_steer<=-238)
+		else if(temp_steer<=-218)
 			flag=2;
 		else 
 			flag=0;
