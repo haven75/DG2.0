@@ -15,7 +15,7 @@
  */
 #include"includes.h"
 #define Hillcont 0
-#define Frequency_Over 120
+#define Frequency_Over 140
 unsigned int chuwan,Hill_count;
 unsigned char StartFlag,StopFlag,RunFlag=2000,Stop=100;
 float fre_diff,dis,LEFT_old,LEFT_new=0,RIGHT_old,RIGHT_new=0,MIDDLE_old,MIDDLE_new=0,temp_steer,temp_steer_old;
@@ -315,7 +315,7 @@ void SpeedSet(void)
 		speed_target=0;
 	}*/
 	if(Up_Flag==1)
-		speed_target=285;
+		speed_target=130;
 	else if((temp_steer>=185||temp_steer<=-185))
 	{	
 		speed_target=speed5;

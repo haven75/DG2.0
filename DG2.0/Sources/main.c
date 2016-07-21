@@ -65,7 +65,7 @@ void FastSpeedMode()
 			if(steer<=STEER_HELM_CENTER-218)
 				steer=STEER_HELM_CENTER-235;
 			if(steer>=STEER_HELM_CENTER+210)
-				steer=STEER_HELM_CENTER+213;
+				steer=STEER_HELM_CENTER+216;
 			Dis_Num(64,3,(WORD)steer,4);
 			if(Up_Flag==1)
 				steer=STEER_HELM_CENTER;
@@ -93,7 +93,7 @@ void MiddleSpeedMode()
 			if(steer<=STEER_HELM_CENTER-218)
 				steer=STEER_HELM_CENTER-235;
 			if(steer>=STEER_HELM_CENTER+210)
-				steer=STEER_HELM_CENTER+213;
+				steer=STEER_HELM_CENTER+216;
 			Dis_Num(64,3,(WORD)steer,4);
 			if(Up_Flag==1)
 				steer=STEER_HELM_CENTER;
@@ -122,7 +122,7 @@ void SlowSpeedMode()
 			if(steer<=STEER_HELM_CENTER-218)
 				steer=STEER_HELM_CENTER-235;
 			if(steer>=STEER_HELM_CENTER+210)
-				steer=STEER_HELM_CENTER+213;
+				steer=STEER_HELM_CENTER+216;
 			Dis_Num(64,3,(WORD)steer,4);
 			if(Up_Flag==1)
 				steer=STEER_HELM_CENTER;
