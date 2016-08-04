@@ -32,10 +32,10 @@ unsigned int
 			 speed1=600,	
 			 speed2=360,
 			 speed3=280,
-			 speed4=220,
-			 speed5=210; //100 105 110
+			 speed4=230,
+			 speed5=215; //100 105 110
 
-#define  D 43//30还可以 //40
+#define  D 45//30还可以 //40
 float	kp1=5.9,ki2=0,kd1=D+4,  
 		kp2=3.9,ki3=0,kd2=D+3,
 		kp3=1.8,ki4=0,kd3=D+2,
@@ -315,31 +315,44 @@ void SpeedSet(void)
 		zd_flag=1;
 	}
 	else if(abs(iError)<12)
-	{
-		speed_target=speed1-(speed1-speed2)/10*(abs(iError)-6);
-		zd_flag=0;
+	{	
+		if(zd_flag)
+			speed_target=speed3;
+		else
+			speed_target=speed1-(speed1-speed2)/10*(abs(iError)-6);
+		//zd_flag=0;
 	}
 	else if(abs(iError)<20)
 	{
- 		speed_target=speed2-(speed2-speed3)/10*(abs(iError)-12);
- 		zd_flag=0;
+		if(zd_flag)
+			speed_target=speed4;
+		else
+			speed_target=speed2-(speed2-speed3)/10*(abs(iError)-12);
+ 		//zd_flag=0;
 	}
 	else if(abs(iError)<30)
 	{
-		speed_target=speed3-(speed3-speed4)/10*(abs(iError)-20);
-		zd_flag=0;
+		if(zd_flag)
+			speed_target=speed5;
+		else
+			speed_target=speed3-(speed3-speed4)/10*(abs(iError)-20);
+		//zd_flag=0;
 	}
 	else 
 	{
-		speed_target=speed4-(speed4-speed5)/10*(abs(iError)-30);
-		zd_flag=0;
+		if(zd_flag)
+			speed_target=speed5-30;
+		else
+			speed_target=speed4-(speed4-speed5)/10*(abs(iError)-30);
+		//zd_flag=0;
 	}
 	if(temp_steer>=210||temp_steer<=-218)
 	{
 		if(zd_flag)
-			speed_target=speed5-30;
+			speed_target=speed5-100;
 		else 
 			speed_target=speed5;
+		zd_flag=0;
 	}
 	if(speed_target>speed1)
 		speed_target=speed1;
@@ -427,8 +440,8 @@ void speed_control()
 	temp_speed+=speed_kp*(Error[0]-Error[1])+speed_ki*Error[0]+speed_kd*(Error[0]-Error[1]-(Error[1]-Error[2]));
 	if(temp_speed>150) 
 		temp_speed=150;
-	if(temp_speed<-160)
-			temp_speed=-160;
+	if(temp_speed<-190)
+			temp_speed=-190;
 	SET_motor(temp_speed);
 	if(StopFlag)
 	{

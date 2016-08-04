@@ -56,7 +56,7 @@ void FastSpeedMode()
 	for (;;) 
 	{
 		speed1=400;
-		speed5=200;
+		speed5=215;
 		Key_Detect_Compensator();
 		if(Flag==1)
 		{
