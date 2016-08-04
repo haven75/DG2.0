@@ -55,8 +55,8 @@ void FastSpeedMode()
 {
 	for (;;) 
 	{
-		speed1=290;
-		speed5=105;
+		speed1=600;
+		speed5=210;
 		Key_Detect_Compensator();
 		if(Flag==1)
 		{
@@ -84,7 +84,7 @@ void MiddleSpeedMode()
 {
 	for (;;) 
 	{
-		speed5=100;
+		speed5=200;
 		Key_Detect_Compensator();
 		if(Flag==1)
 		{
@@ -112,8 +112,8 @@ void SlowSpeedMode()
 {
 	for (;;) 
 	{
-		speed1=280;
-		speed5=95;
+		speed1=560;
+		speed5=190;
 		Key_Detect_Compensator();
 		if(Flag==1)
 		{

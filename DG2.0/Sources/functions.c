@@ -15,7 +15,7 @@
  */
 #include"includes.h"
 #define Hillcont 0
-#define Frequency_Over 140
+#define Frequency_Over 120
 unsigned int chuwan,Hill_count;
 unsigned char StartFlag,StopFlag,RunFlag=2000,Stop=100;
 float fre_diff,dis,LEFT_old,LEFT_new=0,RIGHT_old,RIGHT_new=0,MIDDLE_old,MIDDLE_new=0,temp_steer,temp_steer_old;
@@ -24,21 +24,22 @@ float sensor[3][10]={0},avr[10]={0.005,0.01,0.01,0.0125,0.0125,0.025,0.025,0.05,
 unsigned int left,right,middle,flag=0,zd_flag=0,slow,pause=0; //车子在赛道的位置标志
 unsigned int count1,count2,currentspeed,speed_target; 
 unsigned int presteer,currentsteer,dsteer,Angle;
-unsigned char Left_Compensator=39, Right_Compensator=30;
-float Middle_Compensator=27;
+unsigned char Left_Compensator=25, Right_Compensator=22;
+float Middle_Compensator=16;
+float iError,dError;
 unsigned int Uphill=0,Downhill=0,Up_Flag=0,Down_Flag=0,Straight,Ramp_Flag,Ramp_Time=0;
 unsigned int 
-			 speed1=290,	
-			 speed2=175,
-			 speed3=153,
-			 speed4=132,
-			 speed5=105; //100 105 110
+			 speed1=600,	
+			 speed2=420,
+			 speed3=340,
+			 speed4=260,
+			 speed5=210; //100 105 110
 
-#define  D 37//30还可以 //40
-float	kp1=5.65,ki2=0,kd1=D+1,  
-		kp2=3.69,ki3=0,kd2=D+2,
-		kp3=2.13,ki4=0,kd3=D+3,
-		kp4=0.87,ki=0,kd4=D+4;
+#define  D 43//30还可以 //40
+float	kp1=5.9,ki2=0,kd1=D+4,  
+		kp2=3.9,ki3=0,kd2=D+3,
+		kp3=1.8,ki4=0,kd3=D+2,
+		kp4=0.55,ki=0,kd4=D+1;
 float kp,ki,kd;
 int RIGHT,LEFT,MIDDLE,temp_fre[2];
 unsigned char Outdata[8];
@@ -46,7 +47,7 @@ float sumerror,lasterror,Msetpoint=0,temp_middle=0,sensor_compensator=0,middlefl
 int Set_speed,temp_speed,pwm;
 int speed_iError,speed_lastError,speed_prevError,Error[3];
 float
-	  speed_kp=1.1,
+	  speed_kp=1,
 	  speed_ki=0.3,
 	  speed_kd=0.2;
 /****************************************************************************************************************
@@ -145,10 +146,6 @@ unsigned int abs(signed int x)
 *****************************************************************************************************************/
 signed int LocPIDCal(void)
 {
-	register float iError,dError;
-	
-	
-		
 	dleft=LEFT-start_left;
 	if(dleft>Left_Compensator)
 		dleft=Left_Compensator;
@@ -162,7 +159,7 @@ signed int LocPIDCal(void)
 	
 	if(flag==1)
 	{
-		if(dleft<6&&dmiddle<-20&&dright<6)
+		if(dleft<4&&dmiddle<-12&&dright<4)
 		{
 			flag=1;
 			return(210);
@@ -177,7 +174,7 @@ signed int LocPIDCal(void)
 				if(dmiddle>=-Middle_Compensator)
 					fre_diff=-dmiddle;
 				else
-					fre_diff=-dmiddle+Left_Compensator-dleft;
+					fre_diff=Middle_Compensator+Left_Compensator-dleft;
 					
 			}
 			else
@@ -185,14 +182,14 @@ signed int LocPIDCal(void)
 				if(dmiddle>=-Middle_Compensator)
 					fre_diff=dmiddle;
 				else
-					fre_diff=dmiddle-Right_Compensator+dright;
+					fre_diff=-Middle_Compensator-Right_Compensator+dright;
 			}
 		}
 	}
 		
 	else if(flag==2)
 	{
-		if(dright<6&&dmiddle<-20&&dleft<6)
+		if(dright<4&&dmiddle<-12&&dleft<4)
 		{
 			flag=2;
 			return(-218);
@@ -207,7 +204,7 @@ signed int LocPIDCal(void)
 				if(dmiddle>=-Middle_Compensator)
 					fre_diff=-dmiddle;
 				else
-					fre_diff=-dmiddle+Left_Compensator-dleft;
+					fre_diff=Middle_Compensator+Left_Compensator-dleft;
 					
 			}
 			else
@@ -215,7 +212,7 @@ signed int LocPIDCal(void)
 				if(dmiddle>=-Middle_Compensator)
 					fre_diff=dmiddle;
 				else
-					fre_diff=dmiddle-Right_Compensator+dright;
+					fre_diff=-Middle_Compensator-Right_Compensator+dright;
 			}
 		}
 	}
@@ -227,7 +224,7 @@ signed int LocPIDCal(void)
 			if(dmiddle>=-Middle_Compensator)
 				fre_diff=-dmiddle;
 			else
-				fre_diff=-dmiddle+Left_Compensator-dleft;
+				fre_diff=Middle_Compensator+Left_Compensator-dleft;
 				
 		}
 		else
@@ -235,7 +232,7 @@ signed int LocPIDCal(void)
 			if(dmiddle>=-Middle_Compensator)
 				fre_diff=dmiddle;
 			else
-				fre_diff=dmiddle-Right_Compensator+dright;
+				fre_diff=-Middle_Compensator-Right_Compensator+dright;
 		}
 		
 	}
@@ -249,26 +246,26 @@ signed int LocPIDCal(void)
 	sumerror+=iError;
 	dError=iError-lasterror;
 	lasterror=iError;		
-	if(fre_diff>=-10&&fre_diff<=10)      //直道
+	if(fre_diff>=-8&&fre_diff<=8)      //直道
 	{
 		kp=kp4/10*abs(fre_diff);
 		kd=kd4;
 	}
-	else if(fre_diff>=-25&&fre_diff<=25)      //直道
+	else if(fre_diff>=-18&&fre_diff<=18)      //直道
 	{
 
-		kp=kp4+(kp3-kp4)/15*(abs(fre_diff)-10);
+		kp=kp4+(kp3-kp4)/10*(abs(fre_diff)-8);
 		kd=kd3;
 	}
-	else if(fre_diff>=-40&&fre_diff<=40)                                //小弯
+	else if(fre_diff>=-30&&fre_diff<=30)                                //小弯
 	{
-		kp=kp3+(kp2-kp3)/15*(abs(fre_diff)-25);
+		kp=kp3+(kp2-kp3)/12*(abs(fre_diff)-18);
 		kd=kd2;
 	}
 		else                              //小弯
 		{
 
-			kp=kp2+(kp1-kp2)/30*(abs(fre_diff)-30);
+			kp=kp2+(kp1-kp2)/20*(abs(fre_diff)-30);
 			kd=kd1;
 				
 		}
@@ -395,8 +392,8 @@ void speed_control()
 	
 	
 	temp_speed+=speed_kp*(Error[0]-Error[1])+speed_ki*Error[0]+speed_kd*(Error[0]-Error[1]-(Error[1]-Error[2]));
-	if(temp_speed>140) 
-		temp_speed=140;
+	if(temp_speed>150) 
+		temp_speed=150;
 	if(temp_speed<-150)
 			temp_speed=-150;
 	SET_motor(temp_speed);
@@ -421,24 +418,23 @@ void speed_control()
 *****************************************************************************************************************/
 void sensor_display(void)
 {
-
+	Dis_Num(0,0,(WORD)Left_Compensator,2);
+	Dis_Num(0,1,(WORD)Middle_Compensator,2);
+	Dis_Num(0,2,(WORD)Right_Compensator,2);
+	Dis_Num(0,3,(WORD)RIGHT-start_right+dleft+MIDDLE-start_middle,3);
+	Dis_Num(0,4,(WORD)start_left,3);
+	Dis_Num(0,5,(WORD)start_middle,3);
+	Dis_Num(0,6,(WORD)start_right,3);
+	Dis_Num(0,7,(WORD)StopFlag,2);
 	Dis_Num(64,0,(WORD)LEFT,4);
 	Dis_Num(64,1,(WORD)MIDDLE,4);
 	Dis_Num(64,2,(WORD)RIGHT,4);
 	Dis_Num(64,4,(WORD)currentspeed,4);
 	Dis_Num(64,5,(WORD)fre_diff,3);
 	Dis_Num(64,6,(WORD)-fre_diff,3);
-	Dis_Num(0,0,(WORD)Left_Compensator,3);
-	Dis_Num(0,2,(WORD)Right_Compensator,3);
-	Dis_Num(0,1,(WORD)Middle_Compensator,3);
-	Dis_Num(0,3,(WORD)RIGHT-start_right+dleft+MIDDLE-start_middle,5);
-	Dis_Num(0,4,(WORD)start_middle,3);
-	Dis_Num(0,5,(WORD)start_right,3);
 	Dis_Num(32,0,(WORD)Uphill,2);
 	Dis_Num(32,1,(WORD)Up_Flag,2);
 	Dis_Num(32,2,(WORD)Down_Flag,2);
-	Dis_Num(0,6,(WORD)start_left,4);
-	Dis_Num(0,7,(WORD)StopFlag,4);
 	Dis_Num(32,4,(WORD)switch6,2);
 	Dis_Num(32,5,(WORD)switch5,2);
 	Dis_Num(32,6,(WORD)speed5,3);
@@ -539,9 +535,9 @@ void Get_speed()  //定时2mse采速度
 *****************************************************************************************************************/
 void Set_Middlepoint()
 {
-	start_middle=MIDDLE+7;
-	start_left=LEFT+9;
-	start_right=RIGHT+7;
+	start_middle=MIDDLE+12;
+	start_left=LEFT+16;
+	start_right=RIGHT+14;
 	sensor_compensator=RIGHT-LEFT;
 //	Msetpoint=temp_middle;
 //	Dis_Num(64,6,(WORD)Msetpoint,5);
