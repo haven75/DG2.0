@@ -30,9 +30,9 @@ float iError,dError;
 unsigned int Uphill=0,Downhill=0,Up_Flag=0,Down_Flag=0,Straight,Ramp_Flag,Ramp_Time=0;
 unsigned int 
 			 speed1=600,	
-			 speed2=420,
-			 speed3=340,
-			 speed4=260,
+			 speed2=360,
+			 speed3=280,
+			 speed4=220,
 			 speed5=210; //100 105 110
 
 #define  D 43//30还可以 //40
@@ -306,11 +306,44 @@ unsigned int Get_Angle()
 /****************************************************速度给定****************************************************************/
 void SpeedSet(void)
 {
-	/*if(pause==1)
+	if(abs(iError)<6)
 	{
-		pause=0;
-		speed_target=0;
-	}*/
+		if(abs(dError)<3)
+			speed_target=speed1;
+		else
+			speed_target=speed1-40;
+		zd_flag=1;
+	}
+	else if(abs(iError)<12)
+	{
+		speed_target=speed1-(speed1-speed2)/10*(abs(iError)-6);
+		zd_flag=0;
+	}
+	else if(abs(iError)<20)
+	{
+ 		speed_target=speed2-(speed2-speed3)/10*(abs(iError)-12);
+ 		zd_flag=0;
+	}
+	else if(abs(iError)<30)
+	{
+		speed_target=speed3-(speed3-speed4)/10*(abs(iError)-20);
+		zd_flag=0;
+	}
+	else 
+	{
+		speed_target=speed4-(speed4-speed5)/10*(abs(iError)-30);
+		zd_flag=0;
+	}
+	if(temp_steer>=210||temp_steer<=-218)
+	{
+		if(zd_flag)
+			speed_target=speed5-30;
+		else 
+			speed_target=speed5;
+	}
+	if(speed_target>speed1)
+		speed_target=speed1;
+/*
 	if(Up_Flag==1)
 		speed_target=130;
 	else if((temp_steer>=185||temp_steer<=-185))
@@ -372,7 +405,7 @@ void SpeedSet(void)
 
 //    if(StopFlag==1)
   //  	speed_target=0;
-    
+    */
 }
 
 /****************************************************************************************************************
@@ -394,8 +427,8 @@ void speed_control()
 	temp_speed+=speed_kp*(Error[0]-Error[1])+speed_ki*Error[0]+speed_kd*(Error[0]-Error[1]-(Error[1]-Error[2]));
 	if(temp_speed>150) 
 		temp_speed=150;
-	if(temp_speed<-150)
-			temp_speed=-150;
+	if(temp_speed<-160)
+			temp_speed=-160;
 	SET_motor(temp_speed);
 	if(StopFlag)
 	{
@@ -570,11 +603,11 @@ void SendHex(unsigned char hex)
 
 void Senddata()
 {	unsigned int i;
-	Outdata[0]=(unsigned char)LEFT;
+	Outdata[0]=(unsigned char)abs(iError);
 	Outdata[1]=(unsigned char)RIGHT;
 	Outdata[2]=(unsigned char)speed_target ;
 	Outdata[3]=(unsigned char)currentspeed;
-	Outdata[4]=(unsigned char)(LEFT>>8);
+	Outdata[4]=(unsigned char)(abs(iError)>>8);
 	Outdata[5]=(unsigned char)(RIGHT>>8);
 	Outdata[6]=(unsigned char)(speed_target >>8);
 	Outdata[7]=(unsigned char)(currentspeed>>8);
