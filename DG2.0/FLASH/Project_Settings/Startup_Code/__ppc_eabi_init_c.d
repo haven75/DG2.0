@@ -1,10 +1,10 @@
-Project_Settings/Startup_Code/__ppc_eabi_init_c.obj: C:\Users\Quan\Desktop\DG2.0\DG2.0\Project_Settings\Startup_Code\__ppc_eabi_init.c \
+Project_Settings/Startup_Code/__ppc_eabi_init_c.obj: C:\Users\Quan\Documents\GitHub\DG2.0\DG2.0\Project_Settings\Startup_Code\__ppc_eabi_init.c \
 	E:\codewarrior\setup10.6\CW\ MCU\ v10.6\MCU\PA_Support\ewl\EWL_C\include\lib_ewl.prefix \
 	E:\codewarrior\setup10.6\CW\ MCU\ v10.6\MCU\PA_Support\ewl\EWL_C\include\common.prefix \
 	E:\codewarrior\setup10.6\CW\ MCU\ v10.6\MCU\PA_Support\ewl\EWL_C\include\ewl_c_version.h \
-	C:\Users\Quan\Desktop\DG2.0\DG2.0\Prefix\MPC5604B_FLASH_VLE.prefix \
-	C:\Users\Quan\Desktop\DG2.0\DG2.0\Project_Headers\MPC5604B.h \
-	C:\Users\Quan\Desktop\DG2.0\DG2.0\Project_Headers\typedefs.h \
+	C:\Users\Quan\Documents\GitHub\DG2.0\DG2.0\Prefix\MPC5604B_FLASH_VLE.prefix \
+	C:\Users\Quan\Documents\GitHub\DG2.0\DG2.0\Project_Headers\MPC5604B.h \
+	C:\Users\Quan\Documents\GitHub\DG2.0\DG2.0\Project_Headers\typedefs.h \
 	E:\codewarrior\setup10.6\CW\ MCU\ v10.6\MCU\PA_Support\ewl\EWL_C\include\stdint.h \
 	E:\codewarrior\setup10.6\CW\ MCU\ v10.6\MCU\PA_Support\ewl\EWL_C\include\ansi_parms.h \
 	E:\codewarrior\setup10.6\CW\ MCU\ v10.6\MCU\PA_Support\ewl\EWL_C\include\ewlGlobals.h \

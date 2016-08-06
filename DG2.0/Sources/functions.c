@@ -17,29 +17,29 @@
 #define Hillcont 0
 #define Frequency_Over 120
 unsigned int chuwan,Hill_count;
-unsigned char StartFlag,StopFlag,RunFlag=2000,Stop=100;
+unsigned char StartFlag,StopFlag,RunFlag=2000,Stop=50;
 float fre_diff,dis,LEFT_old,LEFT_new=0,RIGHT_old,RIGHT_new=0,MIDDLE_old,MIDDLE_new=0,temp_steer,temp_steer_old;
 float LEFT_Temp,RIGHT_Temp,MIDDLE_Temp,Lsum,Rsum,Msum;
 float sensor[3][10]={0},avr[10]={0.005,0.01,0.01,0.0125,0.0125,0.025,0.025,0.05,0.15,0.7};
 unsigned int left,right,middle,flag=0,zd_flag=0,slow,pause=0; //车子在赛道的位置标志
 unsigned int count1,count2,currentspeed,speed_target; 
 unsigned int presteer,currentsteer,dsteer,Angle;
-unsigned char Left_Compensator=25, Right_Compensator=22;
+unsigned char Left_Compensator=23, Right_Compensator=22;
 float Middle_Compensator=16;
 float iError,dError;
 unsigned int Uphill=0,Downhill=0,Up_Flag=0,Down_Flag=0,Straight,Ramp_Flag,Ramp_Time=0;
 unsigned int 
-			 speed1=600,	
-			 speed2=360,
+			 speed1=390,	
+			 speed2=320,
 			 speed3=280,
-			 speed4=230,
+			 speed4=250,
 			 speed5=215; //100 105 110
 
 #define  D 45//30还可以 //40
-float	kp1=5.9,ki2=0,kd1=D+4,  
-		kp2=3.9,ki3=0,kd2=D+3,
-		kp3=1.8,ki4=0,kd3=D+2,
-		kp4=0.55,ki=0,kd4=D+1;
+float	kp1=6.45,ki2=0,kd1=D,  
+		kp2=3.8,ki3=0,kd2=D,
+		kp3=1.9,ki4=0,kd3=D+5,
+		kp4=1.4,ki=0,kd4=D+10;
 float kp,ki,kd;
 int RIGHT,LEFT,MIDDLE,temp_fre[2];
 unsigned char Outdata[8];
@@ -47,6 +47,9 @@ float sumerror,lasterror,Msetpoint=0,temp_middle=0,sensor_compensator=0,middlefl
 int Set_speed,temp_speed,pwm;
 int speed_iError,speed_lastError,speed_prevError,Error[3];
 float
+	 /* speed_kp=1.18,
+	  speed_ki=0.35,
+	  speed_kd=0.38;*/
 	  speed_kp=1,
 	  speed_ki=0.3,
 	  speed_kd=0.2;
@@ -161,6 +164,7 @@ signed int LocPIDCal(void)
 	{
 		if(dleft<4&&dmiddle<-12&&dright<4)
 		{
+			return(temp_steer);
 			flag=1;
 			return(210);
 		}
@@ -191,6 +195,7 @@ signed int LocPIDCal(void)
 	{
 		if(dright<4&&dmiddle<-12&&dleft<4)
 		{
+			return(temp_steer);
 			flag=2;
 			return(-218);
 		}
@@ -308,10 +313,10 @@ void SpeedSet(void)
 {
 	if(abs(iError)<6)
 	{
-		if(abs(dError)<3)
-			speed_target=speed1;
-		else
-			speed_target=speed1-40;
+	//	if(abs(dError)<3)
+			speed_target=speed1-(speed1-speed2)/10*abs(iError);
+	//	else
+	//		speed_target=speed1-40;
 		zd_flag=1;
 	}
 	else if(abs(iError)<12)
@@ -341,7 +346,7 @@ void SpeedSet(void)
 	else 
 	{
 		if(zd_flag)
-			speed_target=speed5-30;
+			speed_target=speed5-50;
 		else
 			speed_target=speed4-(speed4-speed5)/10*(abs(iError)-30);
 		//zd_flag=0;
@@ -436,12 +441,16 @@ void speed_control()
 	Error[0]=speed_iError;
 	
 	
-	
-	temp_speed+=speed_kp*(Error[0]-Error[1])+speed_ki*Error[0]+speed_kd*(Error[0]-Error[1]-(Error[1]-Error[2]));
-	if(temp_speed>150) 
-		temp_speed=150;
-	if(temp_speed<-190)
-			temp_speed=-190;
+	if(speed_iError>120)
+		temp_speed=180;
+	else if(speed_iError<-120)
+		temp_speed=-190;
+	else
+		temp_speed+=speed_kp*(Error[0]-Error[1])+speed_ki*Error[0]+speed_kd*(Error[0]-Error[1]-(Error[1]-Error[2]));
+	if(temp_speed>180) 
+		temp_speed=180;
+	if(temp_speed<-200)
+			temp_speed=-200;
 	SET_motor(temp_speed);
 	if(StopFlag)
 	{
@@ -453,6 +462,8 @@ void speed_control()
 		else
 			SET_motor(0);
 	}
+	if(forward)
+		SET_motor(0);
 }
 /****************************************************************************************************************
 * 函数名称：sensor_display()	
@@ -483,7 +494,7 @@ void sensor_display(void)
 	Dis_Num(32,2,(WORD)Down_Flag,2);
 	Dis_Num(32,4,(WORD)switch6,2);
 	Dis_Num(32,5,(WORD)switch5,2);
-	Dis_Num(32,6,(WORD)speed5,3);
+	Dis_Num(32,6,(WORD)speed_target,3);
 	//Dis_Num(64,6,(WORD)EMIOS_0.CH[9].CBDR.R,3);
 	Dis_Num(64,7,(WORD)flag,3);
 		
@@ -583,7 +594,7 @@ void Set_Middlepoint()
 {
 	start_middle=MIDDLE+12;
 	start_left=LEFT+16;
-	start_right=RIGHT+14;
+	start_right=RIGHT+13;
 	sensor_compensator=RIGHT-LEFT;
 //	Msetpoint=temp_middle;
 //	Dis_Num(64,6,(WORD)Msetpoint,5);
