@@ -1,6 +1,7 @@
 #include "includes.h"
 unsigned int Flag=0,wait=9;
 signed int steer=0,delay_count=0,StartDelay=0;
+#define StartDelaySec 300
 
 
 void FastSpeedMode();
@@ -19,8 +20,6 @@ void main(void)
 	while(switch6==1&&switch5==0)
 		SlowSpeedMode();
 }
-
-
 void Pit0ISR()     
 {
 	Flag=1;
@@ -45,8 +44,8 @@ void Pit0ISR()
 	//	RunFlag++;
 	if(switch3==0)
 		StartDelay++;
-	if(StartDelay>601)
-		StartDelay=601;
+	if(StartDelay>StartDelaySec+1)
+		StartDelay=StartDelaySec+1;
 
 	PIT.CH[0].TFLG.B.TIF = 1;
 }
@@ -71,7 +70,7 @@ void FastSpeedMode()
 				steer=STEER_HELM_CENTER;
 			SET_steer(steer);
 			StopLineDetect();
-			if(StartDelay>600)
+			if(StartDelay>=StartDelaySec)
 				SpeedSet();
 			speed_control();
 		}
@@ -99,7 +98,7 @@ void MiddleSpeedMode()
 				steer=STEER_HELM_CENTER;
 			SET_steer(steer);
 			StopLineDetect();
-			if(StartDelay>600)
+			if(StartDelay>=StartDelaySec)
 				SpeedSet();
 			speed_control();
 		}
@@ -112,7 +111,7 @@ void SlowSpeedMode()
 {
 	for (;;) 
 	{
-		speed1=560;
+		speed1=350;
 		speed5=190;
 		Key_Detect_Compensator();
 		if(Flag==1)
@@ -128,7 +127,7 @@ void SlowSpeedMode()
 				steer=STEER_HELM_CENTER;
 			SET_steer(steer);
 			StopLineDetect();
-			if(StartDelay>600)
+			if(StartDelay>=StartDelaySec)
 				SpeedSet();
 			speed_control();
 		}
