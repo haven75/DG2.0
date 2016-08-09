@@ -54,17 +54,17 @@ void FastSpeedMode()
 {
 	for (;;) 
 	{
-		speed1=390;
+		speed1=380;
 		speed5=210;
 		Key_Detect_Compensator();
 		if(Flag==1)
 		{
 			sensor_display();
 			steer=STEER_HELM_CENTER+LocPIDCal();
-			if(steer<=STEER_HELM_CENTER-218)
-				steer=STEER_HELM_CENTER-235;
-			if(steer>=STEER_HELM_CENTER+210)
-				steer=STEER_HELM_CENTER+216;
+			if(steer<=STEER_HELM_CENTER-240)
+				steer=STEER_HELM_CENTER-250;
+			if(steer>=STEER_HELM_CENTER+240)
+				steer=STEER_HELM_CENTER+250;
 			Dis_Num(64,3,(WORD)steer,4);
 			if(Up_Flag==1)
 				steer=STEER_HELM_CENTER;
@@ -89,10 +89,10 @@ void MiddleSpeedMode()
 		{
 			sensor_display();
 			steer=STEER_HELM_CENTER+LocPIDCal();
-			if(steer<=STEER_HELM_CENTER-218)
-				steer=STEER_HELM_CENTER-235;
-			if(steer>=STEER_HELM_CENTER+210)
-				steer=STEER_HELM_CENTER+216;
+			if(steer<=STEER_HELM_CENTER-240)
+				steer=STEER_HELM_CENTER-250;
+			if(steer>=STEER_HELM_CENTER+240)
+				steer=STEER_HELM_CENTER+250;
 			Dis_Num(64,3,(WORD)steer,4);
 			if(Up_Flag==1)
 				steer=STEER_HELM_CENTER;
@@ -118,10 +118,10 @@ void SlowSpeedMode()
 		{
 			sensor_display();
 			steer=STEER_HELM_CENTER+LocPIDCal();
-			if(steer<=STEER_HELM_CENTER-218)
-				steer=STEER_HELM_CENTER-235;
-			if(steer>=STEER_HELM_CENTER+210)
-				steer=STEER_HELM_CENTER+216;
+			if(steer<=STEER_HELM_CENTER-240)
+				steer=STEER_HELM_CENTER-250;
+			if(steer>=STEER_HELM_CENTER+240)
+				steer=STEER_HELM_CENTER+250;
 			Dis_Num(64,3,(WORD)steer,4);
 			if(Up_Flag==1)
 				steer=STEER_HELM_CENTER;

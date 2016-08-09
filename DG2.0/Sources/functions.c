@@ -25,20 +25,20 @@ unsigned int left,right,middle,flag=0,zd_flag=0,slow,pause=0,overflag; //³µ×ÓÔÚÈ
 unsigned int count1,count2,currentspeed,speed_target; 
 unsigned int presteer,currentsteer,dsteer,Angle;
 unsigned char Left_Compensator=22, Right_Compensator=21;
-float Middle_Compensator=16;
+float Middle_Compensator=15;
 float iError,dError;
 unsigned int Uphill=0,Downhill=0,Up_Flag=0,Down_Flag=0,Straight,Ramp_Flag,Ramp_Time=0;
 unsigned int 
 			 speed1=390,	
-			 speed2=360,
-			 speed3=320,
-			 speed4=280,
+			 speed2=320,
+			 speed3=280,
+			 speed4=240,
 			 speed5=215; //100 105 110
 
-#define  D 47//30»¹¿ÉÒÔ //40
+#define  D 38//30»¹¿ÉÒÔ //40
 float	kp1=8.3,ki2=0,kd1=D,  
-		kp2=3.95,ki3=0,kd2=D,
-		kp3=2.6,ki4=0,kd3=D+5,
+		kp2=3.8,ki3=0,kd2=D,
+		kp3=2.5,ki4=0,kd3=D+5,
 		kp4=2.4,ki=0,kd4=D+10;
 float kp,ki,kd;
 int RIGHT,LEFT,MIDDLE,temp_fre[2];
@@ -50,9 +50,9 @@ float
 	 /* speed_kp=1.18,
 	  speed_ki=0.4,
 	  speed_kd=0.38;*/
-	  speed_kp=1.1,
-	  speed_ki=0.32,
-	  speed_kd=0.2;
+	  speed_kp=1,
+	  speed_ki=0.31,
+	  speed_kd=0.25;
 /****************************************************************************************************************
 * º¯ÊıÃû³Æ£ºfrequency_measure()	
 * º¯Êı¹¦ÄÜ£º»ñÈ¡µç¸ĞÆµÂÊ
@@ -293,9 +293,9 @@ signed int LocPIDCal(void)
 			
 	}
 	temp_steer=kp*iError+kd*dError;
-	if(temp_steer>=230)
+	if(temp_steer>=240)
 		flag=1;               //×ó´òËÀ
-	else if(temp_steer<=-230)
+	else if(temp_steer<=-240)
 		flag=2;
 	else 
 		flag=0;
@@ -335,7 +335,7 @@ void SpeedSet(void)
 	if(abs(iError)<10)
 	{
 		zd_flag++;
-		if(zd_flag>15)
+		if(zd_flag>20)
 		{
 			speed_target=speed1-(speed1-speed2)/10*abs(iError);
 			if(speed_target<speed2)
@@ -349,29 +349,48 @@ void SpeedSet(void)
 		speed_target=speed2-(speed2-speed3)/5*(abs(iError)-10);
 		if(speed_target<speed3)
 			speed_target=speed2;
+		if(zd_flag>200)
+					speed_target=speed5-50;
+		
+		else if(zd_flag>150)
+			speed_target=speed5;
+		else if(zd_flag>80)
+			speed_target=speed3;
 	}
 	else if(abs(iError)<21)
 	{
 		speed_target=speed3-(speed3-speed4)/6*(abs(iError)-15);
- 		zd_flag=0;
  		if(speed_target<speed4)
- 					speed_target=speed4;
+ 			speed_target=speed4;
+ 		if(zd_flag>200)
+ 			speed_target=speed5-50;
+ 		else if(zd_flag>150)
+ 			speed_target=speed5;
+ 		else if(zd_flag>100);
+ 			speed_target=speed5+20;
+		zd_flag=0;
 	}
 	else if(abs(iError)<29)
 	{
-			speed_target=speed4-(speed4-speed5)/8*(abs(iError)-21);
-			zd_flag=0;
+		speed_target=speed4-(speed4-speed5)/8*(abs(iError)-21);
+		if(zd_flag>200)
+			speed_target=speed5-80;
+		else if(zd_flag>150)
+			speed_target=speed5-50;
+		else if(zd_flag>100)
+			speed_target=speed5-20;
+		zd_flag=0;
 	}
 	else 
 	{
-			speed_target=speed5;//-(speed5-speed6)/10*(abs(iError)-30);
+			speed_target=speed5;//-(speed5-speed6)/10*(abs(iError)-30)
+			if(zd_flag>200)
+				speed_target=speed5-100;
 	}
 	if(speed_target>speed1)
 		speed_target=speed1;
-	if(speed_target<speed5)
-		speed_target=speed5;
-	if(abs(dError)>6)
-		speed_target=speed5;
+	if(speed_target<speed5-100)
+		speed_target=speed5-100;
 
 }
 
