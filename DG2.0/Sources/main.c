@@ -46,7 +46,7 @@ void Pit0ISR()
 		StartDelay++;
 	if(StartDelay>StartDelaySec+1)
 		StartDelay=StartDelaySec+1;
-
+	count++;
 	PIT.CH[0].TFLG.B.TIF = 1;
 }
 
@@ -54,8 +54,8 @@ void FastSpeedMode()
 {
 	for (;;) 
 	{
-		speed1=370;
-		speed5=230;
+		speed1=390;
+		speed5=210;
 		Key_Detect_Compensator();
 		if(Flag==1)
 		{
