@@ -155,16 +155,16 @@ void initPIT(void)
 {                                 //PIT02msec中断立controlflag  PIT1速度反馈2ms一个控制周期
                            	       // NOTE:  DIVIDER FROM SYSCLK TO PIT ASSUMES DEFAULT DIVIDE BY 1 
   PIT.PITMCR.R = 0x00000001;       // Enable PIT and configure timers to stop in debug mode 
-  PIT.CH[0].LDVAL.R = 640000;        //PIT0 timeout=640000 sysclks x 1sec/64M sysclks =10msec
+  PIT.CH[0].LDVAL.R = 64000;        //PIT0 timeout=640000 sysclks x 1sec/64M sysclks =10msec
   PIT.CH[0].TCTRL.R = 0X00000003;    //Enable PIT0 interrupt and make PIT active to count 
   
-  PIT.CH[1].LDVAL.R = 64000;      // PIT1 timeout = 64000 sysclks x 1sec/64M sysclks = 1msec 
+  PIT.CH[1].LDVAL.R = 64000;      // PIT2 timeout = 64000 sysclks x 1sec/64M sysclks = 1msec 
   PIT.CH[1].TCTRL.R = 0x00000003; // Enable PIT1 interrupt and make PIT active to count 
   
  // PIT.CH[2].LDVAL.R =320000000;    //设置计数值为32000000
  // PIT.CH[2].TCTRL.R = 0x000000003; //使能PIT2计数，并使能中断
   
-  INTC_InstallINTCInterruptHandler(Pit0ISR,59,1); 
+  INTC_InstallINTCInterruptHandler(Pit0ISR,59,3); 
  // INTC_InstallINTCInterruptHandler(Pit1ISR,60,2);
 }
 

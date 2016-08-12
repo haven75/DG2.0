@@ -567,9 +567,9 @@ void Get_speed()  //定时2mse采速度
 *****************************************************************************************************************/
 void Set_Middlepoint()
 {
-	start_middle=MIDDLE+12;
-	start_left=LEFT+16;
-	start_right=RIGHT+14;
+	start_middle=MIDDLE-6;
+	start_left=LEFT-7;
+	start_right=RIGHT-7;
 	sensor_compensator=RIGHT-LEFT;
 //	Msetpoint=temp_middle;
 //	Dis_Num(64,6,(WORD)Msetpoint,5);

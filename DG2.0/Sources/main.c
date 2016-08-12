@@ -1,5 +1,5 @@
 #include "includes.h"
-unsigned int Flag=0,wait=9;
+unsigned int Flag=0,wait=9,INTC_Time=0;
 signed int steer=0,delay_count=0,StartDelay=0;
 #define StartDelaySec 300
 
@@ -26,35 +26,54 @@ void main(void)
  }
 void Pit0ISR()     
 {
-	Flag=1;
-	frequency_measure();
-	Get_speed();
-	if(wait>0)
-		wait--;
-	if(1)
+	INTC_Time++;
+	if(INTC_Time==10)
 	{
-		if(delay_count<500)
-			delay_count++;    //防止开机触发
-		else Ramp_Detect();
-		if(Ramp_Flag==1)
-			Ramp_Time++;
-		if(Ramp_Time>40)
+		Flag=1;
+		frequency_measure();
+		Get_speed();
+		if(wait>0)
+			wait--;
+		if(1)
 		{
-			Up_Flag=2;
-			Ramp_Flag=0;
+			if(delay_count<500)
+				delay_count++;    //防止开机触发
+			else Ramp_Detect();
+			if(Ramp_Flag==1)
+				Ramp_Time++;
+			if(Ramp_Time>40)
+			{
+				Up_Flag=2;
+				Ramp_Flag=0;
+			}
 		}
+		if(Up_Flag==2&&Ramp_Time_Delay>0)
+			Ramp_Time_Delay--;
+		//if(StartFlag==1&&RunFlag<2005)
+		//	RunFlag++;
+		if(switch3==0)
+			StartDelay++;
+		if(StartDelay>StartDelaySec+1)
+			StartDelay=StartDelaySec+1;
+		count++;
+		INTC_Time=0;
 	}
-	if(Up_Flag==2&&Ramp_Time_Delay>0)
-		Ramp_Time_Delay--;
-	//if(StartFlag==1&&RunFlag<2005)
-	//	RunFlag++;
-	if(switch3==0)
-		StartDelay++;
-	if(StartDelay>StartDelaySec+1)
-		StartDelay=StartDelaySec+1;
-	count++;
+	if(switch2!=0||switch1!=0)
+	{
+		if(StartDelay>=StartDelaySec)
+			SpeedSet();
+		speed_control();
+	}
 	PIT.CH[0].TFLG.B.TIF = 1;
 }
+
+/*void Pit1ISR()
+{
+	Get_speed();
+	if(StartDelay>=StartDelaySec)
+		SpeedSet();
+	speed_control();
+}*/
 
 void FastSpeedMode()
 {
@@ -76,9 +95,9 @@ void FastSpeedMode()
 				steer=STEER_HELM_CENTER+8;
 			SET_steer(steer);
 			StopLineDetect();
-			if(StartDelay>=StartDelaySec)
+		/*	if(StartDelay>=StartDelaySec)
 				SpeedSet();
-			speed_control();
+			speed_control();*/
 		}
 		Flag=0;
 		Senddata();
@@ -104,9 +123,9 @@ void MiddleSpeedMode()
 				steer=STEER_HELM_CENTER+10;
 			SET_steer(steer);
 			StopLineDetect();
-			if(StartDelay>=StartDelaySec)
+		/*	if(StartDelay>=StartDelaySec)
 				SpeedSet();
-			speed_control();
+			speed_control();*/
 		}
 		Flag=0;
 		Senddata();
@@ -122,9 +141,9 @@ void SlowSpeedMode()
 		kp3=3;		kd3=32;
 		kp4=2.4;	kd4=30;
 		
-		speed_kp=0.9;
-		speed_ki=0.31;
-		speed_kd=0.25;
+		speed_kp=1.6;
+		speed_ki=0.08;
+		speed_kd=0.5;
 		speed1=320;
 		speed2=290;
 		speed3=270;
@@ -146,9 +165,9 @@ void SlowSpeedMode()
 			}
 			SET_steer(steer);
 			StopLineDetect();
-			if(StartDelay>=StartDelaySec)
+		/*	if(StartDelay>=StartDelaySec)
 				SpeedSet();
-			speed_control();
+			speed_control();*/
 			if(Up_Flag==1)
 			{
 				EMIOS_0.CH[9].CBDR.R = Openloop_Speed+20;
