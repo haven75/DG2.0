@@ -1,7 +1,7 @@
 #include "includes.h"
 unsigned int Flag=0,wait=9,INTC_Time=0;
 signed int steer=0,delay_count=0,StartDelay=0;
-#define StartDelaySec 300
+#define StartDelaySec 100
 
 
 void FastSpeedMode();
@@ -27,11 +27,11 @@ void main(void)
 void Pit0ISR()     
 {
 	INTC_Time++;
-	if(INTC_Time==10)
+	if(INTC_Time==5)
 	{
 		Flag=1;
 		frequency_measure();
-		Get_speed();
+		//Get_speed();
 		if(wait>0)
 			wait--;
 		if(1)
@@ -41,7 +41,7 @@ void Pit0ISR()
 			else Ramp_Detect();
 			if(Ramp_Flag==1)
 				Ramp_Time++;
-			if(Ramp_Time>40)
+			if(Ramp_Time>45)
 			{
 				Up_Flag=2;
 				Ramp_Flag=0;
@@ -58,6 +58,7 @@ void Pit0ISR()
 		count++;
 		INTC_Time=0;
 	}
+	Get_speed();
 	if(switch2!=0||switch1!=0)
 	{
 		if(StartDelay>=StartDelaySec)
@@ -76,11 +77,14 @@ void Pit0ISR()
 }*/
 
 void FastSpeedMode()
-{
+{	
+	speed_kp=5.4;
+	speed_ki=1;
+	speed_kd=2;
+	speed1=72;
+	speed5=43;
 	for (;;) 
 	{
-		speed1=380;
-		speed5=225;
 		Key_Detect_Compensator();
 		if(Flag==1)
 		{
@@ -106,9 +110,13 @@ void FastSpeedMode()
                    
 void MiddleSpeedMode()
 {
+	speed_kp=5;
+	speed_ki=1.2;
+	speed_kd=2.5;
+	speed1=68;
+	speed5=43;
 	for (;;) 
-	{	speed1=350;
-		speed5=230;
+	{	
 		Key_Detect_Compensator();
 		if(Flag==1)
 		{
@@ -134,21 +142,21 @@ void MiddleSpeedMode()
 
 void SlowSpeedMode()
 {
+	kp1=8.2;	kd1=28;  
+	kp2=3.9;	kd2=28;
+	kp3=2.9;	kd3=28;
+	kp4=2.5;	kd4=28;
+	
+	speed_kp=5.4;
+	speed_ki=1;
+	speed_kd=2;
+	speed1=64;
+	speed2=56;
+	speed3=50;
+	speed4=44;
+	speed5=40;
 	for (;;) 
 	{
-		kp1=8.3;	kd1=38;  
-		kp2=4.1;	kd2=34;
-		kp3=3;		kd3=32;
-		kp4=2.4;	kd4=30;
-		
-		speed_kp=1.6;
-		speed_ki=0.08;
-		speed_kd=0.5;
-		speed1=320;
-		speed2=290;
-		speed3=270;
-		speed4=250;
-		speed5=235;
 		Key_Detect_Compensator();
 		if(Flag==1)
 		{

@@ -22,18 +22,18 @@ float fre_diff,dis,LEFT_old,LEFT_new=0,RIGHT_old,RIGHT_new=0,MIDDLE_old,MIDDLE_n
 float LEFT_Temp,RIGHT_Temp,MIDDLE_Temp,Lsum,Rsum,Msum;
 float sensor[3][10]={0},avr[10]={0.005,0.01,0.01,0.0125,0.0125,0.025,0.025,0.05,0.15,0.7};
 unsigned int left,right,middle,flag=0,zd_flag=0,slow,pause=0,overflag; //车子在赛道的位置标志
-unsigned int count1,count2,currentspeed,speed_target,Ramp_Time_Delay=10; 
+unsigned int count1,count2,currentspeed,speed_target,Ramp_Time_Delay=0; 
 unsigned int presteer,currentsteer,dsteer,Angle;
 unsigned char Left_Compensator=22, Right_Compensator=23;
 float Middle_Compensator=15;
 float iError,dError;
 unsigned int Uphill=0,Downhill=0,Up_Flag=0,Down_Flag=0,Straight,Ramp_Flag,Ramp_Time=0;
 unsigned int 
-			 speed1=390,	
-			 speed2=300,
-			 speed3=270,
-			 speed4=240,
-			 speed5=215; //100 105 110
+			 speed1=78,	
+			 speed2=60,
+			 speed3=54,
+			 speed4=46,
+			 speed5=43; //100 105 110
 
 #define  D 38//30还可以 //40
 float	kp1=8.3,kd1=D,  
@@ -43,16 +43,16 @@ float	kp1=8.3,kd1=D,
 float kp,ki,kd;
 int RIGHT,LEFT,MIDDLE,temp_fre[2];
 unsigned char Outdata[8];
-float sumerror,lasterror,Msetpoint=0,temp_middle=0,sensor_compensator=0,middleflag=0,dleft=0,dmiddle=0,dright=0,start_middle=2125,start_left=2978,start_right=2525;
+float sumerror,lasterror,Msetpoint=0,temp_middle=0,sensor_compensator=0,middleflag=0,dleft=0,dmiddle=0,dright=0,start_middle=2125,start_left=2981,start_right=2529;
 int Set_speed,temp_speed,pwm;
 int speed_iError,speed_lastError,speed_prevError,Error[3];
 float
 	 /* speed_kp=1.18,
 	  speed_ki=0.4,
 	  speed_kd=0.38;*/
-	  speed_kp=0.9,
-	  speed_ki=0.31,
-	  speed_kd=0.25;
+	  speed_kp=5.4,
+	  speed_ki=1,
+	  speed_kd=2;
 /****************************************************************************************************************
 * 函数名称：frequency_measure()	
 * 函数功能：获取电感频率
@@ -334,9 +334,9 @@ void SpeedSet(void)
 		speed_target=0;
 		return;
 	}
-	if(Up_Flag==1&&Ramp_Time_Delay>0)
+	if(Up_Flag==1||Ramp_Time_Delay>0)
 	{
-		speed_target=speed5-100;
+		speed_target=speed5-13;
 		return;
 	}
 	if(abs(iError)<10)
@@ -394,8 +394,8 @@ void SpeedSet(void)
 	}
 	if(speed_target>speed1)
 		speed_target=speed1;
-	if(speed_target<speed5-100)
-		speed_target=speed5-100;
+	if(speed_target<speed5-10)
+		speed_target=speed5-10;
 
 }
 
@@ -414,9 +414,9 @@ void speed_control()
 	Error[0]=speed_iError;
 	
 	
-	if(speed_iError>100)
+	if(speed_iError>15)
 		temp_speed=180;
-	else if(speed_iError<-70)
+	else if(speed_iError<-10)
 		temp_speed=-190;
 	else
 		temp_speed+=speed_kp*(Error[0]-Error[1])+speed_ki*Error[0]+speed_kd*(Error[0]-Error[1]-(Error[1]-Error[2]));
@@ -567,9 +567,9 @@ void Get_speed()  //定时2mse采速度
 *****************************************************************************************************************/
 void Set_Middlepoint()
 {
-	start_middle=MIDDLE-6;
-	start_left=LEFT-7;
-	start_right=RIGHT-7;
+	start_middle=MIDDLE-2;
+	start_left=LEFT-2;
+	start_right=RIGHT-3;
 	sensor_compensator=RIGHT-LEFT;
 //	Msetpoint=temp_middle;
 //	Dis_Num(64,6,(WORD)Msetpoint,5);
@@ -725,6 +725,7 @@ void Ramp_Detect()
 			{
 				Hill_count=0;
 				Up_Flag=1;
+				Ramp_Time_Delay=30;
 			}
 		}
 		if(Up_Flag==1	&&	Down_Flag==0	&&	RIGHT-start_right+dleft+MIDDLE-start_middle<45)

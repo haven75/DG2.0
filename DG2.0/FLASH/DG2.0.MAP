@@ -98,10 +98,6 @@ Link map of __startup
          8] LEFT (object,global) found in functions_c.obj 
          8] MIDDLE (object,global) found in functions_c.obj 
          8] RIGHT (object,global) found in functions_c.obj 
-        7] Get_speed (func,global) found in functions_c.obj 
-         8] count1 (object,global) found in functions_c.obj 
-         8] count2 (object,global) found in functions_c.obj 
-         8] currentspeed (object,global) found in functions_c.obj 
         7] Ramp_Detect (func,global) found in functions_c.obj 
          8] Up_Flag (object,global) found in functions_c.obj 
          8] start_middle (object,global) found in functions_c.obj 
@@ -114,6 +110,10 @@ Link map of __startup
          8] Uphill (object,global) found in functions_c.obj 
          8] Ramp_Flag (object,global) found in functions_c.obj 
         7] count (object,global) found in functions_c.obj 
+        7] Get_speed (func,global) found in functions_c.obj 
+         8] count1 (object,global) found in functions_c.obj 
+         8] count2 (object,global) found in functions_c.obj 
+         8] currentspeed (object,global) found in functions_c.obj 
         7] SpeedSet (func,global) found in functions_c.obj 
          8] StopFlag (object,global) found in functions_c.obj 
          8] speed_target (object,global) found in functions_c.obj 
@@ -370,67 +370,67 @@ Link map of __startup
   UNUSED   000060 ........ ........    Draw_LibLogo oleddriver_c.obj 
   00000634 000264 00003634 00000d74  2 Dis_Num 	oleddriver_c.obj 
   00000898 000000 00003898 00000fd8  1 .text.383 	oleddriver_c.obj 
-  00000898 000562 00003898 00000fd8  1 .text 	main_c.obj 
+  00000898 000574 00003898 00000fd8  1 .text 	main_c.obj 
   00000898 00009e 00003898 00000fd8  2 main 	main_c.obj 
-  00000936 000118 00003936 00001076  2 Pit0ISR 	main_c.obj 
-  00000a4e 0000a2 00003a4e 0000118e  2 FastSpeedMode 	main_c.obj 
-  00000af0 0000a2 00003af0 00001230  2 MiddleSpeedMode 	main_c.obj 
-  00000b92 000144 00003b92 000012d2  2 SlowSpeedMode 	main_c.obj 
-  00000cd6 000124 00003cd6 00001416  2 OpenLoopMode 	main_c.obj 
-  00000dfa 000000 00003dfa 0000153a  1 .text.161 	main_c.obj 
-  00000dfa 00076a 00003dfa 0000153a  1 .text 	init_c.obj 
-  00000dfa 00003c 00003dfa 0000153a  2 initALL 	init_c.obj 
-  00000e36 0000a4 00003e36 00001576  2 initModesAndClock 	init_c.obj 
-  00000eda 000032 00003eda 0000161a  2 disableWatchdog 	init_c.obj 
-  00000f0c 0001f6 00003f0c 0000164c  2 initEMIOS_0MotorAndSteer 	init_c.obj 
-  00001102 000030 00004102 00001842  2 SET_motor 	init_c.obj 
-  00001132 00000a 00004132 00001872  2 SET_steer 	init_c.obj 
-  0000113c 000018 0000413c 0000187c  2 enableIrq 	init_c.obj 
-  00001154 000060 00004154 00001894  2 initPIT 	init_c.obj 
-  000011b4 000212 000041b4 000018f4  2 initEMIOS_0ModulusCounter 	init_c.obj 
-  000013c6 000046 000043c6 00001b06  2 initADC 	init_c.obj 
-  0000140c 00007c 0000440c 00001b4c  2 initLINFlex_0_UART 	init_c.obj 
-  00001488 00002e 00004488 00001bc8  2 LINFlex_TX 	init_c.obj 
+  00000936 000116 00003936 00001076  2 Pit0ISR 	main_c.obj 
+  00000a4c 0000b6 00003a4c 0000118c  2 FastSpeedMode 	main_c.obj 
+  00000b02 0000b6 00003b02 00001242  2 MiddleSpeedMode 	main_c.obj 
+  00000bb8 000130 00003bb8 000012f8  2 SlowSpeedMode 	main_c.obj 
+  00000ce8 000124 00003ce8 00001428  2 OpenLoopMode 	main_c.obj 
+  00000e0c 000000 00003e0c 0000154c  1 .text.161 	main_c.obj 
+  00000e0c 00076a 00003e0c 0000154c  1 .text 	init_c.obj 
+  00000e0c 00003c 00003e0c 0000154c  2 initALL 	init_c.obj 
+  00000e48 0000a4 00003e48 00001588  2 initModesAndClock 	init_c.obj 
+  00000eec 000032 00003eec 0000162c  2 disableWatchdog 	init_c.obj 
+  00000f1e 0001f6 00003f1e 0000165e  2 initEMIOS_0MotorAndSteer 	init_c.obj 
+  00001114 000030 00004114 00001854  2 SET_motor 	init_c.obj 
+  00001144 00000a 00004144 00001884  2 SET_steer 	init_c.obj 
+  0000114e 000018 0000414e 0000188e  2 enableIrq 	init_c.obj 
+  00001166 000060 00004166 000018a6  2 initPIT 	init_c.obj 
+  000011c6 000212 000041c6 00001906  2 initEMIOS_0ModulusCounter 	init_c.obj 
+  000013d8 000046 000043d8 00001b18  2 initADC 	init_c.obj 
+  0000141e 00007c 0000441e 00001b5e  2 initLINFlex_0_UART 	init_c.obj 
+  0000149a 00002e 0000449a 00001bda  2 LINFlex_TX 	init_c.obj 
   UNUSED   000024 ........ ........    LINFlex_RX_Interrupt init_c.obj 
-  000014b6 00003e 000044b6 00001bf6  2 initOLED 	init_c.obj 
-  000014f4 000070 000044f4 00001c34  2 initKeys_Switchs 	init_c.obj 
-  00001564 000000 00004564 00001ca4  1 .text.126 	init_c.obj 
-  00001564 00136c 00004564 00001ca4  1 .text 	functions_c.obj 
-  00001564 000296 00004564 00001ca4  2 frequency_measure 	functions_c.obj 
-  000017fa 00000a 000047fa 00001f3a  2 abs 	functions_c.obj 
-  00001804 0004fc 00004804 00001f44  2 LocPIDCal 	functions_c.obj 
+  000014c8 00003e 000044c8 00001c08  2 initOLED 	init_c.obj 
+  00001506 000070 00004506 00001c46  2 initKeys_Switchs 	init_c.obj 
+  00001576 000000 00004576 00001cb6  1 .text.126 	init_c.obj 
+  00001576 001370 00004576 00001cb6  1 .text 	functions_c.obj 
+  00001576 000296 00004576 00001cb6  2 frequency_measure 	functions_c.obj 
+  0000180c 00000a 0000480c 00001f4c  2 abs 	functions_c.obj 
+  00001816 0004fc 00004816 00001f56  2 LocPIDCal 	functions_c.obj 
   UNUSED   00002c ........ ........    ADC_GetValueChannel functions_c.obj 
   UNUSED   00005e ........ ........    Get_Angle functions_c.obj 
-  00001d00 0001a4 00004d00 00002440  2 SpeedSet 	functions_c.obj 
-  00001ea4 00015e 00004ea4 000025e4  2 speed_control 	functions_c.obj 
-  00002002 000284 00005002 00002742  2 sensor_display 	functions_c.obj 
-  00002286 000054 00005286 000029c6  2 Get_speed 	functions_c.obj 
-  000022da 00004c 000052da 00002a1a  2 Set_Middlepoint 	functions_c.obj 
-  00002326 000068 00005326 00002a66  2 SendHex 	functions_c.obj 
-  0000238e 0000d6 0000538e 00002ace  2 Senddata 	functions_c.obj 
-  00002464 00023c 00005464 00002ba4  2 Key_Detect_Compensator 	functions_c.obj 
-  000026a0 000020 000056a0 00002de0  2 delay 	functions_c.obj 
-  000026c0 0001ae 000056c0 00002e00  2 Ramp_Detect 	functions_c.obj 
-  0000286e 000062 0000586e 00002fae  2 StopLineDetect 	functions_c.obj 
-  000028d0 000000 000058d0 00003010  1 .text.423 	functions_c.obj 
-  000028d0 00004e 000058d0 00003010  1 .text 	IntcInterrupts_c.obj 
-  000028d0 00002c 000058d0 00003010  2 INTC_InstallINTCInterruptHandler 	IntcInterrupts_c.obj 
-  000028fc 000022 000058fc 0000303c  2 INTC_InitINTCInterrupts 	IntcInterrupts_c.obj 
-  0000291e 00000e 0000591e 0000305e  1 .text 	Exceptions_c.obj 
-  0000291e 00000e 0000591e 0000305e  2 EXCEP_InitExceptionHandlers 	Exceptions_c.obj 
-  0000292c 000040 0000592c 0000306c  1 .text 	libc_E200z0_VLE_Soft.a D:\w\EPPC\workspace_codegen\ewl\EWL_C\EWL_C.PA_CmdLineData\libc_E200z0_VLE_Soft\obj\abort_exit.o
+  00001d12 0001a4 00004d12 00002452  2 SpeedSet 	functions_c.obj 
+  00001eb6 00015c 00004eb6 000025f6  2 speed_control 	functions_c.obj 
+  00002012 000284 00005012 00002752  2 sensor_display 	functions_c.obj 
+  00002296 000054 00005296 000029d6  2 Get_speed 	functions_c.obj 
+  000022ea 00004c 000052ea 00002a2a  2 Set_Middlepoint 	functions_c.obj 
+  00002336 000068 00005336 00002a76  2 SendHex 	functions_c.obj 
+  0000239e 0000d6 0000539e 00002ade  2 Senddata 	functions_c.obj 
+  00002474 00023c 00005474 00002bb4  2 Key_Detect_Compensator 	functions_c.obj 
+  000026b0 000020 000056b0 00002df0  2 delay 	functions_c.obj 
+  000026d0 0001b4 000056d0 00002e10  2 Ramp_Detect 	functions_c.obj 
+  00002884 000062 00005884 00002fc4  2 StopLineDetect 	functions_c.obj 
+  000028e6 000000 000058e6 00003026  1 .text.423 	functions_c.obj 
+  000028e6 00004e 000058e6 00003026  1 .text 	IntcInterrupts_c.obj 
+  000028e6 00002c 000058e6 00003026  2 INTC_InstallINTCInterruptHandler 	IntcInterrupts_c.obj 
+  00002912 000022 00005912 00003052  2 INTC_InitINTCInterrupts 	IntcInterrupts_c.obj 
+  00002934 00000e 00005934 00003074  1 .text 	Exceptions_c.obj 
+  00002934 00000e 00005934 00003074  2 EXCEP_InitExceptionHandlers 	Exceptions_c.obj 
+  00002942 000040 00005942 00003082  1 .text 	libc_E200z0_VLE_Soft.a D:\w\EPPC\workspace_codegen\ewl\EWL_C\EWL_C.PA_CmdLineData\libc_E200z0_VLE_Soft\obj\abort_exit.o
   UNUSED   00002c ........ ........    abort libc_E200z0_VLE_Soft.a D:\w\EPPC\workspace_codegen\ewl\EWL_C\EWL_C.PA_CmdLineData\libc_E200z0_VLE_Soft\obj\abort_exit.o
   UNUSED   000004 ........ ........    atexit libc_E200z0_VLE_Soft.a D:\w\EPPC\workspace_codegen\ewl\EWL_C\EWL_C.PA_CmdLineData\libc_E200z0_VLE_Soft\obj\abort_exit.o
-  0000292c 000040 0000592c 0000306c  2 exit 	libc_E200z0_VLE_Soft.a D:\w\EPPC\workspace_codegen\ewl\EWL_C\EWL_C.PA_CmdLineData\libc_E200z0_VLE_Soft\obj\abort_exit.o
+  00002942 000040 00005942 00003082  2 exit 	libc_E200z0_VLE_Soft.a D:\w\EPPC\workspace_codegen\ewl\EWL_C\EWL_C.PA_CmdLineData\libc_E200z0_VLE_Soft\obj\abort_exit.o
   UNUSED   00002a ........ ........    __atexit libc_E200z0_VLE_Soft.a D:\w\EPPC\workspace_codegen\ewl\EWL_C\EWL_C.PA_CmdLineData\libc_E200z0_VLE_Soft\obj\abort_exit.o
   UNUSED   000056 ........ ........    __exit libc_E200z0_VLE_Soft.a D:\w\EPPC\workspace_codegen\ewl\EWL_C\EWL_C.PA_CmdLineData\libc_E200z0_VLE_Soft\obj\abort_exit.o
-  0000296c 000000 0000596c 000030ac  1 .text.86 	libc_E200z0_VLE_Soft.a D:\w\EPPC\workspace_codegen\ewl\EWL_C\EWL_C.PA_CmdLineData\libc_E200z0_VLE_Soft\obj\abort_exit.o
-  0000296c 000032 0000596c 000030ac  1 .text 	librt_E200z0_VLE_Soft.a D:\w\EPPC\workspace_codegen\ewl\EWL_Runtime\Runtime_PA_CmdLineData\librt_E200z0_VLE_Soft\obj\global_destructor_chain.o
+  00002982 000000 00005982 000030c2  1 .text.86 	libc_E200z0_VLE_Soft.a D:\w\EPPC\workspace_codegen\ewl\EWL_C\EWL_C.PA_CmdLineData\libc_E200z0_VLE_Soft\obj\abort_exit.o
+  00002982 000032 00005982 000030c2  1 .text 	librt_E200z0_VLE_Soft.a D:\w\EPPC\workspace_codegen\ewl\EWL_Runtime\Runtime_PA_CmdLineData\librt_E200z0_VLE_Soft\obj\global_destructor_chain.o
   UNUSED   000010 ........ ........    __register_global_object librt_E200z0_VLE_Soft.a D:\w\EPPC\workspace_codegen\ewl\EWL_Runtime\Runtime_PA_CmdLineData\librt_E200z0_VLE_Soft\obj\global_destructor_chain.o
-  0000296c 000032 0000596c 000030ac  2 __destroy_global_chain 	librt_E200z0_VLE_Soft.a D:\w\EPPC\workspace_codegen\ewl\EWL_Runtime\Runtime_PA_CmdLineData\librt_E200z0_VLE_Soft\obj\global_destructor_chain.o
+  00002982 000032 00005982 000030c2  2 __destroy_global_chain 	librt_E200z0_VLE_Soft.a D:\w\EPPC\workspace_codegen\ewl\EWL_Runtime\Runtime_PA_CmdLineData\librt_E200z0_VLE_Soft\obj\global_destructor_chain.o
   UNUSED   00003a ........ ........    __register_atexit librt_E200z0_VLE_Soft.a D:\w\EPPC\workspace_codegen\ewl\EWL_Runtime\Runtime_PA_CmdLineData\librt_E200z0_VLE_Soft\obj\global_destructor_chain.o
-  0000299e 000000 0000599e 000030de  1 .text.104 	librt_E200z0_VLE_Soft.a D:\w\EPPC\workspace_codegen\ewl\EWL_Runtime\Runtime_PA_CmdLineData\librt_E200z0_VLE_Soft\obj\global_destructor_chain.o
-  0000299e 000008 0000599e 000030de  1 .text 	librt_E200z0_VLE_Soft.a D:\w\EPPC\workspace_codegen\ewl\EWL_Runtime\Runtime_PA_CmdLineData\librt_E200z0_VLE_Soft\obj\runtime.o
+  000029b4 000000 000059b4 000030f4  1 .text.104 	librt_E200z0_VLE_Soft.a D:\w\EPPC\workspace_codegen\ewl\EWL_Runtime\Runtime_PA_CmdLineData\librt_E200z0_VLE_Soft\obj\global_destructor_chain.o
+  000029b4 000008 000059b4 000030f4  1 .text 	librt_E200z0_VLE_Soft.a D:\w\EPPC\workspace_codegen\ewl\EWL_Runtime\Runtime_PA_CmdLineData\librt_E200z0_VLE_Soft\obj\runtime.o
   UNUSED   00004a ........ ........    __save_gpr librt_E200z0_VLE_Soft.a D:\w\EPPC\workspace_codegen\ewl\EWL_Runtime\Runtime_PA_CmdLineData\librt_E200z0_VLE_Soft\obj\runtime.o
   UNUSED   000000 ........ ........    _savegpr_14 librt_E200z0_VLE_Soft.a D:\w\EPPC\workspace_codegen\ewl\EWL_Runtime\Runtime_PA_CmdLineData\librt_E200z0_VLE_Soft\obj\runtime.o
   UNUSED   000000 ........ ........    _save32gpr_14 librt_E200z0_VLE_Soft.a D:\w\EPPC\workspace_codegen\ewl\EWL_Runtime\Runtime_PA_CmdLineData\librt_E200z0_VLE_Soft\obj\runtime.o
@@ -505,7 +505,7 @@ Link map of __startup
   UNUSED   000000 ........ ........    _rest32gpr_30 librt_E200z0_VLE_Soft.a D:\w\EPPC\workspace_codegen\ewl\EWL_Runtime\Runtime_PA_CmdLineData\librt_E200z0_VLE_Soft\obj\runtime.o
   UNUSED   000000 ........ ........    _restgpr_31 librt_E200z0_VLE_Soft.a D:\w\EPPC\workspace_codegen\ewl\EWL_Runtime\Runtime_PA_CmdLineData\librt_E200z0_VLE_Soft\obj\runtime.o
   UNUSED   000000 ........ ........    _rest32gpr_31 librt_E200z0_VLE_Soft.a D:\w\EPPC\workspace_codegen\ewl\EWL_Runtime\Runtime_PA_CmdLineData\librt_E200z0_VLE_Soft\obj\runtime.o
-  0000299e 000008 0000599e 000030de  2 __restore_frame_and_exit 	librt_E200z0_VLE_Soft.a D:\w\EPPC\workspace_codegen\ewl\EWL_Runtime\Runtime_PA_CmdLineData\librt_E200z0_VLE_Soft\obj\runtime.o
+  000029b4 000008 000059b4 000030f4  2 __restore_frame_and_exit 	librt_E200z0_VLE_Soft.a D:\w\EPPC\workspace_codegen\ewl\EWL_Runtime\Runtime_PA_CmdLineData\librt_E200z0_VLE_Soft\obj\runtime.o
   UNUSED   000000 ........ ........    __finish_restore_frame_and_exit2 librt_E200z0_VLE_Soft.a D:\w\EPPC\workspace_codegen\ewl\EWL_Runtime\Runtime_PA_CmdLineData\librt_E200z0_VLE_Soft\obj\runtime.o
   UNUSED   00000a ........ ........    __restore_gpr_31_exit librt_E200z0_VLE_Soft.a D:\w\EPPC\workspace_codegen\ewl\EWL_Runtime\Runtime_PA_CmdLineData\librt_E200z0_VLE_Soft\obj\runtime.o
   UNUSED   000000 ........ ........    __finish_restore_frame_and_exit librt_E200z0_VLE_Soft.a D:\w\EPPC\workspace_codegen\ewl\EWL_Runtime\Runtime_PA_CmdLineData\librt_E200z0_VLE_Soft\obj\runtime.o
@@ -553,22 +553,22 @@ Link map of __startup
   UNUSED   00001a ........ ........    __shl2i librt_E200z0_VLE_Soft.a D:\w\EPPC\workspace_codegen\ewl\EWL_Runtime\Runtime_PA_CmdLineData\librt_E200z0_VLE_Soft\obj\runtime.o
   UNUSED   00001a ........ ........    __shr2u librt_E200z0_VLE_Soft.a D:\w\EPPC\workspace_codegen\ewl\EWL_Runtime\Runtime_PA_CmdLineData\librt_E200z0_VLE_Soft\obj\runtime.o
   UNUSED   00001c ........ ........    __shr2i librt_E200z0_VLE_Soft.a D:\w\EPPC\workspace_codegen\ewl\EWL_Runtime\Runtime_PA_CmdLineData\librt_E200z0_VLE_Soft\obj\runtime.o
-  000029a6 000000 000059a6 000030e6  1 .text.205 	librt_E200z0_VLE_Soft.a D:\w\EPPC\workspace_codegen\ewl\EWL_Runtime\Runtime_PA_CmdLineData\librt_E200z0_VLE_Soft\obj\runtime.o
-  000029a6 00000a 000059b0 000030f0 16 *fill*
-  000029b0 000d26 000059b0 000030f0  1 .text 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  000029bc 000000 000059bc 000030fc  1 .text.205 	librt_E200z0_VLE_Soft.a D:\w\EPPC\workspace_codegen\ewl\EWL_Runtime\Runtime_PA_CmdLineData\librt_E200z0_VLE_Soft\obj\runtime.o
+  000029bc 000004 000059c0 00003100 16 *fill*
+  000029c0 000d26 000059c0 00003100  1 .text 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
   UNUSED   000018 ........ ........    _fp_round librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
   UNUSED   00000a ........ ........    _fp_get_fpscr librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
   UNUSED   00000a ........ ........    _fp_set_fpscr librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  000029b0 000006 000059b0 000030f0 16 _f_utof 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  000029c0 000028 000059c0 00003100 16 _f_itof 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  000029ca 000000 000059ca 0000310a    f_itof_common_with_proloque (entry of _f_itof) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  000029c0 000006 000059c0 00003100 16 _f_utof 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  000029d0 000028 000059d0 00003110 16 _f_itof 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  000029da 000000 000059da 0000311a    f_itof_common_with_proloque (entry of _f_itof) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
   UNUSED   000000 ........ ........    f_itof_common librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
   UNUSED   000000 ........ ........    f_itof_go_coerce librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
   UNUSED   000006 ........ ........    _f_ulltof librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
   UNUSED   00003c ........ ........    _f_lltof librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
   UNUSED   000000 ........ ........    f_lltof_common librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  000029f0 000044 000059f0 00003130 16 _f_qtof 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  000029f4 000000 000059f4 00003134    _d_dtof (entry of _f_qtof) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  00002a00 000044 00005a00 00003140 16 _f_qtof 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  00002a04 000000 00005a04 00003144    _d_dtof (entry of _f_qtof) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
   UNUSED   000006 ........ ........    _d_utod librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
   UNUSED   000012 ........ ........    _d_itod librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
   UNUSED   000000 ........ ........    d_itod_common librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
@@ -577,33 +577,33 @@ Link map of __startup
   UNUSED   000000 ........ ........    d_Xtod_common librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
   UNUSED   000000 ........ ........    d_lltod_common librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
   UNUSED   000000 ........ ........    d_lltod_go_coerce librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  00002a40 000046 00005a40 00003180 16 _f_ftod 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  00002a50 000046 00005a50 00003190 16 _f_ftod 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
   UNUSED   000000 ........ ........    _f_ftoq librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
   UNUSED   000008 ........ ........    _f_ftoll librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
   UNUSED   000006 ........ ........    _f_ftoull librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  00002a90 000006 00005a90 000031d0 16 _f_ftou 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  00002aa0 000092 00005aa0 000031e0 16 _f_ftoi 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  00002aa2 000000 00005aa2 000031e2    f_toshortX_common (entry of _f_ftoi) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  00002abc 000000 00005abc 000031fc    Xtoshort_common (entry of _f_ftoi) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  00002aa0 000006 00005aa0 000031e0 16 _f_ftou 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  00002ab0 000092 00005ab0 000031f0 16 _f_ftoi 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  00002ab2 000000 00005ab2 000031f2    f_toshortX_common (entry of _f_ftoi) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  00002acc 000000 00005acc 0000320c    Xtoshort_common (entry of _f_ftoi) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
   UNUSED   000008 ........ ........    _d_dtoll librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
   UNUSED   000006 ........ ........    _d_dtoull librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
   UNUSED   000006 ........ ........    _d_dtou librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  00002b40 0000c2 00005b40 00003280 16 _d_dtoi 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  00002b50 0000c2 00005b50 00003290 16 _d_dtoi 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
   UNUSED   000000 ........ ........    d_toshortX_common librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  00002b56 000000 00005b56 00003296    Xtolong_common (entry of _d_dtoi) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  00002b66 000000 00005b66 000032a6    Xtolong_common (entry of _d_dtoi) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
   UNUSED   000006 ........ ........    _d_dtoq librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
   UNUSED   000006 ........ ........    _d_qtod librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
   UNUSED   000006 ........ ........    _f_cmp librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
   UNUSED   000006 ........ ........    _f_cmpe librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
   UNUSED   000006 ........ ........    _f_feq librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
   UNUSED   000006 ........ ........    _f_fne librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  00002c10 000006 00005c10 00003350 16 _f_flt 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  00002c20 000006 00005c20 00003360 16 _f_fle 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  00002c30 000006 00005c30 00003370 16 _f_fgt 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  00002c40 000006 00005c40 00003380 16 _f_fge 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  00002c20 000006 00005c20 00003360 16 _f_flt 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  00002c30 000006 00005c30 00003370 16 _f_fle 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  00002c40 000006 00005c40 00003380 16 _f_fgt 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  00002c50 000006 00005c50 00003390 16 _f_fge 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
   UNUSED   000006 ........ ........    _f_fun librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  00002c50 00003e 00005c50 00003390 16 _f_for 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  00002c52 000000 00005c52 00003392    f_compare (entry of _f_for) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  00002c60 00003e 00005c60 000033a0 16 _f_for 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  00002c62 000000 00005c62 000033a2    f_compare (entry of _f_for) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
   UNUSED   000006 ........ ........    _d_cmp librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
   UNUSED   000006 ........ ........    _d_cmpe librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
   UNUSED   000006 ........ ........    _d_feq librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
@@ -613,69 +613,69 @@ Link map of __startup
   UNUSED   000006 ........ ........    _d_fgt librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
   UNUSED   000006 ........ ........    _d_fge librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
   UNUSED   000006 ........ ........    _d_fun librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  00002c90 000114 00005c90 000033d0 16 _d_for 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  00002ca0 000114 00005ca0 000033e0 16 _d_for 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
   UNUSED   000000 ........ ........    d_compare librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  00002ce8 000000 00005ce8 00003428    compare_dispatch (entry of _d_for) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  00002d22 000000 00005d22 00003462    f_compare_un (entry of _d_for) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  00002cf8 000000 00005cf8 00003438    compare_dispatch (entry of _d_for) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  00002d32 000000 00005d32 00003472    f_compare_un (entry of _d_for) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
   UNUSED   000006 ........ ........    _f_neg librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
   UNUSED   000000 ........ ........    _d_neg librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  00002db0 000156 00005db0 000034f0 16 _f_mul 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  00002de2 000000 00005de2 00003522    f_coerce_result (entry of _f_mul) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  00002dea 000000 00005dea 0000352a    f_coerce_result_precalculated_data (entry of _f_mul) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  00002e92 000000 00005e92 000035d2    f_result_is_INF (entry of _f_mul) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  00002ee0 000000 00005ee0 00003620    f_result_is_zero (entry of _f_mul) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  00002eea 000000 00005eea 0000362a    f_both_NaNs (entry of _f_mul) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  00002eee 000000 00005eee 0000362e    f_x_is_NaN (entry of _f_mul) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  00002ef2 000000 00005ef2 00003632    f_result_is_Invalid (entry of _f_mul) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  00002efc 000000 00005efc 0000363c    f_y_is_NaN (entry of _f_mul) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  00002f02 000000 00005f02 00003642    f_result_is_x (entry of _f_mul) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  00002f10 00006a 00005f10 00003650 16 _f_div 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  00002f80 000008 00005f80 000036c0 16 _f_sub 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  00002f90 000116 00005f90 000036d0 16 _f_add 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  00002f92 000000 00005f92 000036d2    f_add_common (entry of _f_add) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  000030b0 000008 000060b0 000037f0 16 _d_sub 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  000030c0 00018a 000060c0 00003800 16 _d_add 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  000030c2 000000 000060c2 00003802    d_add_common (entry of _d_add) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  00003250 0001ee 00006250 00003990 16 _d_mul 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  000032b8 000000 000062b8 000039f8    d_coerce_result_prepare (entry of _d_mul) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  000032bc 000000 000062bc 000039fc    d_coerce_result (entry of _d_mul) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  000032c0 000000 000062c0 00003a00    d_coerce_result_precalculated_data (entry of _d_mul) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  00003386 000000 00006386 00003ac6    d_double_result_and_exit (entry of _d_mul) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  00003392 000000 00006392 00003ad2    d_result_is_INF (entry of _d_mul) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  000033e4 000000 000063e4 00003b24    d_result_is_zero (entry of _d_mul) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  000033f0 000000 000063f0 00003b30    d_both_NaNs (entry of _d_mul) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  000033f6 000000 000063f6 00003b36    d_x_is_NaN (entry of _d_mul) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  000033fc 000000 000063fc 00003b3c    d_result_is_Invalid (entry of _d_mul) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  00003408 000000 00006408 00003b48    d_y_is_NaN (entry of _d_mul) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  00003424 000000 00006424 00003b64    d_result_is_x (entry of _d_mul) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  00003426 000000 00006426 00003b66    d_result_is_number_x (entry of _d_mul) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  00003440 0000a2 00006440 00003b80 16 divu_l_r3_r4_r5 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  00002dc0 000156 00005dc0 00003500 16 _f_mul 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  00002df2 000000 00005df2 00003532    f_coerce_result (entry of _f_mul) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  00002dfa 000000 00005dfa 0000353a    f_coerce_result_precalculated_data (entry of _f_mul) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  00002ea2 000000 00005ea2 000035e2    f_result_is_INF (entry of _f_mul) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  00002ef0 000000 00005ef0 00003630    f_result_is_zero (entry of _f_mul) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  00002efa 000000 00005efa 0000363a    f_both_NaNs (entry of _f_mul) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  00002efe 000000 00005efe 0000363e    f_x_is_NaN (entry of _f_mul) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  00002f02 000000 00005f02 00003642    f_result_is_Invalid (entry of _f_mul) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  00002f0c 000000 00005f0c 0000364c    f_y_is_NaN (entry of _f_mul) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  00002f12 000000 00005f12 00003652    f_result_is_x (entry of _f_mul) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  00002f20 00006a 00005f20 00003660 16 _f_div 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  00002f90 000008 00005f90 000036d0 16 _f_sub 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  00002fa0 000116 00005fa0 000036e0 16 _f_add 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  00002fa2 000000 00005fa2 000036e2    f_add_common (entry of _f_add) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  000030c0 000008 000060c0 00003800 16 _d_sub 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  000030d0 00018a 000060d0 00003810 16 _d_add 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  000030d2 000000 000060d2 00003812    d_add_common (entry of _d_add) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  00003260 0001ee 00006260 000039a0 16 _d_mul 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  000032c8 000000 000062c8 00003a08    d_coerce_result_prepare (entry of _d_mul) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  000032cc 000000 000062cc 00003a0c    d_coerce_result (entry of _d_mul) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  000032d0 000000 000062d0 00003a10    d_coerce_result_precalculated_data (entry of _d_mul) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  00003396 000000 00006396 00003ad6    d_double_result_and_exit (entry of _d_mul) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  000033a2 000000 000063a2 00003ae2    d_result_is_INF (entry of _d_mul) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  000033f4 000000 000063f4 00003b34    d_result_is_zero (entry of _d_mul) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  00003400 000000 00006400 00003b40    d_both_NaNs (entry of _d_mul) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  00003406 000000 00006406 00003b46    d_x_is_NaN (entry of _d_mul) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  0000340c 000000 0000640c 00003b4c    d_result_is_Invalid (entry of _d_mul) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  00003418 000000 00006418 00003b58    d_y_is_NaN (entry of _d_mul) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  00003434 000000 00006434 00003b74    d_result_is_x (entry of _d_mul) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  00003436 000000 00006436 00003b76    d_result_is_number_x (entry of _d_mul) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  00003450 0000a2 00006450 00003b90 16 divu_l_r3_r4_r5 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
   UNUSED   00010a ........ ........    _d_div librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  000034f0 00009a 000064f0 00003c30 16 f_unpack_1 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  000034f8 000000 000064f8 00003c38    f_unpack_2 (entry of f_unpack_1) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  00003590 0000f6 00006590 00003cd0 16 d_unpack_1 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  00003598 000000 00006598 00003cd8    d_unpack_2 (entry of d_unpack_1) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  00003690 00002e 00006690 00003dd0 16 load_rounding_0x2000 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  00003694 000000 00006694 00003dd4    load_rounding_0x0200 (entry of load_rounding_0x2000) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  00003698 000000 00006698 00003dd8    load_rounding_0x1200 (entry of load_rounding_0x2000) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  0000369c 000000 0000669c 00003ddc    load_rounding_0x0a00 (entry of load_rounding_0x2000) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  000036a2 000000 000066a2 00003de2    load_rounding_cr_simple (entry of load_rounding_0x2000) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  000036a4 000000 000066a4 00003de4    load_rounding_cr (entry of load_rounding_0x2000) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  000036c0 000016 000066c0 00003e00 16 proloque 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  000036ca 000000 000066ca 00003e0a    epiloque (entry of proloque) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  00003500 00009a 00006500 00003c40 16 f_unpack_1 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  00003508 000000 00006508 00003c48    f_unpack_2 (entry of f_unpack_1) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  000035a0 0000f6 000065a0 00003ce0 16 d_unpack_1 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  000035a8 000000 000065a8 00003ce8    d_unpack_2 (entry of d_unpack_1) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  000036a0 00002e 000066a0 00003de0 16 load_rounding_0x2000 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  000036a4 000000 000066a4 00003de4    load_rounding_0x0200 (entry of load_rounding_0x2000) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  000036a8 000000 000066a8 00003de8    load_rounding_0x1200 (entry of load_rounding_0x2000) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  000036ac 000000 000066ac 00003dec    load_rounding_0x0a00 (entry of load_rounding_0x2000) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  000036b2 000000 000066b2 00003df2    load_rounding_cr_simple (entry of load_rounding_0x2000) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  000036b4 000000 000066b4 00003df4    load_rounding_cr (entry of load_rounding_0x2000) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  000036d0 000016 000066d0 00003e10 16 proloque 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  000036da 000000 000066da 00003e1a    epiloque (entry of proloque) 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
 
 
 .rodata section layout
   Starting        Virtual  File
   address  Size   address  offset
   ---------------------------------
-  00000000 00000c 000066d8 00003e18  1 .rodata 	__ppc_eabi_init_c.obj 
-  00000000 00000c 000066d8 00003e18  4 @22 	__ppc_eabi_init_c.obj 
-  0000000c 000004 000066e8 00003e28  8 *fill*
-  00000010 000518 000066e8 00003e28  1 .rodata 	oleddriver_c.obj 
-  00000010 000228 000066e8 00003e28  8 F6x8 	oleddriver_c.obj 
-  00000238 000033 00006910 00004050  4 F14x16_Idx 	oleddriver_c.obj 
-  0000026c 0002bc 00006944 00004084  4 F14x16 	oleddriver_c.obj 
+  00000000 00000c 000066e8 00003e28  1 .rodata 	__ppc_eabi_init_c.obj 
+  00000000 00000c 000066e8 00003e28  4 @22 	__ppc_eabi_init_c.obj 
+  0000000c 000004 000066f8 00003e38  8 *fill*
+  00000010 000518 000066f8 00003e38  1 .rodata 	oleddriver_c.obj 
+  00000010 000228 000066f8 00003e38  8 F6x8 	oleddriver_c.obj 
+  00000238 000033 00006920 00004060  4 F14x16_Idx 	oleddriver_c.obj 
+  0000026c 0002bc 00006954 00004094  4 F14x16 	oleddriver_c.obj 
   UNUSED   0005f0 ........ ........    F8X16 oleddriver_c.obj 
   UNUSED   0001e0 ........ ........    LIBLOGO60x58 oleddriver_c.obj 
 
@@ -729,129 +729,129 @@ extabindex section layout
   UNUSED   000004 ........ ........    se main_c.obj 
   00000000 000004 40000370 00004828  4 wait 	main_c.obj 
   00000004 000004 40000378 00004830  8 *fill*
-  00000008 000060 40000378 00004830  1 .sdata 	functions_c.obj 
+  00000008 000058 40000378 00004830  1 .sdata 	functions_c.obj 
   UNUSED   000004 ........ ........    sp functions_c.obj 
   UNUSED   000004 ........ ........    se functions_c.obj 
   00000008 000004 40000378 00004830  4 min_count 	functions_c.obj 
   0000000c 000001 4000037c 00004834  1 RunFlag 	functions_c.obj 
   UNUSED   000001 ........ ........    Stop functions_c.obj 
-  00000010 000004 40000380 00004838  4 Ramp_Time_Delay 	functions_c.obj 
-  00000014 000001 40000384 0000483c  1 Left_Compensator 	functions_c.obj 
-  00000015 000001 40000385 0000483d  1 Right_Compensator 	functions_c.obj 
-  00000018 000004 40000388 00004840  4 Middle_Compensator 	functions_c.obj 
-  0000001c 000004 4000038c 00004844  4 speed1 	functions_c.obj 
-  00000020 000004 40000390 00004848  4 speed2 	functions_c.obj 
-  00000024 000004 40000394 0000484c  4 speed3 	functions_c.obj 
-  00000028 000004 40000398 00004850  4 speed4 	functions_c.obj 
-  0000002c 000004 4000039c 00004854  4 speed5 	functions_c.obj 
-  00000030 000004 400003a0 00004858  4 kp1 	functions_c.obj 
-  00000034 000004 400003a4 0000485c  4 kd1 	functions_c.obj 
-  00000038 000004 400003a8 00004860  4 kp2 	functions_c.obj 
-  0000003c 000004 400003ac 00004864  4 kd2 	functions_c.obj 
-  00000040 000004 400003b0 00004868  4 kp3 	functions_c.obj 
-  00000044 000004 400003b4 0000486c  4 kd3 	functions_c.obj 
-  00000048 000004 400003b8 00004870  4 kp4 	functions_c.obj 
-  0000004c 000004 400003bc 00004874  4 kd4 	functions_c.obj 
-  00000050 000004 400003c0 00004878  4 start_middle 	functions_c.obj 
-  00000054 000004 400003c4 0000487c  4 start_left 	functions_c.obj 
-  00000058 000004 400003c8 00004880  4 start_right 	functions_c.obj 
-  0000005c 000004 400003cc 00004884  4 speed_kp 	functions_c.obj 
-  00000060 000004 400003d0 00004888  4 speed_ki 	functions_c.obj 
-  00000064 000004 400003d4 0000488c  4 speed_kd 	functions_c.obj 
+  0000000d 000001 4000037d 00004835  1 Left_Compensator 	functions_c.obj 
+  0000000e 000001 4000037e 00004836  1 Right_Compensator 	functions_c.obj 
+  00000010 000004 40000380 00004838  4 Middle_Compensator 	functions_c.obj 
+  00000014 000004 40000384 0000483c  4 speed1 	functions_c.obj 
+  00000018 000004 40000388 00004840  4 speed2 	functions_c.obj 
+  0000001c 000004 4000038c 00004844  4 speed3 	functions_c.obj 
+  00000020 000004 40000390 00004848  4 speed4 	functions_c.obj 
+  00000024 000004 40000394 0000484c  4 speed5 	functions_c.obj 
+  00000028 000004 40000398 00004850  4 kp1 	functions_c.obj 
+  0000002c 000004 4000039c 00004854  4 kd1 	functions_c.obj 
+  00000030 000004 400003a0 00004858  4 kp2 	functions_c.obj 
+  00000034 000004 400003a4 0000485c  4 kd2 	functions_c.obj 
+  00000038 000004 400003a8 00004860  4 kp3 	functions_c.obj 
+  0000003c 000004 400003ac 00004864  4 kd3 	functions_c.obj 
+  00000040 000004 400003b0 00004868  4 kp4 	functions_c.obj 
+  00000044 000004 400003b4 0000486c  4 kd4 	functions_c.obj 
+  00000048 000004 400003b8 00004870  4 start_middle 	functions_c.obj 
+  0000004c 000004 400003bc 00004874  4 start_left 	functions_c.obj 
+  00000050 000004 400003c0 00004878  4 start_right 	functions_c.obj 
+  00000054 000004 400003c4 0000487c  4 speed_kp 	functions_c.obj 
+  00000058 000004 400003c8 00004880  4 speed_ki 	functions_c.obj 
+  0000005c 000004 400003cc 00004884  4 speed_kd 	functions_c.obj 
 
 
 .sbss section layout
   Starting        Virtual  File
   address  Size   address  offset
   ---------------------------------
-  00000000 000014 400003d8 00004890  1 .sbss 	main_c.obj 
-  00000000 000004 400003d8 00004890  4 Flag 	main_c.obj 
-  00000004 000004 400003dc 00004894  4 INTC_Time 	main_c.obj 
-  00000008 000004 400003e0 00004898  4 steer 	main_c.obj 
-  0000000c 000004 400003e4 0000489c  4 delay_count 	main_c.obj 
-  00000010 000004 400003e8 000048a0  4 StartDelay 	main_c.obj 
-  00000014 000004 400003f0 000048a8  8 *fill*
-  00000018 000004 400003f0 000048a8  1 .sbss 	init_c.obj 
-  00000018 000004 400003f0 000048a8  4 Openloop_Speed 	init_c.obj 
-  0000001c 000004 400003f8 000048b0  8 *fill*
-  00000020 0000bc 400003f8 000048b0  1 .sbss 	functions_c.obj 
-  00000020 000004 400003f8 000048b0  4 LEFT_new 	functions_c.obj 
-  00000024 000004 400003fc 000048b4  4 RIGHT_new 	functions_c.obj 
-  00000028 000004 40000400 000048b8  4 MIDDLE_new 	functions_c.obj 
-  0000002c 000004 40000404 000048bc  4 flag 	functions_c.obj 
-  00000030 000004 40000408 000048c0  4 zd_flag 	functions_c.obj 
+  00000000 000014 400003d0 00004888  1 .sbss 	main_c.obj 
+  00000000 000004 400003d0 00004888  4 Flag 	main_c.obj 
+  00000004 000004 400003d4 0000488c  4 INTC_Time 	main_c.obj 
+  00000008 000004 400003d8 00004890  4 steer 	main_c.obj 
+  0000000c 000004 400003dc 00004894  4 delay_count 	main_c.obj 
+  00000010 000004 400003e0 00004898  4 StartDelay 	main_c.obj 
+  00000014 000004 400003e8 000048a0  8 *fill*
+  00000018 000004 400003e8 000048a0  1 .sbss 	init_c.obj 
+  00000018 000004 400003e8 000048a0  4 Openloop_Speed 	init_c.obj 
+  0000001c 000004 400003f0 000048a8  8 *fill*
+  00000020 0000bc 400003f0 000048a8  1 .sbss 	functions_c.obj 
+  00000020 000004 400003f0 000048a8  4 LEFT_new 	functions_c.obj 
+  00000024 000004 400003f4 000048ac  4 RIGHT_new 	functions_c.obj 
+  00000028 000004 400003f8 000048b0  4 MIDDLE_new 	functions_c.obj 
+  0000002c 000004 400003fc 000048b4  4 flag 	functions_c.obj 
+  00000030 000004 40000400 000048b8  4 zd_flag 	functions_c.obj 
   UNUSED   000004 ........ ........    pause functions_c.obj 
-  00000034 000004 4000040c 000048c4  4 Uphill 	functions_c.obj 
+  00000034 000004 40000404 000048bc  4 Ramp_Time_Delay 	functions_c.obj 
+  00000038 000004 40000408 000048c0  4 Uphill 	functions_c.obj 
   UNUSED   000004 ........ ........    Downhill functions_c.obj 
-  00000038 000004 40000410 000048c8  4 Up_Flag 	functions_c.obj 
-  0000003c 000004 40000414 000048cc  4 Down_Flag 	functions_c.obj 
-  00000040 000004 40000418 000048d0  4 Ramp_Time 	functions_c.obj 
+  0000003c 000004 4000040c 000048c4  4 Up_Flag 	functions_c.obj 
+  00000040 000004 40000410 000048c8  4 Down_Flag 	functions_c.obj 
+  00000044 000004 40000414 000048cc  4 Ramp_Time 	functions_c.obj 
   UNUSED   000004 ........ ........    Msetpoint functions_c.obj 
   UNUSED   000004 ........ ........    temp_middle functions_c.obj 
-  00000044 000004 4000041c 000048d4  4 sensor_compensator 	functions_c.obj 
+  00000048 000004 40000418 000048d0  4 sensor_compensator 	functions_c.obj 
   UNUSED   000004 ........ ........    middleflag functions_c.obj 
-  00000048 000004 40000420 000048d8  4 dleft 	functions_c.obj 
-  0000004c 000004 40000424 000048dc  4 dmiddle 	functions_c.obj 
-  00000050 000004 40000428 000048e0  4 dright 	functions_c.obj 
+  0000004c 000004 4000041c 000048d4  4 dleft 	functions_c.obj 
+  00000050 000004 40000420 000048d8  4 dmiddle 	functions_c.obj 
+  00000054 000004 40000424 000048dc  4 dright 	functions_c.obj 
   UNUSED   000004 ........ ........    speed_prevError functions_c.obj 
   UNUSED   000004 ........ ........    speed_lastError functions_c.obj 
-  00000054 000004 4000042c 000048e4  4 speed_iError 	functions_c.obj 
+  00000058 000004 40000428 000048e0  4 speed_iError 	functions_c.obj 
   UNUSED   000004 ........ ........    pwm functions_c.obj 
-  00000058 000004 40000430 000048e8  4 temp_speed 	functions_c.obj 
+  0000005c 000004 4000042c 000048e4  4 temp_speed 	functions_c.obj 
   UNUSED   000004 ........ ........    Set_speed functions_c.obj 
-  0000005c 000004 40000434 000048ec  4 lasterror 	functions_c.obj 
-  00000060 000004 40000438 000048f0  4 sumerror 	functions_c.obj 
-  00000068 000008 40000440 000048f8  8 Outdata 	functions_c.obj 
+  00000060 000004 40000430 000048e8  4 lasterror 	functions_c.obj 
+  00000064 000004 40000434 000048ec  4 sumerror 	functions_c.obj 
+  00000068 000008 40000438 000048f0  8 Outdata 	functions_c.obj 
   UNUSED   000008 ........ ........    temp_fre functions_c.obj 
-  00000070 000004 40000448 00004900  4 MIDDLE 	functions_c.obj 
-  00000074 000004 4000044c 00004904  4 LEFT 	functions_c.obj 
-  00000078 000004 40000450 00004908  4 RIGHT 	functions_c.obj 
-  0000007c 000004 40000454 0000490c  4 kd 	functions_c.obj 
+  00000070 000004 40000440 000048f8  4 MIDDLE 	functions_c.obj 
+  00000074 000004 40000444 000048fc  4 LEFT 	functions_c.obj 
+  00000078 000004 40000448 00004900  4 RIGHT 	functions_c.obj 
+  0000007c 000004 4000044c 00004904  4 kd 	functions_c.obj 
   UNUSED   000004 ........ ........    ki functions_c.obj 
-  00000080 000004 40000458 00004910  4 kp 	functions_c.obj 
-  00000084 000004 4000045c 00004914  4 Ramp_Flag 	functions_c.obj 
+  00000080 000004 40000450 00004908  4 kp 	functions_c.obj 
+  00000084 000004 40000454 0000490c  4 Ramp_Flag 	functions_c.obj 
   UNUSED   000004 ........ ........    Straight functions_c.obj 
-  00000088 000004 40000460 00004918  4 dError 	functions_c.obj 
-  0000008c 000004 40000464 0000491c  4 iError 	functions_c.obj 
+  00000088 000004 40000458 00004910  4 dError 	functions_c.obj 
+  0000008c 000004 4000045c 00004914  4 iError 	functions_c.obj 
   UNUSED   000004 ........ ........    Angle functions_c.obj 
   UNUSED   000004 ........ ........    dsteer functions_c.obj 
   UNUSED   000004 ........ ........    currentsteer functions_c.obj 
   UNUSED   000004 ........ ........    presteer functions_c.obj 
-  00000090 000004 40000468 00004920  4 speed_target 	functions_c.obj 
-  00000094 000004 4000046c 00004924  4 currentspeed 	functions_c.obj 
-  00000098 000004 40000470 00004928  4 count2 	functions_c.obj 
-  0000009c 000004 40000474 0000492c  4 count1 	functions_c.obj 
+  00000090 000004 40000460 00004918  4 speed_target 	functions_c.obj 
+  00000094 000004 40000464 0000491c  4 currentspeed 	functions_c.obj 
+  00000098 000004 40000468 00004920  4 count2 	functions_c.obj 
+  0000009c 000004 4000046c 00004924  4 count1 	functions_c.obj 
   UNUSED   000004 ........ ........    overflag functions_c.obj 
   UNUSED   000004 ........ ........    slow functions_c.obj 
   UNUSED   000004 ........ ........    middle functions_c.obj 
   UNUSED   000004 ........ ........    right functions_c.obj 
   UNUSED   000004 ........ ........    left functions_c.obj 
-  000000a0 000004 40000478 00004930  4 Msum 	functions_c.obj 
-  000000a4 000004 4000047c 00004934  4 Rsum 	functions_c.obj 
-  000000a8 000004 40000480 00004938  4 Lsum 	functions_c.obj 
-  000000ac 000004 40000484 0000493c  4 MIDDLE_Temp 	functions_c.obj 
-  000000b0 000004 40000488 00004940  4 RIGHT_Temp 	functions_c.obj 
-  000000b4 000004 4000048c 00004944  4 LEFT_Temp 	functions_c.obj 
-  000000b8 000004 40000490 00004948  4 temp_steer_old 	functions_c.obj 
-  000000bc 000004 40000494 0000494c  4 temp_steer 	functions_c.obj 
-  000000c0 000004 40000498 00004950  4 MIDDLE_old 	functions_c.obj 
-  000000c4 000004 4000049c 00004954  4 RIGHT_old 	functions_c.obj 
-  000000c8 000004 400004a0 00004958  4 LEFT_old 	functions_c.obj 
+  000000a0 000004 40000470 00004928  4 Msum 	functions_c.obj 
+  000000a4 000004 40000474 0000492c  4 Rsum 	functions_c.obj 
+  000000a8 000004 40000478 00004930  4 Lsum 	functions_c.obj 
+  000000ac 000004 4000047c 00004934  4 MIDDLE_Temp 	functions_c.obj 
+  000000b0 000004 40000480 00004938  4 RIGHT_Temp 	functions_c.obj 
+  000000b4 000004 40000484 0000493c  4 LEFT_Temp 	functions_c.obj 
+  000000b8 000004 40000488 00004940  4 temp_steer_old 	functions_c.obj 
+  000000bc 000004 4000048c 00004944  4 temp_steer 	functions_c.obj 
+  000000c0 000004 40000490 00004948  4 MIDDLE_old 	functions_c.obj 
+  000000c4 000004 40000494 0000494c  4 RIGHT_old 	functions_c.obj 
+  000000c8 000004 40000498 00004950  4 LEFT_old 	functions_c.obj 
   UNUSED   000004 ........ ........    dis functions_c.obj 
-  000000cc 000004 400004a4 0000495c  4 fre_diff 	functions_c.obj 
-  000000d0 000001 400004a8 00004960  1 StopFlag 	functions_c.obj 
-  000000d1 000001 400004a9 00004961  1 StartFlag 	functions_c.obj 
-  000000d4 000004 400004ac 00004964  4 count 	functions_c.obj 
-  000000d8 000004 400004b0 00004968  4 Hill_count 	functions_c.obj 
+  000000cc 000004 4000049c 00004954  4 fre_diff 	functions_c.obj 
+  000000d0 000001 400004a0 00004958  1 StopFlag 	functions_c.obj 
+  000000d1 000001 400004a1 00004959  1 StartFlag 	functions_c.obj 
+  000000d4 000004 400004a4 0000495c  4 count 	functions_c.obj 
+  000000d8 000004 400004a8 00004960  4 Hill_count 	functions_c.obj 
   UNUSED   000004 ........ ........    chuwan functions_c.obj 
-  000000dc 000004 400004b8 00004970  8 *fill*
-  000000e0 000008 400004b8 00004970  1 .sbss 	libc_E200z0_VLE_Soft.a D:\w\EPPC\workspace_codegen\ewl\EWL_C\EWL_C.PA_CmdLineData\libc_E200z0_VLE_Soft\obj\abort_exit.o
+  000000dc 000004 400004b0 00004968  8 *fill*
+  000000e0 000008 400004b0 00004968  1 .sbss 	libc_E200z0_VLE_Soft.a D:\w\EPPC\workspace_codegen\ewl\EWL_C\EWL_C.PA_CmdLineData\libc_E200z0_VLE_Soft\obj\abort_exit.o
   UNUSED   000004 ........ ........    __atexit_curr_func_C libc_E200z0_VLE_Soft.a D:\w\EPPC\workspace_codegen\ewl\EWL_C\EWL_C.PA_CmdLineData\libc_E200z0_VLE_Soft\obj\abort_exit.o
-  000000e0 000004 400004b8 00004970  4 __stdio_exit 	libc_E200z0_VLE_Soft.a D:\w\EPPC\workspace_codegen\ewl\EWL_C\EWL_C.PA_CmdLineData\libc_E200z0_VLE_Soft\obj\abort_exit.o
-  000000e4 000004 400004bc 00004974  4 __console_exit 	libc_E200z0_VLE_Soft.a D:\w\EPPC\workspace_codegen\ewl\EWL_C\EWL_C.PA_CmdLineData\libc_E200z0_VLE_Soft\obj\abort_exit.o
-  000000e8 000004 400004c0 00004978  1 .sbss 	librt_E200z0_VLE_Soft.a D:\w\EPPC\workspace_codegen\ewl\EWL_Runtime\Runtime_PA_CmdLineData\librt_E200z0_VLE_Soft\obj\global_destructor_chain.o
+  000000e0 000004 400004b0 00004968  4 __stdio_exit 	libc_E200z0_VLE_Soft.a D:\w\EPPC\workspace_codegen\ewl\EWL_C\EWL_C.PA_CmdLineData\libc_E200z0_VLE_Soft\obj\abort_exit.o
+  000000e4 000004 400004b4 0000496c  4 __console_exit 	libc_E200z0_VLE_Soft.a D:\w\EPPC\workspace_codegen\ewl\EWL_C\EWL_C.PA_CmdLineData\libc_E200z0_VLE_Soft\obj\abort_exit.o
+  000000e8 000004 400004b8 00004970  1 .sbss 	librt_E200z0_VLE_Soft.a D:\w\EPPC\workspace_codegen\ewl\EWL_Runtime\Runtime_PA_CmdLineData\librt_E200z0_VLE_Soft\obj\global_destructor_chain.o
   UNUSED   000004 ........ ........    atexit_curr_func librt_E200z0_VLE_Soft.a D:\w\EPPC\workspace_codegen\ewl\EWL_Runtime\Runtime_PA_CmdLineData\librt_E200z0_VLE_Soft\obj\global_destructor_chain.o
-  000000e8 000004 400004c0 00004978  4 __global_destructor_chain 	librt_E200z0_VLE_Soft.a D:\w\EPPC\workspace_codegen\ewl\EWL_Runtime\Runtime_PA_CmdLineData\librt_E200z0_VLE_Soft\obj\global_destructor_chain.o
+  000000e8 000004 400004b8 00004970  4 __global_destructor_chain 	librt_E200z0_VLE_Soft.a D:\w\EPPC\workspace_codegen\ewl\EWL_Runtime\Runtime_PA_CmdLineData\librt_E200z0_VLE_Soft\obj\global_destructor_chain.o
 
 
 .sdata2 section layout
@@ -870,14 +870,14 @@ extabindex section layout
   Starting        Virtual  File
   address  Size   address  offset
   ---------------------------------
-  00000000 000084 400004c8 00004890  1 .bss 	functions_c.obj 
-  00000000 000078 400004c8 00004890  8 sensor 	functions_c.obj 
-  00000078 00000c 40000540 00004908  4 Error 	functions_c.obj 
+  00000000 000084 400004c0 00004888  1 .bss 	functions_c.obj 
+  00000000 000078 400004c0 00004888  8 sensor 	functions_c.obj 
+  00000078 00000c 40000538 00004900  4 Error 	functions_c.obj 
   UNUSED   000030 ........ ........    sePID functions_c.obj 
   UNUSED   000030 ........ ........    spPID functions_c.obj 
-  00000084 000004 40000550 00004918  8 *fill*
-  00000088 000004 40000550 00004918  1 .bss 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
-  00000088 000004 40000550 00004918  4 __SoftFPSCR 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  00000084 000004 40000548 00004910  8 *fill*
+  00000088 000004 40000548 00004910  1 .bss 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
+  00000088 000004 40000548 00004910  4 __SoftFPSCR 	librt_E200z0_VLE_Soft.a E:\CW_Dev\eppc_support\Do_Not_Distribute\zen_fpemu\Src\vle_ppcsfpe.o
 
 
 Memory map:
@@ -889,25 +889,25 @@ Memory map:
     .ivor_branch_table 00001000 000000f4 00000590 00001000 00001000         38
   .intc_hw_branch_table 000010f4 00000000 00000800 000010f4 000010f4          0
   .__exception_handlers 00001100 000000a4 00000690 00001100 00001100         51
-             .text_vle 00003000 000036d8 00000740 00003000 00003000         60
-               .rodata 000066d8 00000528 00003e18 000066d8 000066d8        762
-                .ctors 00006c00 00000000 00004340 00006c00 00006c00          0
-                .dtors 00006c00 00000000 00004340 00006c00 00006c00          0
-                 extab 00006c00 00000000 00004340 00006c00 00006c00          0
-            extabindex 00006c00 00000000 00004340 00006c00 00006c00          0
+             .text_vle 00003000 000036e8 00000740 00003000 00003000         60
+               .rodata 000066e8 00000528 00003e28 000066e8 000066e8        763
+                .ctors 00006c10 00000000 00004350 00006c10 00006c10          0
+                .dtors 00006c10 00000000 00004350 00006c10 00006c10          0
+                 extab 00006c10 00000000 00004350 00006c10 00006c10          0
+            extabindex 00006c10 00000000 00004350 00006c10 00006c10          0
   .__uninitialized_intc_handlertable 40000000 00000348 00004800 00007000 00007000          0
-                 .data 40000348 00000028 00004800 00007000 00007000        828
-                .sdata 40000370 00000068 00004828 00007028 00007028        830
-                 .sbss 400003d8 000000ec 00004890 00007090 00007090          0
-               .sdata2 400004c4 00000000 00004890 00007090 00007090          0
-                .sbss2 400004c4 00000000 00004890 00007090 00007090          0
-                  .bss 400004c8 0000008c 00004890 00007090 00007090          0
-      .PPC.EMB.apuinfo 00009c38 00000000 0000e4d0 00010cc8 00010cc8          0
-         .debug_abbrev          00000129 00004890
-           .debug_info          00002cf2 000049b9
-           .debug_line          00003437 000076ab
-            .debug_loc          000008ce 0000aae2
-       .debug_pubnames          00000a9a 0000b3b0
+                 .data 40000348 00000028 00004800 00007000 00007000        829
+                .sdata 40000370 00000060 00004828 00007028 00007028        831
+                 .sbss 400003d0 000000ec 00004888 00007088 00007088          0
+               .sdata2 400004bc 00000000 00004888 00007088 00007088          0
+                .sbss2 400004bc 00000000 00004888 00007088 00007088          0
+                  .bss 400004c0 0000008c 00004888 00007088 00007088          0
+      .PPC.EMB.apuinfo 00009c64 00000000 0000e4f0 00010cec 00010cec          0
+         .debug_abbrev          00000129 00004888
+           .debug_info          00002d0e 000049b1
+           .debug_line          00003447 000076bf
+            .debug_loc          000008ce 0000ab06
+       .debug_pubnames          00000a9a 0000b3d4
 
 
 Linker generated symbols:
@@ -937,22 +937,22 @@ _f___exception_handlers_rom 00001100
                   _e_text 00003000
               _f_text_vle 00003000
           _f_text_vle_rom 00003000
-              _e_text_vle 000066d8
-                _f_rodata 000066d8
-            _f_rodata_rom 000066d8
-                _e_rodata 00006c00
-                 _f_ctors 00006c00
-             _f_ctors_rom 00006c00
-                 _e_ctors 00006c00
-                 _f_dtors 00006c00
-             _f_dtors_rom 00006c00
-                 _e_dtors 00006c00
-                  _fextab 00006c00
-              _fextab_rom 00006c00
-                  _eextab 00006c00
-             _fextabindex 00006c00
-         _fextabindex_rom 00006c00
-             _eextabindex 00006c00
+              _e_text_vle 000066e8
+                _f_rodata 000066e8
+            _f_rodata_rom 000066e8
+                _e_rodata 00006c10
+                 _f_ctors 00006c10
+             _f_ctors_rom 00006c10
+                 _e_ctors 00006c10
+                 _f_dtors 00006c10
+             _f_dtors_rom 00006c10
+                 _e_dtors 00006c10
+                  _fextab 00006c10
+              _fextab_rom 00006c10
+                  _eextab 00006c10
+             _fextabindex 00006c10
+         _fextabindex_rom 00006c10
+             _eextabindex 00006c10
 _f___uninitialized_intc_handlertable 40000000
 _e___uninitialized_intc_handlertable 40000348
                   _f_data 40000348
@@ -960,16 +960,16 @@ _e___uninitialized_intc_handlertable 40000348
                   _e_data 40000370
                  _f_sdata 40000370
              _f_sdata_rom 00007028
-                 _e_sdata 400003d8
-                  _f_sbss 400003d8
-                  _e_sbss 400004c4
-                _f_sdata2 400004c4
-            _f_sdata2_rom 00007090
-                _e_sdata2 400004c4
-                 _f_sbss2 400004c4
-                 _e_sbss2 400004c4
-                   _f_bss 400004c8
-                   _e_bss 40000554
+                 _e_sdata 400003d0
+                  _f_sbss 400003d0
+                  _e_sbss 400004bc
+                _f_sdata2 400004bc
+            _f_sdata2_rom 00007088
+                _e_sdata2 400004bc
+                 _f_sbss2 400004bc
+                 _e_sbss2 400004bc
+                   _f_bss 400004c0
+                   _e_bss 4000054c
               _stack_addr 40008000
                _stack_end 40007000
                _heap_addr 40006000
@@ -977,9 +977,9 @@ _e___uninitialized_intc_handlertable 40000348
              _nbfunctions 0000005e
            SIZEOF_HEADERS 000002e0
                _SDA_BASE_ 40008370
-              _SDA2_BASE_ 400084c4
+              _SDA2_BASE_ 400084bc
            _ABS_SDA_BASE_ 40008370
-          _ABS_SDA2_BASE_ 400084c4
+          _ABS_SDA2_BASE_ 400084bc
                  _SP_INIT 40008000
              __HEAP_START 40006000
               __mem_limit 40007000
