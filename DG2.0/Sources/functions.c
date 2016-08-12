@@ -17,7 +17,7 @@
 #define Hillcont 0
 #define Frequency_Over 90
 unsigned int chuwan,Hill_count,count,min_count=0xffff;
-unsigned char StartFlag,StopFlag,RunFlag=2000,Stop=25;
+unsigned char StartFlag,StopFlag,RunFlag=2000,Stop=30;
 float fre_diff,dis,LEFT_old,LEFT_new=0,RIGHT_old,RIGHT_new=0,MIDDLE_old,MIDDLE_new=0,temp_steer,temp_steer_old;
 float LEFT_Temp,RIGHT_Temp,MIDDLE_Temp,Lsum,Rsum,Msum;
 float sensor[3][10]={0},avr[10]={0.005,0.01,0.01,0.0125,0.0125,0.025,0.025,0.05,0.15,0.7};
@@ -329,7 +329,7 @@ unsigned int Get_Angle()
 /****************************************************速度给定****************************************************************/
 void SpeedSet(void)
 {	
-	if(StopFlag)
+	if(StopFlag&&Stop==0)
 	{
 		speed_target=0;
 		return;
@@ -339,7 +339,7 @@ void SpeedSet(void)
 		speed_target=speed5-13;
 		return;
 	}
-	if(abs(iError)<10)
+	if(abs(iError)<10&&abs(dError)<4)
 	{
 		zd_flag++;
 		if(zd_flag>20)

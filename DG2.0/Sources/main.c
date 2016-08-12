@@ -41,7 +41,7 @@ void Pit0ISR()
 			else Ramp_Detect();
 			if(Ramp_Flag==1)
 				Ramp_Time++;
-			if(Ramp_Time>45)
+			if(Ramp_Time>55)
 			{
 				Up_Flag=2;
 				Ramp_Flag=0;
@@ -142,10 +142,10 @@ void MiddleSpeedMode()
 
 void SlowSpeedMode()
 {
-	kp1=8.2;	kd1=28;  
-	kp2=3.9;	kd2=28;
-	kp3=2.9;	kd3=28;
-	kp4=2.5;	kd4=28;
+	kp1=8.2;	kd1=34;  
+	kp2=3.9;	kd2=34;
+	kp3=2.9;	kd3=35;
+	kp4=2.5;	kd4=38;
 	
 	speed_kp=5.4;
 	speed_ki=1;
@@ -154,7 +154,7 @@ void SlowSpeedMode()
 	speed2=56;
 	speed3=50;
 	speed4=44;
-	speed5=40;
+	speed5=42;
 	for (;;) 
 	{
 		Key_Detect_Compensator();
@@ -169,17 +169,13 @@ void SlowSpeedMode()
 			Dis_Num(64,3,(WORD)steer,4);
 			if(Up_Flag==1)
 			{
-				steer=STEER_HELM_CENTER+13;
+				steer=STEER_HELM_CENTER+8;
 			}
 			SET_steer(steer);
 			StopLineDetect();
 		/*	if(StartDelay>=StartDelaySec)
 				SpeedSet();
 			speed_control();*/
-			if(Up_Flag==1)
-			{
-				EMIOS_0.CH[9].CBDR.R = Openloop_Speed+20;
-			}
 		}
 		Flag=0;
 		Senddata();
