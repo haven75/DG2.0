@@ -13,6 +13,8 @@ void main(void)
  {
 	initALL();
 	while(wait>0);
+	if(switch5==0)
+		pause=1;
 	if(switch4==0)
 		Set_Middlepoint();
 	if(switch1==0&&switch2==0)
@@ -61,7 +63,7 @@ void Pit0ISR()
 	Get_speed();
 	if(switch2!=0||switch1!=0)
 	{
-		if(StartDelay>=StartDelaySec)
+		if(StartDelay>=StartDelaySec||switch5==0)
 			SpeedSet();
 		speed_control();
 	}
@@ -142,10 +144,10 @@ void MiddleSpeedMode()
 
 void SlowSpeedMode()
 {
-	kp1=8;	kd1=34;  
-	kp2=3.9;	kd2=34;
-	kp3=2.9;	kd3=35;
-	kp4=2.5;	kd4=38;
+	kp1=8;		kd1=34;  
+	kp2=4.5;	kd2=36;
+	kp3=3.2;	kd3=38;
+	kp4=2.5;	kd4=40;
 	
 	speed_kp=5.4;
 	speed_ki=1;
@@ -153,8 +155,8 @@ void SlowSpeedMode()
 	speed1=66;
 	speed2=54;
 	speed3=49;
-	speed4=44;
-	speed5=42;
+	speed4=46;
+	speed5=44;
 	for (;;) 
 	{
 		Key_Detect_Compensator();
@@ -199,7 +201,7 @@ void OpenLoopMode()
 				if(steer>=STEER_HELM_CENTER+240)
 					steer=STEER_HELM_CENTER+250;
 				Dis_Num(64,3,(WORD)steer,4);
-				if(StartDelay>=StartDelaySec)
+				if(StartDelay>=StartDelaySec||switch5==0)
 					EMIOS_0.CH[9].CBDR.R = Openloop_Speed;
 				if(Up_Flag==1)
 				{

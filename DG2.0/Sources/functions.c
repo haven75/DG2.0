@@ -16,7 +16,7 @@
 #include"includes.h"
 #define Hillcont 0
 #define Frequency_Over 90
-unsigned int chuwan,Hill_count,count,min_count=0xffff;
+unsigned int chuwan,Hill_count,count,min_count=0xffff,pause;
 unsigned char StartFlag,StopFlag,RunFlag=2000,Stop=30;
 float fre_diff,dis,LEFT_old,LEFT_new=0,RIGHT_old,RIGHT_new=0,MIDDLE_old,MIDDLE_new=0,temp_steer,temp_steer_old;
 float LEFT_Temp,RIGHT_Temp,MIDDLE_Temp,Lsum,Rsum,Msum;
@@ -43,7 +43,7 @@ float	kp1=8.3,kd1=D,
 float kp,ki,kd;
 int RIGHT,LEFT,MIDDLE,temp_fre[2];
 unsigned char Outdata[8];
-float sumerror,lasterror,Msetpoint=0,temp_middle=0,sensor_compensator=0,middleflag=0,dleft=0,dmiddle=0,dright=0,start_middle=2125,start_left=2981,start_right=2529;
+float sumerror,lasterror,Msetpoint=0,temp_middle=0,sensor_compensator=0,middleflag=0,dleft=0,dmiddle=0,dright=0,start_middle=2126,start_left=2981,start_right=2529;
 int Set_speed,temp_speed,pwm;
 int speed_iError,speed_lastError,speed_prevError,Error[3];
 float
@@ -767,7 +767,11 @@ void Ramp_Detect()
 void StopLineDetect()
 {
 	if(ReedSwitch1==0 || ReedSwitch2==0)
+	{
 		StartFlag=1;
+		if(pause==1)
+			StopFlag=1;
+	}
 //	if(ReedSwitch1==1 && ReedSwitch2==1 && StartFlag==1)
 /*		RunFlag=2000;
 	if(RunFlag>1)*/
