@@ -41,7 +41,7 @@ void Pit0ISR()
 			else Ramp_Detect();
 			if(Ramp_Flag==1)
 				Ramp_Time++;
-			if(Ramp_Time>55)
+			if(Ramp_Time>45)
 			{
 				Up_Flag=2;
 				Ramp_Flag=0;
@@ -110,9 +110,9 @@ void FastSpeedMode()
                    
 void MiddleSpeedMode()
 {
-	speed_kp=5;
-	speed_ki=1.2;
-	speed_kd=2.5;
+	speed_kp=8;
+	speed_ki=1;
+	speed_kd=2;
 	speed1=68;
 	speed5=43;
 	for (;;) 
@@ -142,7 +142,7 @@ void MiddleSpeedMode()
 
 void SlowSpeedMode()
 {
-	kp1=8.2;	kd1=34;  
+	kp1=8;	kd1=34;  
 	kp2=3.9;	kd2=34;
 	kp3=2.9;	kd3=35;
 	kp4=2.5;	kd4=38;
@@ -150,9 +150,9 @@ void SlowSpeedMode()
 	speed_kp=5.4;
 	speed_ki=1;
 	speed_kd=2;
-	speed1=64;
-	speed2=56;
-	speed3=50;
+	speed1=66;
+	speed2=54;
+	speed3=49;
 	speed4=44;
 	speed5=42;
 	for (;;) 
@@ -185,25 +185,26 @@ void OpenLoopMode()
 {
 	kp2-=0.2;
 	kp3-=0.2;
+	kd4+=10;
 	for (;;) 
 		{
-			Openloop_Speed=88;
+			Openloop_Speed=92;
 			Key_Detect_Compensator();
 			if(Flag==1)
 			{
 				sensor_display();
-				steer=STEER_HELM_CENTER+LocPIDCal()+5;
+				steer=STEER_HELM_CENTER+LocPIDCal()+8;
 				if(steer<=STEER_HELM_CENTER-240)
 					steer=STEER_HELM_CENTER-250;
 				if(steer>=STEER_HELM_CENTER+240)
 					steer=STEER_HELM_CENTER+250;
 				Dis_Num(64,3,(WORD)steer,4);
 				if(StartDelay>=StartDelaySec)
-					EMIOS_0.CH[9].CBDR.R = Openloop_Speed-10;
+					EMIOS_0.CH[9].CBDR.R = Openloop_Speed;
 				if(Up_Flag==1)
 				{
 					steer=STEER_HELM_CENTER+13;
-					EMIOS_0.CH[9].CBDR.R = Openloop_Speed-5;
+					EMIOS_0.CH[9].CBDR.R = Openloop_Speed-20;
 				}
 				if(StopFlag)
 					EMIOS_0.CH[9].CBDR.R = 0;
