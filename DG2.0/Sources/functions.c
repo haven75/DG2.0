@@ -43,7 +43,7 @@ float	kp1=8.3,kd1=D,
 float kp,ki,kd;
 int RIGHT,LEFT,MIDDLE,temp_fre[2];
 unsigned char Outdata[8];
-float sumerror,lasterror,Msetpoint=0,temp_middle=0,sensor_compensator=0,middleflag=0,dleft=0,dmiddle=0,dright=0,start_middle=2126,start_left=2981,start_right=2529;
+float sumerror,lasterror,Msetpoint=0,temp_middle=0,sensor_compensator=0,middleflag=0,dleft=0,dmiddle=0,dright=0,start_middle=2127,start_left=2985,start_right=2529;
 int Set_speed,temp_speed,pwm;
 int speed_iError,speed_lastError,speed_prevError,Error[3];
 float
@@ -265,7 +265,7 @@ signed int LocPIDCal(void)
 		return(temp_steer_old);*/
 	
 	if(fre_diff<0)
-		fre_diff*=1;
+		fre_diff*=0.98;
 
 	iError=fre_diff; 
 	sumerror+=iError;
@@ -769,8 +769,8 @@ void StopLineDetect()
 	if(ReedSwitch1==0 || ReedSwitch2==0)
 	{
 		StartFlag=1;
-		if(pause==1)
-			StopFlag=1;
+	//	if(pause==1)
+		//	StopFlag=1;
 	}
 //	if(ReedSwitch1==1 && ReedSwitch2==1 && StartFlag==1)
 /*		RunFlag=2000;
