@@ -15,16 +15,17 @@
  */
 #include"includes.h"
 #define Hillcont 0
-#define Frequency_Over 90
+#define STEER 230
+#define Frequency_Over 100
 unsigned int chuwan,Hill_count,count,min_count=0xffff,pause;
-unsigned char StartFlag,StopFlag,RunFlag=2000,Stop=30;
+unsigned char StartFlag,StopFlag,RunFlag=1000,Stop=30;
 float fre_diff,dis,LEFT_old,LEFT_new=0,RIGHT_old,RIGHT_new=0,MIDDLE_old,MIDDLE_new=0,temp_steer,temp_steer_old;
 float LEFT_Temp,RIGHT_Temp,MIDDLE_Temp,Lsum,Rsum,Msum;
 float sensor[3][10]={0},avr[10]={0.005,0.01,0.01,0.0125,0.0125,0.025,0.025,0.05,0.15,0.7};
 unsigned int left,right,middle,flag=0,zd_flag=0,slow,pause=0,overflag; //车子在赛道的位置标志
 unsigned int count1,count2,currentspeed,speed_target,Ramp_Time_Delay=0; 
 unsigned int presteer,currentsteer,dsteer,Angle;
-unsigned char Left_Compensator=22, Right_Compensator=23;
+unsigned char Left_Compensator=21, Right_Compensator=21;
 float Middle_Compensator=15;
 float iError,dError;
 unsigned int Uphill=0,Downhill=0,Up_Flag=0,Down_Flag=0,Straight,Ramp_Flag,Ramp_Time=0;
@@ -43,7 +44,7 @@ float	kp1=8.3,kd1=D,
 float kp,ki,kd;
 int RIGHT,LEFT,MIDDLE,temp_fre[2];
 unsigned char Outdata[8];
-float sumerror,lasterror,Msetpoint=0,temp_middle=0,sensor_compensator=0,middleflag=0,dleft=0,dmiddle=0,dright=0,start_middle=2127,start_left=2985,start_right=2529;
+float sumerror,lasterror,Msetpoint=0,temp_middle=0,sensor_compensator=0,middleflag=0,dleft=0,dmiddle=0,dright=0,start_middle=2128,start_left=2987,start_right=2531;
 int Set_speed,temp_speed,pwm;
 int speed_iError,speed_lastError,speed_prevError,Error[3];
 float
@@ -168,7 +169,7 @@ signed int LocPIDCal(void)
 	{	
 		if(dleft<5&&dmiddle<-Middle_Compensator+3&&dright<5)
 		{		
-			return(240);
+			return(STEER);
 			if(overflag!=flag)
 			{
 				if(count<min_count)
@@ -207,7 +208,7 @@ signed int LocPIDCal(void)
 	{	
 		if(dright<5&&dmiddle<-Middle_Compensator+3&&dleft<5)
 		{
-			return(-240);
+			return(-STEER);
 			if(overflag!=flag)
 			{
 				if(count<min_count)
@@ -265,7 +266,7 @@ signed int LocPIDCal(void)
 		return(temp_steer_old);*/
 	
 	if(fre_diff<0)
-		fre_diff*=0.98;
+		fre_diff*=1.05;
 
 	iError=fre_diff; 
 	sumerror+=iError;
@@ -295,9 +296,9 @@ signed int LocPIDCal(void)
 			
 	}
 	temp_steer=kp*iError+kd*dError;
-	if(temp_steer>=240)
+	if(temp_steer>=STEER)
 		flag=1;               //左打死
-	else if(temp_steer<=-240)
+	else if(temp_steer<=-STEER)
 		flag=2;
 	else 
 		flag=0;
