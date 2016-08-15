@@ -16,9 +16,9 @@
 #include"includes.h"
 #define Hillcont 0
 #define STEER 230
-#define Frequency_Over 100
+#define Frequency_Over 95
 unsigned int chuwan,Hill_count,count,min_count=0xffff,pause;
-unsigned char StartFlag,StopFlag,RunFlag=1000,Stop=30;
+unsigned char StartFlag,StopFlag,RunFlag=1000,Stop=40,Open;
 float fre_diff,dis,LEFT_old,LEFT_new=0,RIGHT_old,RIGHT_new=0,MIDDLE_old,MIDDLE_new=0,temp_steer,temp_steer_old;
 float LEFT_Temp,RIGHT_Temp,MIDDLE_Temp,Lsum,Rsum,Msum;
 float sensor[3][10]={0},avr[10]={0.005,0.01,0.01,0.0125,0.0125,0.025,0.025,0.05,0.15,0.7};
@@ -44,7 +44,7 @@ float	kp1=8.3,kd1=D,
 float kp,ki,kd;
 int RIGHT,LEFT,MIDDLE,temp_fre[2];
 unsigned char Outdata[8];
-float sumerror,lasterror,Msetpoint=0,temp_middle=0,sensor_compensator=0,middleflag=0,dleft=0,dmiddle=0,dright=0,start_middle=2128,start_left=2987,start_right=2531;
+float sumerror,lasterror,Msetpoint=0,temp_middle=0,sensor_compensator=0,middleflag=0,dleft=0,dmiddle=0,dright=0,start_middle=2128,start_left=2989,start_right=2532;
 int Set_speed,temp_speed,pwm;
 int speed_iError,speed_lastError,speed_prevError,Error[3];
 float
@@ -266,7 +266,7 @@ signed int LocPIDCal(void)
 		return(temp_steer_old);*/
 	
 	if(fre_diff<0)
-		fre_diff*=1.05;
+		fre_diff*=1.0;
 
 	iError=fre_diff; 
 	sumerror+=iError;
@@ -330,14 +330,16 @@ unsigned int Get_Angle()
 /****************************************************速度给定****************************************************************/
 void SpeedSet(void)
 {	
-	if(StopFlag&&Stop==0)
+	if(StopFlag/*&&Stop==0*/||(pause==1&&StartFlag==1))
 	{
 		speed_target=0;
 		return;
 	}
-	if(Up_Flag==1||Ramp_Time_Delay>0)
+	if(Up_Flag==1)
 	{
-		speed_target=speed5-13;
+		speed_target=28;
+		if((switch2==0&&switch1==1)||(switch1==1&&switch2==1))
+			speed_target=18;
 		return;
 	}
 	if(abs(iError)<10&&abs(dError)<4)
@@ -431,13 +433,13 @@ void speed_control()
 		if(Stop>0)
 		{
 			Stop--;
-			SET_motor(-130);
+			SET_motor(-160);
 		}
 		else
 			SET_motor(0);
 	}*/
-	if(forward&&StopFlag)
-		SET_motor(0);
+	//if(forward&&StopFlag)
+		//SET_motor(0);
 }
 /****************************************************************************************************************
 * 函数名称：sensor_display()	
@@ -570,7 +572,7 @@ void Set_Middlepoint()
 {
 	start_middle=MIDDLE-2;
 	start_left=LEFT-2;
-	start_right=RIGHT-3;
+	start_right=RIGHT-2;
 	sensor_compensator=RIGHT-LEFT;
 //	Msetpoint=temp_middle;
 //	Dis_Num(64,6,(WORD)Msetpoint,5);

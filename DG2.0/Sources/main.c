@@ -1,5 +1,5 @@
 #include "includes.h"
-unsigned int Flag=0,wait=9,INTC_Time=0;
+unsigned int Flag=0,wait=9,INTC_Time=0,Ramp_Steer=0;
 signed int steer=0,delay_count=0,StartDelay=0;
 #define StartDelaySec 100
 
@@ -13,7 +13,7 @@ void main(void)
  {
 	initALL();
 	while(wait>0);
-	if(switch5==0)
+	if(switch4==1)
 		pause=1;
 	if(switch4==0)
 		Set_Middlepoint();
@@ -43,10 +43,28 @@ void Pit0ISR()
 			else Ramp_Detect();
 			if(Ramp_Flag==1)
 				Ramp_Time++;
-			if(Ramp_Time>45)
+			if(Ramp_Time>65)
 			{
 				Up_Flag=2;
+				//Ramp_Flag=0;
+			}
+			if(Ramp_Time>60&&Ramp_Time<120)
+			{
+				if(steer<=STEER_HELM_CENTER-40)
+					steer=STEER_HELM_CENTER-40;
+				if(steer>=STEER_HELM_CENTER+40)
+					steer=STEER_HELM_CENTER+40;
+				Ramp_Steer=1;
+			}
+			if(Ramp_Time>120)
+				Ramp_Steer=0;
+			if(Ramp_Time>200)
+			{
+				Up_Flag=0;
+				Down_Flag=0;
 				Ramp_Flag=0;
+				Uphill=0;
+				Ramp_Time=0;
 			}
 		}
 		if(Up_Flag==2&&Ramp_Time_Delay>0)
@@ -63,7 +81,7 @@ void Pit0ISR()
 	Get_speed();
 	if(switch2!=0||switch1!=0)
 	{
-		if(StartDelay>=StartDelaySec)
+		if(StartDelay>=StartDelaySec||pause==1)
 			SpeedSet();
 		speed_control();
 	}
@@ -87,11 +105,11 @@ void FastSpeedMode()
 	speed_kp=5.4;
 	speed_ki=1.2;
 	speed_kd=3;
-	speed1=80;
-	speed2=64;
+	speed1=88;
+	speed2=68;
 	speed3=56;
-	speed4=50;
-	speed5=43;
+	speed4=54;
+	speed5=46;
 	for (;;) 
 	{
 		Key_Detect_Compensator();
@@ -105,8 +123,9 @@ void FastSpeedMode()
 				steer=STEER_HELM_CENTER+240;
 			Dis_Num(64,3,(WORD)steer,4);
 			if(Up_Flag==1)
-				steer=STEER_HELM_CENTER+8;
-			SET_steer(steer);
+				steer=STEER_HELM_CENTER;
+			if(!Ramp_Steer)
+				SET_steer(steer);
 			StopLineDetect();
 		/*	if(StartDelay>=StartDelaySec)
 				SpeedSet();
@@ -120,7 +139,7 @@ void FastSpeedMode()
 void MiddleSpeedMode()
 {
 	kp1=6.9;	kd1=40;  
-	kp2=4.5;	kd2=45;
+	kp2=4.4;	kd2=45;
 	kp3=3.2;	kd3=50;
 	kp4=2.5;	kd4=55;
 	speed_kp=5.4;
@@ -130,46 +149,6 @@ void MiddleSpeedMode()
 	speed2=64;
 	speed3=56;
 	speed4=50;
-	speed5=43;
-	for (;;) 
-	{
-		Key_Detect_Compensator();
-		if(Flag==1)
-		{
-			sensor_display();
-			steer=STEER_HELM_CENTER+LocPIDCal();
-			if(steer<=STEER_HELM_CENTER-230)
-				steer=STEER_HELM_CENTER-240;
-			if(steer>=STEER_HELM_CENTER+230)
-				steer=STEER_HELM_CENTER+240;
-			Dis_Num(64,3,(WORD)steer,4);
-			if(Up_Flag==1)
-				steer=STEER_HELM_CENTER+8;
-			SET_steer(steer);
-			StopLineDetect();
-		/*	if(StartDelay>=StartDelaySec)
-				SpeedSet();
-			speed_control();*/
-		}
-		Flag=0;
-		Senddata();
-	}
-}
-
-void SlowSpeedMode()
-{
-	kp1=7;		kd1=32;  
-	kp2=4.5;	kd2=34;
-	kp3=3.3;	kd3=36;
-	kp4=2.4;	kd4=38;
-	
-	speed_kp=5.4;
-	speed_ki=2;
-	speed_kd=4;
-	speed1=70;
-	speed2=56;
-	speed3=50;
-	speed4=46;
 	speed5=42;
 	for (;;) 
 	{
@@ -184,10 +163,53 @@ void SlowSpeedMode()
 				steer=STEER_HELM_CENTER+240;
 			Dis_Num(64,3,(WORD)steer,4);
 			if(Up_Flag==1)
+				steer=STEER_HELM_CENTER+6;
+			if(!Ramp_Steer)
+				SET_steer(steer);
+			StopLineDetect();
+		/*	if(StartDelay>=StartDelaySec)
+				SpeedSet();
+			speed_control();*/
+		}
+		Flag=0;
+		Senddata();
+	}
+}
+
+void SlowSpeedMode()
+{
+	kp1=6.9;		kd1=32;  
+	kp2=4.4;	kd2=34;
+	kp3=3.3;	kd3=38;
+	kp4=2.4;	kd4=42;
+	
+	speed_kp=5.4;
+	speed_ki=2;
+	speed_kd=4;
+	speed1=70;
+	speed2=56;
+	speed3=50;
+	speed4=46;
+	speed5=42;
+	Open=1;
+	for (;;) 
+	{
+		Key_Detect_Compensator();
+		if(Flag==1)
+		{
+			sensor_display();
+			steer=STEER_HELM_CENTER+LocPIDCal();
+			if(steer<=STEER_HELM_CENTER-230)
+				steer=STEER_HELM_CENTER-240;
+			if(steer>=STEER_HELM_CENTER+230)
+				steer=STEER_HELM_CENTER+240;
+			Dis_Num(64,3,(WORD)steer,4);
+			if(Up_Flag==1)
 			{
-				steer=STEER_HELM_CENTER+10;
+				steer=STEER_HELM_CENTER+8;
 			}
-			SET_steer(steer);
+			if(!Ramp_Steer)
+				SET_steer(steer);			
 			StopLineDetect();
 		/*	if(StartDelay>=StartDelaySec)
 				SpeedSet();
@@ -219,12 +241,13 @@ void OpenLoopMode()
 					EMIOS_0.CH[9].CBDR.R = Openloop_Speed;
 				if(Up_Flag==1)
 				{
-					steer=STEER_HELM_CENTER+13;
-					EMIOS_0.CH[9].CBDR.R = Openloop_Speed-20;
+					steer=STEER_HELM_CENTER+7;
+					EMIOS_0.CH[9].CBDR.R = Openloop_Speed-25;
 				}
 				if(StopFlag)
 					EMIOS_0.CH[9].CBDR.R = 0;
-				SET_steer(steer);
+				if(!Ramp_Steer)
+					SET_steer(steer);
 				StopLineDetect();
 			//	if(StartDelay>=StartDelaySec)
 					//SpeedSet();

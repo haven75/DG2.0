@@ -34,7 +34,7 @@ void Ramp_Detect();
 
 
 
-extern unsigned char Left_Compensator, Right_Compensator;
+extern unsigned char Left_Compensator, Right_Compensator,Open;
 extern float Middle_Compensator;
 extern unsigned int Ramp_Time_Delay,pause;
 extern unsigned int count,min_count;
