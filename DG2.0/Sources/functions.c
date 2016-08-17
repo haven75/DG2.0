@@ -16,7 +16,7 @@
 #include"includes.h"
 #define Hillcont 0
 #define STEER 230
-#define Frequency_Over 95
+#define Frequency_Over 85
 unsigned int chuwan,Hill_count,count,min_count=0xffff,pause;
 unsigned char StartFlag,StopFlag,RunFlag=1000,Stop=40,Open;
 float fre_diff,dis,LEFT_old,LEFT_new=0,RIGHT_old,RIGHT_new=0,MIDDLE_old,MIDDLE_new=0,temp_steer,temp_steer_old;

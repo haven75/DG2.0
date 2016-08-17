@@ -48,15 +48,15 @@ void Pit0ISR()
 				Up_Flag=2;
 				//Ramp_Flag=0;
 			}
-			if(Ramp_Time>60&&Ramp_Time<120)
+			if(Ramp_Time>60&&Ramp_Time<100)
 			{
-				if(steer<=STEER_HELM_CENTER-40)
-					steer=STEER_HELM_CENTER-40;
-				if(steer>=STEER_HELM_CENTER+40)
-					steer=STEER_HELM_CENTER+40;
+				if(steer<=STEER_HELM_CENTER-30)
+					steer=STEER_HELM_CENTER-30;
+				if(steer>=STEER_HELM_CENTER+30)
+					steer=STEER_HELM_CENTER+30;
 				Ramp_Steer=1;
 			}
-			if(Ramp_Time>120)
+			if(Ramp_Time>100)
 				Ramp_Steer=0;
 			if(Ramp_Time>200)
 			{
@@ -98,10 +98,10 @@ void Pit0ISR()
 
 void FastSpeedMode()
 {	
-	kp1=6.9;		kd1=40;  
-	kp2=4.5;	kd2=45;
+	kp1=7;		kd1=40;  
+	kp2=4.4;	kd2=45;
 	kp3=3.2;	kd3=50;
-	kp4=2.5;	kd4=55;
+	kp4=2.4;	kd4=55;
 	speed_kp=5.4;
 	speed_ki=1.2;
 	speed_kd=3;
@@ -123,7 +123,7 @@ void FastSpeedMode()
 				steer=STEER_HELM_CENTER+240;
 			Dis_Num(64,3,(WORD)steer,4);
 			if(Up_Flag==1)
-				steer=STEER_HELM_CENTER;
+				steer=STEER_HELM_CENTER+6;
 			if(!Ramp_Steer)
 				SET_steer(steer);
 			StopLineDetect();
@@ -141,7 +141,7 @@ void MiddleSpeedMode()
 	kp1=6.9;	kd1=40;  
 	kp2=4.4;	kd2=45;
 	kp3=3.2;	kd3=50;
-	kp4=2.5;	kd4=55;
+	kp4=2.4;	kd4=55;
 	speed_kp=5.4;
 	speed_ki=1.2;
 	speed_kd=3;
@@ -206,7 +206,7 @@ void SlowSpeedMode()
 			Dis_Num(64,3,(WORD)steer,4);
 			if(Up_Flag==1)
 			{
-				steer=STEER_HELM_CENTER+8;
+				steer=STEER_HELM_CENTER+6;
 			}
 			if(!Ramp_Steer)
 				SET_steer(steer);			
@@ -238,7 +238,7 @@ void OpenLoopMode()
 					steer=STEER_HELM_CENTER+240;
 				Dis_Num(64,3,(WORD)steer,4);
 				if(StartDelay>=StartDelaySec||switch5==0)
-					EMIOS_0.CH[9].CBDR.R = Openloop_Speed;
+					EMIOS_0.CH[10].CBDR.R = 40;//Openloop_Speed;
 				if(Up_Flag==1)
 				{
 					steer=STEER_HELM_CENTER+7;
